@@ -229,8 +229,9 @@
     ros2 service call /camera/save_point_cloud std_srvs/srv/Empty '{}'
     ```
 
-> **注意**：以下服务目前仅支持435Le模块。每个服务一次只能存储一组数据或字符串。
+### 特定设备
 
+**Gemini 435L**
 *   `/camera/write_customer_data` & `/camera/read_customer_data`
     ```bash
     ros2 service call /camera/write_customer_data orbbec_camera_msgs/srv/SetString '{data: "string"}'
@@ -255,6 +256,18 @@
                     -9.439220279455185e-05,
                     -6.804073229432106e-06]}'
     ros2 service call /camera/get_user_calib_params orbbec_camera_msgs/srv/GetUserCalibParams '{}'
+    ```
+
+**Gemini 305**
+*   `/camera/set_ae_mode`
+    ```bash
+      # depthbased or colorbased
+      ros2 service call /camera/set_ae_mode orbbec_camera_msgs/srv/SetString "data: depthbased"
+    ```
+
+*   `/camera/set_sports_mode`
+    ```bash
+      ros2 service call /camera/set_sports_mode std_srvs/srv/SetBool "data: true"
     ```
 
 ### 点云下采样

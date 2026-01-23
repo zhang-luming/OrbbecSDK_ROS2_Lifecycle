@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5.3.7. Net_camera &mdash; OrbbecSDK V2 ROS2 Wrapper  documentation</title>
+  <title>5.3.12. Net_camera &mdash; OrbbecSDK V2 ROS2 Wrapper  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=63de077d" />
@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="6. Benchmark" href="../../6_benchmark/benchmark.html" />
-    <link rel="prev" title="5.3.6. Predefined presets" href="predefined_presets.html" /> 
+    <link rel="prev" title="5.3.6. Gemini 330 / Gemini 330L / Gemini 335 / Gemini 335L" href="predefined_presets.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -143,7 +143,10 @@
 <li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#device-information-management">4.2.3. Device Information &amp; Management</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#synchronization-triggering">4.2.4. Synchronization &amp; Triggering</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#depth-filter-configuration">4.2.5. Depth Filter Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#data-capture-calibration-management">4.2.6. Data Capture &amp; Calibration Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#data-capture">4.2.6. Data Capture</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../4_application_guide/services.html#device-specific">4.2.6.1. Device-Specific</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#point-cloud-decimation">4.2.7. Point cloud decimation</a></li>
 </ul>
 </li>
@@ -237,7 +240,7 @@
 </ul>
 </li>
 <li class="toctree-l3 current"><a class="reference internal" href="../advanced_guide.html#configuration-modes">5.3. Configuration &amp; Modes</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="align_depth_color.html">5.3.1. Aligning Depth to Color in ROS 2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="align_depth_color.html">5.3.1. Aligning Depth to Color</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="align_depth_color.html#commands-to-align-and-view-depth-and-color-images">5.3.1.1. Commands to Align and View Depth and Color Images</a></li>
 <li class="toctree-l5"><a class="reference internal" href="align_depth_color.html#selecting-topics-in-rviz2">5.3.1.2. Selecting Topics in RViz2</a></li>
 <li class="toctree-l5"><a class="reference internal" href="align_depth_color.html#example-of-depth-to-color-overlay">5.3.1.3. Example of Depth to Color Overlay</a></li>
@@ -257,11 +260,20 @@
 <li class="toctree-l5"><a class="reference internal" href="interleave_ae_mode.html#multi-camera-synced-interleave-ae">5.3.5.3. Multi_camera_synced + Interleave_ae</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="predefined_presets.html">5.3.6. Predefined presets</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">5.3.7. Net_camera</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#femto-mega-gemini-435le-gemini-335le">5.3.7.1. Femto Mega &amp; Gemini 435Le &amp; Gemini 335Le</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#set-device-ip-utility">5.3.7.2. set_device_ip Utility</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#force-ip-function">5.3.7.3. Force IP Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="predefined_presets.html">5.3.6. Gemini 330 / Gemini 330L / Gemini 335 / Gemini 335L</a></li>
+<li class="toctree-l4"><a class="reference internal" href="predefined_presets.html#gemini-336-gemini-336l">5.3.7. Gemini 336 / Gemini 336L</a></li>
+<li class="toctree-l4"><a class="reference internal" href="predefined_presets.html#gemini-2">5.3.8. Gemini 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="predefined_presets.html#gemini-2l">5.3.9. Gemini 2L</a></li>
+<li class="toctree-l4"><a class="reference internal" href="predefined_presets.html#gemini-305">5.3.10. Gemini 305</a></li>
+<li class="toctree-l4"><a class="reference internal" href="predefined_presets.html#extended-presets">5.3.11. Extended presets</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="predefined_presets.html#g33x-close-range-high-accuracy-gemini-330-gemini-335-gemini-336">5.3.11.1. G33X Close Range High Accuracy (Gemini 330 / Gemini 335 / Gemini 336)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="predefined_presets.html#g336x-amr-default-gemini-336-gemini-336l">5.3.11.2. G336X AMR Default (Gemini 336 / Gemini 336L)</a></li>
+</ul>
+</li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">5.3.12. Net_camera</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#femto-mega-gemini-435le-gemini-335le">5.3.12.1. Femto Mega &amp; Gemini 435Le &amp; Gemini 335Le</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#set-device-ip-utility">5.3.12.2. set_device_ip Utility</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#force-ip-function">5.3.12.3. Force IP Function</a></li>
 </ul>
 </li>
 </ul>
@@ -392,7 +404,7 @@
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Camera Devices</a></li>
           <li class="breadcrumb-item"><a href="../advanced_guide.html"><span class="section-number">5. </span>Advanced Guide</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">5.3.7. </span>Net_camera</li>
+      <li class="breadcrumb-item active"><span class="section-number">5.3.12. </span>Net_camera</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/source/camera_devices/5_advanced_guide/configuration/net_camera.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -403,13 +415,13 @@
            <div itemprop="articleBody">
              
   <div class="lang-switch" style="margin:0 0 1em 0; font-size:0.9em;"><a class="lang-other" href="#">中文</a> | <a class="lang-current" href="#">English</a></div><script>(function(){var p=window.location.pathname;var isEn=p.indexOf('/en/')!==-1 && p.indexOf('/zh/')===-1;if(p.indexOf('/zh/')!==-1) isEn=false;var other = isEn ? p.replace(/\/en\//, '/zh/') : p.replace(/\/zh\//, '/en/');var current=p;var sw=document.querySelector('.lang-switch'); if(!sw) return;var o=sw.querySelector('.lang-other'); var c=sw.querySelector('.lang-current');if(isEn){ o.textContent='中文'; c.textContent='English'; } else { o.textContent='English'; c.textContent='中文'; }o.setAttribute('href', other); c.setAttribute('href', current);})();</script><section id="net-camera">
-<h1><span class="section-number">5.3.7. </span>Net_camera<a class="headerlink" href="#net-camera" title="Link to this heading"></a></h1>
+<h1><span class="section-number">5.3.12. </span>Net_camera<a class="headerlink" href="#net-camera" title="Link to this heading"></a></h1>
 <blockquote>
 <div><p>This section describes how to use Net camera in OrbbecSDK_ROS2.Currently, only Femto_Mega, Gemini 335Le and Gemini 435Le devices are supported, and other Net devices will be supported in the near future.</p>
 </div></blockquote>
 <p>You can find example usage code in the <a class="reference external" href="https://github.com/orbbec/OrbbecSDK_ROS2/tree/v2-main/orbbec_camera/examples">example</a>.</p>
 <section id="femto-mega-gemini-435le-gemini-335le">
-<h2><span class="section-number">5.3.7.1. </span>Femto Mega &amp; Gemini 435Le &amp; Gemini 335Le<a class="headerlink" href="#femto-mega-gemini-435le-gemini-335le" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.3.12.1. </span>Femto Mega &amp; Gemini 435Le &amp; Gemini 335Le<a class="headerlink" href="#femto-mega-gemini-435le-gemini-335le" title="Link to this heading"></a></h2>
 <p><strong>Parameter Introduction</strong></p>
 <p>Network device settings: <code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code> is set to true, which will automatically enumerate network devices.</p>
 <p>If you do not want to automatically enumerate network devices,you can set <code class="docutils literal notranslate"><span class="pre">enumerate_net_device</span></code> to false, <code class="docutils literal notranslate"><span class="pre">net_device_ip</span></code> to the device’s IP address, and <code class="docutils literal notranslate"><span class="pre">net_device_port</span></code> to the default value of 8090.</p>
@@ -443,7 +455,7 @@
 </div>
 </section>
 <section id="set-device-ip-utility">
-<h2><span class="section-number">5.3.7.2. </span>set_device_ip Utility<a class="headerlink" href="#set-device-ip-utility" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.3.12.2. </span>set_device_ip Utility<a class="headerlink" href="#set-device-ip-utility" title="Link to this heading"></a></h2>
 <p>The <strong><code class="docutils literal notranslate"><span class="pre">set_device_ip</span></code></strong> executable allows you to configure the IP settings of a network camera directly from ROS 2, including switching between DHCP and static IP, and setting subnet mask and gateway. This is useful for quickly assigning or updating IP addresses without modifying launch files.</p>
 <blockquote>
 <div><p><strong>Note:</strong> The IP settings applied with <code class="docutils literal notranslate"><span class="pre">set_device_ip</span></code> are <strong>permanent</strong> and <strong>will not be reset</strong> if the device is powered off or restarted.</p>
@@ -467,7 +479,7 @@
 </ul>
 </section>
 <section id="force-ip-function">
-<h2><span class="section-number">5.3.7.3. </span>Force IP Function<a class="headerlink" href="#force-ip-function" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.3.12.3. </span>Force IP Function<a class="headerlink" href="#force-ip-function" title="Link to this heading"></a></h2>
 <p>The <strong>Force IP</strong> feature allows you to assign a <strong>static IP address</strong> to a network camera, overriding DHCP settings. This is useful when multiple network cameras are connected, and you need each device to have a fixed IP for reliable communication.</p>
 <blockquote>
 <div><p><strong>Note:</strong> The Force IP configuration <strong>will be reset if the device is powered off or restarted</strong>. You need to reapply the settings after reboot.</p>
@@ -504,7 +516,7 @@ net_device_port:<span class="o">=</span><span class="m">8090</span>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="predefined_presets.html" class="btn btn-neutral float-left" title="5.3.6. Predefined presets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="predefined_presets.html" class="btn btn-neutral float-left" title="5.3.6. Gemini 330 / Gemini 330L / Gemini 335 / Gemini 335L" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../../6_benchmark/benchmark.html" class="btn btn-neutral float-right" title="6. Benchmark" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -512,7 +524,7 @@ net_device_port:<span class="o">=</span><span class="m">8090</span>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-01-13 11:20:23.
+      <span class="lastupdated">Last updated on 2026-01-23 07:26:37.
       </span></p>
   </div>
 

@@ -218,7 +218,7 @@
     ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: SpatialModerateFilter, filter_enable: true, filter_param: [160,1,3]}'
     ```
 
-### Data Capture & Calibration Management
+### Data Capture
 
 *   `/camera/save_images`
     ```bash
@@ -229,7 +229,9 @@
     ros2 service call /camera/save_point_cloud std_srvs/srv/Empty '{}'
     ```
 
-> **Note**: The following services are currently supported only on the 435Le module. Each service can store only one set of data or string at a time.
+#### Device-Specific
+
+**Gemini 435Le**
 
 *   `/camera/write_customer_data` & `/camera/read_customer_data`
     ```bash
@@ -255,6 +257,18 @@
                     -9.439220279455185e-05,
                     -6.804073229432106e-06]}'
     ros2 service call /camera/get_user_calib_params orbbec_camera_msgs/srv/GetUserCalibParams '{}'
+    ```
+
+**Gemini 305**
+*   `/camera/set_ae_mode`
+    ```bash
+      # depthbased or colorbased
+      ros2 service call /camera/set_ae_mode orbbec_camera_msgs/srv/SetString "data: depthbased"
+    ```
+
+*   `/camera/set_sports_mode`
+    ```bash
+      ros2 service call /camera/set_sports_mode std_srvs/srv/SetBool "data: true"
     ```
 
 ### Point cloud decimation

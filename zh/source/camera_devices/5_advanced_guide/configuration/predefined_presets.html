@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5.3.6. 预定义预设 &mdash; OrbbecSDK V2 ROS2 封装  文档</title>
+  <title>5.3.6. 设备预设 &mdash; OrbbecSDK V2 ROS2 封装  文档</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=63de077d" />
@@ -145,7 +145,8 @@
 <li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#id9">4.2.4. 同步与触发</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#id10">4.2.5. 深度滤波器配置</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#id11">4.2.6. 数据捕获与校准管理</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#id12">4.2.7. 点云下采样</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#id12">4.2.7. 特定设备</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../4_application_guide/services.html#id13">4.2.8. 点云下采样</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../4_application_guide/topics.html">4.3. 可用话题</a><ul>
@@ -238,10 +239,10 @@
 </ul>
 </li>
 <li class="toctree-l3 current"><a class="reference internal" href="../advanced_guide.html#id4">5.3. 配置与模式</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="align_depth_color.html">5.3.1. 在 ROS 2 中对齐深度到彩色</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="align_depth_color.html#id1">5.3.1.1. 对齐和查看深度和彩色图像的命令</a></li>
+<li class="toctree-l4"><a class="reference internal" href="align_depth_color.html">5.3.1. 对齐深度到彩色</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="align_depth_color.html#id2">5.3.1.1. 对齐和查看深度和彩色图像的命令</a></li>
 <li class="toctree-l5"><a class="reference internal" href="align_depth_color.html#rviz2">5.3.1.2. 在 RViz2 中选择话题</a></li>
-<li class="toctree-l5"><a class="reference internal" href="align_depth_color.html#id2">5.3.1.3. 深度到彩色叠加示例</a></li>
+<li class="toctree-l5"><a class="reference internal" href="align_depth_color.html#id3">5.3.1.3. 深度到彩色叠加示例</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="configuration_of_depth_NFOV_and_WFOV_modes.html">5.3.2. 深度 NFOV 和 WFOV 模式配置</a></li>
@@ -258,7 +259,15 @@
 <li class="toctree-l5"><a class="reference internal" href="interleave_ae_mode.html#multi-camera-synced-interleave-ae">5.3.5.3. Multi_camera_synced + Interleave_ae</a></li>
 </ul>
 </li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">5.3.6. 预定义预设</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">5.3.6. 设备预设</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#gemini-330-gemini-330l-gemini-335-gemini-335l">5.3.6.1. Gemini 330 / Gemini 330L / Gemini 335 / Gemini 335L</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gemini-336-gemini-336l">5.3.6.2. Gemini 336 / Gemini 336L</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gemini-2">5.3.6.3. Gemini 2</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gemini-2l">5.3.6.4. Gemini 2L</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#gemini-305">5.3.6.5. Gemini 305</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#id2">5.3.6.6. 扩展预设</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="net_camera.html">5.3.7. 网络相机</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="net_camera.html#femto-mega-gemini-435le-gemini-335le">5.3.7.1. Femto Mega &amp; Gemini 435Le &amp; Gemini 335Le</a></li>
 <li class="toctree-l5"><a class="reference internal" href="net_camera.html#set-device-ip">5.3.7.2. set_device_ip 工具</a></li>
@@ -393,7 +402,7 @@
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Camera Devices</a></li>
           <li class="breadcrumb-item"><a href="../advanced_guide.html"><span class="section-number">5. </span>高级指南</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">5.3.6. </span>预定义预设</li>
+      <li class="breadcrumb-item active"><span class="section-number">5.3.6. </span>设备预设</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/source/camera_devices/5_advanced_guide/configuration/predefined_presets.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -404,7 +413,10 @@
            <div itemprop="articleBody">
              
   <div class="lang-switch" style="margin:0 0 1em 0; font-size:0.9em;"><a class="lang-other" href="#">English</a> | <a class="lang-current" href="#">中文</a></div><script>(function(){var p=window.location.pathname;var isEn=p.indexOf('/en/')!==-1 && p.indexOf('/zh/')===-1;if(p.indexOf('/zh/')!==-1) isEn=false;var other = isEn ? p.replace(/\/en\//, '/zh/') : p.replace(/\/zh\//, '/en/');var current=p;var sw=document.querySelector('.lang-switch'); if(!sw) return;var o=sw.querySelector('.lang-other'); var c=sw.querySelector('.lang-current');if(isEn){ o.textContent='中文'; c.textContent='English'; } else { o.textContent='English'; c.textContent='中文'; }o.setAttribute('href', other); c.setAttribute('href', current);})();</script><section id="id1">
-<h1><span class="section-number">5.3.6. </span>预定义预设<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
+<h1><span class="section-number">5.3.6. </span>设备预设<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
+<p>本文档按产品列出可用预设、特点与推荐场景。请选择匹配产品型号的预设名称，并将其设置为<code class="docutils literal notranslate"><span class="pre">device_preset</span></code>参数的值。</p>
+<section id="gemini-330-gemini-330l-gemini-335-gemini-335l">
+<h2><span class="section-number">5.3.6.1. </span>Gemini 330 / Gemini 330L / Gemini 335 / Gemini 335L<a class="headerlink" href="#gemini-330-gemini-330l-gemini-335-gemini-335l" title="链接到此标题。"></a></h2>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -416,36 +428,191 @@
 <tbody>
 <tr>
 <td>Default</td>
-<td>- 最佳视觉感知<br>- 在精度、填充率、微小物体等方面的整体性能良好</td>
-<td>- 通用场景<br>- 机器人应用</td>
+<td>最佳视觉效果<br> 整体性能较好，包括精度、填充率、小物体检测能力等典型指标</td>
+<td>通用场景<br> 机器人应用</td>
 </tr>
 <tr>
 <td>Hand</td>
-<td>- 清晰的手部和手指边缘</td>
-<td>- 手势识别</td>
+<td>清晰的手和手指边缘</td>
+<td>手势识别</td>
 </tr>
 <tr>
 <td>High Accuracy</td>
-<td>- 高置信度深度<br>- 几乎无噪声深度值<br>- 填充率较低</td>
-<td>- 避障<br>- 物体扫描</td>
+<td>高可靠的深度信息<br> 极少的深度噪声<br> 相对较低的深度填充率</td>
+<td>避障<br> 物体扫描</td>
 </tr>
 <tr>
 <td>High Density</td>
-<td>- 更高填充率<br>- 更多微小物体<br>- 可能存在噪声深度值</td>
-<td>- 物体识别<br>- 抓取和放置<br>- 前景和背景动画</td>
+<td>更高的深度填充率<br> 可检测到更多的细小物体<br> 更容易受到深度噪声影响</td>
+<td>物体识别<br> 抓取<br> 前景或背景处理，如抠图等</td>
 </tr>
 <tr>
 <td>Medium Density</td>
-<td>- 填充率和精度的平衡性能<br>- 与 Default 相比：填充率较低，边缘质量更好</td>
-<td>- 通用场景和 Default 的替代方案</td>
+<td>平衡的深度填充率和精度表现<br> 与默认设置相比：填充率相对较低，边缘质量更好</td>
+<td>通用场景，可替代Default</td>
 </tr>
 <tr>
 <td>Custom</td>
-<td>- 用户自定义预设<br>- 从上述预设派生，具有自定义修改<br>- 例如后处理管道的新配置等</td>
-<td>- 通过使用自定义配置可获得比预定义预设更好的深度性能<br>- 适用于已建立的自定义配置</td>
+<td>自定义修改，例如后处理管道的新配置、深度AE功能的修改</td>
+<td>通过自行调整深度配置，可获得比预定义深度预置配置更好的效果<br> 经过充分验证的定制化深度配置</td>
 </tr>
 </tbody>
-</table><p>根据您的具体使用场景选择合适的预设名称，并将其设置为 <code class="docutils literal notranslate"><span class="pre">device_preset</span></code> 参数的值。</p>
+</table></section>
+<section id="gemini-336-gemini-336l">
+<h2><span class="section-number">5.3.6.2. </span>Gemini 336 / Gemini 336L<a class="headerlink" href="#gemini-336-gemini-336l" title="链接到此标题。"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>预设</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default</td>
+<td>最佳视觉效果<br> 整体性能较好，包括精度、填充率、小物体检测能力等典型指标</td>
+</tr>
+<tr>
+<td>High Accuracy</td>
+<td>高可靠的深度信息<br> 极少的深度噪声<br> 相对较低的深度填充率</td>
+</tr>
+<tr>
+<td>Custom</td>
+<td>自定义修改，例如后处理管道的新配置、深度AE功能的修改</td>
+</tr>
+</tbody>
+</table></section>
+<section id="gemini-2">
+<h2><span class="section-number">5.3.6.3. </span>Gemini 2<a class="headerlink" href="#gemini-2" title="链接到此标题。"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>预设</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unbinned Dense Default</td>
+<td>深度质量优先</td>
+</tr>
+<tr>
+<td>Binned Sparse Default</td>
+<td>小盲区、低功耗、高帧率</td>
+</tr>
+<tr>
+<td>Obstacle Avoidance</td>
+<td>机器人避障模式</td>
+</tr>
+</tbody>
+</table></section>
+<section id="gemini-2l">
+<h2><span class="section-number">5.3.6.4. </span>Gemini 2L<a class="headerlink" href="#gemini-2l" title="链接到此标题。"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>预设</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unbinned Dense Default</td>
+<td>深度质量优先</td>
+</tr>
+<tr>
+<td>Dimensioning</td>
+<td>测量精度优先</td>
+</tr>
+<tr>
+<td>Binned Sparse Default</td>
+<td>小盲区、低功耗、高帧率</td>
+</tr>
+<tr>
+<td>Unbinned Sparse Default</td>
+<td>平衡质量和功耗，提升低反和半室外效果</td>
+</tr>
+</tbody>
+</table></section>
+<section id="gemini-305">
+<h2><span class="section-number">5.3.6.5. </span>Gemini 305<a class="headerlink" href="#gemini-305" title="链接到此标题。"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>预设</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default</td>
+<td>最佳视觉感知<br> 在精度、填充率、微小物体等方面整体性能良好</td>
+</tr>
+<tr>
+<td>High Accuracy</td>
+<td>高置信度深度值<br> 几乎无噪声深度值<br> 填充率较低</td>
+</tr>
+<tr>
+<td>Close Range High Accuracy</td>
+<td>可调更大视差搜索范围，Mini-Z减小<br> 其余表现与High Accuracy保持一致</td>
+</tr>
+<tr>
+<td>Dual Color Streams</td>
+<td>支持左右彩色同时出流，无深度IR信息<br> 左右路输出效果一致</td>
+</tr>
+<tr>
+<td>Custom</td>
+<td>自定义修改，例如后处理管道的新配置、深度AE功能的修改</td>
+</tr>
+<tr>
+<td>&gt; 由于 <code>Dual Color Streams</code> 模式的参数配置与 <code>Default</code> 模式差异较大，我们提供了对应的 YAML 配置文件。</td>
+<td></td>
+</tr>
+<tr>
+<td>请将 <code>config_file_path</code> 设置为 <code>gemini305_dual_color</code>，该配置文件位于 config 目录下。</td>
+<td></td>
+</tr>
+</tbody>
+</table></section>
+<section id="id2">
+<h2><span class="section-number">5.3.6.6. </span>扩展预设<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<section id="g33x-close-range-high-accuracy-gemini-330-gemini-335-gemini-336">
+<h3><span class="section-number">5.3.6.6.1. </span>G33X Close Range High Accuracy（Gemini 330 / Gemini 335 / Gemini 336）<a class="headerlink" href="#g33x-close-range-high-accuracy-gemini-330-gemini-335-gemini-336" title="链接到此标题。"></a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>预设</th>
+<th>特点</th>
+<th>推荐使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G33X Close Range High Accuracy</td>
+<td>对于选定的深度分辨率，最近工作距离的深度值将减小50%<br> 启用近距应用时新的最近工作距离为0.13m<br> 支持的深度分辨率：仅限1280x800/1280x720/640x400/424x266</td>
+<td>眼在手上和近距离操作任务<br> 近距离测量</td>
+</tr>
+</tbody>
+</table></section>
+<section id="g336x-amr-default-gemini-336-gemini-336l">
+<h3><span class="section-number">5.3.6.6.2. </span>G336X AMR Default（Gemini 336 / Gemini 336L）<a class="headerlink" href="#g336x-amr-default-gemini-336-gemini-336l" title="链接到此标题。"></a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>预设</th>
+<th>特点</th>
+<th>推荐使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G336X AMR Default</td>
+<td>优化其在阳光照射和重复纹理的仓库场景中具有可靠的深度性能<br> 推荐深度分辨率：1280x800 / 640x400 / 424x266</td>
+<td>仓库AMRs</td>
+</tr>
+</tbody>
+</table></section>
+</section>
 </section>
 
 
@@ -460,7 +627,7 @@
 
   <div role="contentinfo">
     <p>&#169; 版权所有 2025, 奥比中光科技集团股份有限公司 www.orbbec.com.。
-      <span class="lastupdated">最后更新于 2026年01月13日 11:20:26.
+      <span class="lastupdated">最后更新于 2026年01月23日 07:26:40.
       </span></p>
   </div>
 
