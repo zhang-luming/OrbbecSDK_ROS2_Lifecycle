@@ -443,17 +443,17 @@
 <section id="how-to-collect-and-save-logs">
 <h2><span class="section-number">8.3. </span>How to Collect and Save Logs<a class="headerlink" href="#how-to-collect-and-save-logs" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>SDK debug logs</strong>
-Set the launch parameter <code class="docutils literal notranslate"><span class="pre">log_level</span></code> to <code class="docutils literal notranslate"><span class="pre">debug</span></code>. After running, the SDK will generate log files in the <code class="docutils literal notranslate"><span class="pre">Log/</span></code> folder under the current project directory. If you want a more recognizable file name for this test, you can set the parameter <code class="docutils literal notranslate"><span class="pre">log_file_name</span></code>.</p></li>
+<li><p><strong>SDK debug logs</strong></p></li>
 </ul>
+<p>Set the launch parameter <code class="docutils literal notranslate"><span class="pre">log_level</span></code> to <code class="docutils literal notranslate"><span class="pre">debug</span></code>. After running, the SDK will generate log files in the <code class="docutils literal notranslate"><span class="pre">Log/</span></code> folder under the current project directory. If you want a more recognizable file name for this test, you can set the parameter <code class="docutils literal notranslate"><span class="pre">log_file_name</span></code>.</p>
 <blockquote>
 <div><p>SDK logs are appended to the same file: multiple launches will continue writing into the same log file.
 Recommendation: before packaging logs to send to technical support, delete old log files, then reproduce the issue and collect new logs. This keeps the logs cleaner and makes troubleshooting more accurate.</p>
 </div></blockquote>
 <ul class="simple">
-<li><p><strong>ROS 2 logs (<code class="docutils literal notranslate"><span class="pre">~/.ros/log</span></code>)</strong>
-In the launch file, set the node (or composable node container) parameter <code class="docutils literal notranslate"><span class="pre">output</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;log&quot;</span></code> to save ROS 2 logs locally.</p></li>
+<li><p><strong>ROS 2 logs (<code class="docutils literal notranslate"><span class="pre">~/.ros/log</span></code>)</strong></p></li>
 </ul>
+<p>In the launch file, set the node (or composable node container) parameter <code class="docutils literal notranslate"><span class="pre">output</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;log&quot;</span></code> to save ROS 2 logs locally.</p>
 <blockquote>
 <div><p>After setting <code class="docutils literal notranslate"><span class="pre">output=&quot;log&quot;</span></code>, ROS 2 logs will be stored in the <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> directory.
 When submitting an issue, please package both the SDK logs under the <code class="docutils literal notranslate"><span class="pre">Log/</span></code> directory and the corresponding ROS 2 logs under <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> for the same time period.</p>
@@ -553,7 +553,7 @@ When setting <code class="docutils literal notranslate"><span class="pre">softwa
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-02-05 06:35:03.
+      <span class="lastupdated">Last updated on 2026-02-05 06:39:12.
       </span></p>
   </div>
 
