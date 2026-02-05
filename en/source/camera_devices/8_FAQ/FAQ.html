@@ -342,7 +342,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">8. Frequently Asked Questions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#unexpected-crash">8.1. Unexpected Crash</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#no-data-stream-from-multiple-cameras">8.2. No Data Stream from Multiple Cameras</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#additional-troubleshooting">8.3. Additional Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-collect-and-save-logs">8.3. How to Collect and Save Logs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#why-are-there-so-many-launch-files">8.4. Why Are There So Many Launch Files?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-to-launch-a-specific-camera-when-multiple-cameras-are-connected">8.5. How to Launch a Specific Camera When Multiple Cameras Are Connected</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#why-is-it-necessary-to-add-delays-when-starting-multiple-cameras-or-switching-streams">8.6. Why Is It Necessary to Add Delays When Starting Multiple Cameras or Switching Streams?</a></li>
@@ -440,13 +440,24 @@
 <li><p>To make this change permanent, check <a class="reference external" href="https://github.com/OpenKinect/libfreenect2/issues/807">this link</a>.</p></li>
 </ul>
 </section>
-<section id="additional-troubleshooting">
-<h2><span class="section-number">8.3. </span>Additional Troubleshooting<a class="headerlink" href="#additional-troubleshooting" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>If you encounter other issues, set the <code class="docutils literal notranslate"><span class="pre">log_level</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">debug</span></code>. This will generate an SDK log file in the running directory: <code class="docutils literal notranslate"><span class="pre">Log/OrbbecSDK.log.txt</span></code>. Please provide this file to the support team for further assistance.</p></li>
-<li><p>If firmware logs are required, set the <code class="docutils literal notranslate"><span class="pre">log_level</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">debug</span></code> and set <code class="docutils literal notranslate"><span class="pre">enable_heartbeat</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> to activate this feature.</p></li>
-<li><p>If you set the <code class="docutils literal notranslate"><span class="pre">log_level</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">debug</span></code> and do not want the terminal to refresh too many logs, you can change <code class="docutils literal notranslate"><span class="pre">output=&quot;screen&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">output=&quot;log&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">launch</span></code>, and the logs will be saved in the <code class="docutils literal notranslate"><span class="pre">~/.ros/log</span></code> directory.</p></li>
-</ul>
+<section id="how-to-collect-and-save-logs">
+<h2><span class="section-number">8.3. </span>How to Collect and Save Logs<a class="headerlink" href="#how-to-collect-and-save-logs" title="Link to this heading"></a></h2>
+<ol class="simple">
+<li><p><strong>SDK debug logs</strong>
+Set the launch parameter <code class="docutils literal notranslate"><span class="pre">log_level</span></code> to <code class="docutils literal notranslate"><span class="pre">debug</span></code>. After running, the SDK will generate log files in the <code class="docutils literal notranslate"><span class="pre">Log/</span></code> folder under the current project directory. If you want a more recognizable file name for this test, you can set the parameter <code class="docutils literal notranslate"><span class="pre">log_file_name</span></code>.</p></li>
+</ol>
+<blockquote>
+<div><p>SDK logs are appended to the same file: multiple launches will continue writing into the same log file.
+Recommendation: before packaging logs to send to technical support, delete old log files, then reproduce the issue and collect new logs. This keeps the logs cleaner and makes troubleshooting more accurate.</p>
+</div></blockquote>
+<ol class="simple">
+<li><p><strong>ROS 2 logs (<code class="docutils literal notranslate"><span class="pre">~/.ros/log</span></code>)</strong>
+In the launch file, set the node (or composable node container) parameter <code class="docutils literal notranslate"><span class="pre">output</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;log&quot;</span></code> to save ROS 2 logs locally.</p></li>
+</ol>
+<blockquote>
+<div><p>After setting <code class="docutils literal notranslate"><span class="pre">output=&quot;log&quot;</span></code>, ROS 2 logs will be stored in the <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> directory.
+When submitting an issue, please package both the SDK logs under the <code class="docutils literal notranslate"><span class="pre">Log/</span></code> directory and the corresponding ROS 2 logs under <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> for the same time period.</p>
+</div></blockquote>
 </section>
 <section id="why-are-there-so-many-launch-files">
 <h2><span class="section-number">8.4. </span>Why Are There So Many Launch Files?<a class="headerlink" href="#why-are-there-so-many-launch-files" title="Link to this heading"></a></h2>
@@ -542,7 +553,7 @@ When setting <code class="docutils literal notranslate"><span class="pre">softwa
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-01-26 05:55:58.
+      <span class="lastupdated">Last updated on 2026-02-05 06:28:46.
       </span></p>
   </div>
 

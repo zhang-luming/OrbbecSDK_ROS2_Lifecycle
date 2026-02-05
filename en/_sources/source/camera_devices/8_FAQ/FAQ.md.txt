@@ -25,11 +25,19 @@ If the camera node crashes unexpectedly, it will generate a crash log in the cur
 
 - To make this change permanent, check [this link](https://github.com/OpenKinect/libfreenect2/issues/807).
 
-### Additional Troubleshooting
+### How to Collect and Save Logs
 
-- If you encounter other issues, set the `log_level` parameter to `debug`. This will generate an SDK log file in the running directory: `Log/OrbbecSDK.log.txt`. Please provide this file to the support team for further assistance.
-- If firmware logs are required, set the `log_level` parameter to `debug` and set `enable_heartbeat` to `true` to activate this feature.
-- If you set the `log_level` parameter to `debug` and do not want the terminal to refresh too many logs, you can change `output="screen"` to `output="log"` in `launch`, and the logs will be saved in the `~/.ros/log` directory.
+1. **SDK debug logs**
+Set the launch parameter `log_level` to `debug`. After running, the SDK will generate log files in the `Log/` folder under the current project directory. If you want a more recognizable file name for this test, you can set the parameter `log_file_name`.
+
+> SDK logs are appended to the same file: multiple launches will continue writing into the same log file.
+> Recommendation: before packaging logs to send to technical support, delete old log files, then reproduce the issue and collect new logs. This keeps the logs cleaner and makes troubleshooting more accurate.
+
+2. **ROS 2 logs (`~/.ros/log`)**
+In the launch file, set the node (or composable node container) parameter `output` to `"log"` to save ROS 2 logs locally.
+
+> After setting `output="log"`, ROS 2 logs will be stored in the `~/.ros/log/` directory.
+> When submitting an issue, please package both the SDK logs under the `Log/` directory and the corresponding ROS 2 logs under `~/.ros/log/` for the same time period.
 
 ### Why Are There So Many Launch Files?
 

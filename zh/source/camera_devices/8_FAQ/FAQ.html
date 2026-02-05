@@ -341,7 +341,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">8. 常见问题</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">8.1. 意外崩溃</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id3">8.2. 多相机无数据流</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">8.3. 其他故障排除</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">8.3. 如何采集和保存日志</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id5">8.4. 为什么有这么多启动文件？</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">8.5. 多相机连接时如何指定启动某一个相机</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id7">8.6. 多相机启动或切换流时为什么需要设置延迟？</a></li>
@@ -440,12 +440,23 @@
 </ul>
 </section>
 <section id="id4">
-<h2><span class="section-number">8.3. </span>其他故障排除<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>
-<ul class="simple">
-<li><p>如果遇到其他问题，将 <code class="docutils literal notranslate"><span class="pre">log_level</span></code> 参数设置为 <code class="docutils literal notranslate"><span class="pre">debug</span></code>。这将在运行目录中生成SDK日志文件：<code class="docutils literal notranslate"><span class="pre">Log/OrbbecSDK.log.txt</span></code>。请将此文件提供给支持团队以获得进一步帮助。</p></li>
-<li><p>如果需要固件日志，将<code class="docutils literal notranslate"><span class="pre">log_level</span></code> 参数设置为 <code class="docutils literal notranslate"><span class="pre">debug</span></code>的同时，将 <code class="docutils literal notranslate"><span class="pre">enable_heartbeat</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">true</span></code> 以激活此功能。</p></li>
-<li><p>若将<code class="docutils literal notranslate"><span class="pre">log_level</span></code> 参数设置为 <code class="docutils literal notranslate"><span class="pre">debug</span></code>的同时，又不想终端刷新太多日志，可以在<code class="docutils literal notranslate"><span class="pre">launch</span></code>中将<code class="docutils literal notranslate"><span class="pre">output=&quot;screen&quot;</span></code>改为<code class="docutils literal notranslate"><span class="pre">output=&quot;log&quot;</span></code>，日志会被保存在<code class="docutils literal notranslate"><span class="pre">~/.ros/log</span></code>目录下。</p></li>
-</ul>
+<h2><span class="section-number">8.3. </span>如何采集和保存日志<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>
+<ol class="simple">
+<li><p><strong>SDK debug 日志</strong>
+将 launch 参数 <code class="docutils literal notranslate"><span class="pre">log_level</span></code> 设为 <code class="docutils literal notranslate"><span class="pre">debug</span></code> 运行后，会在当前工程目录下的 <code class="docutils literal notranslate"><span class="pre">Log/</span></code> 文件夹中生成 SDK 日志文件。如果需要为本次测试指定一个更易识别的日志文件名，可以修改参数 <code class="docutils literal notranslate"><span class="pre">log_file_name</span></code>。</p></li>
+</ol>
+<blockquote>
+<div><p>SDK 日志是追加写入的：多次启动会在同一个文件里不断累积日志。
+建议：在准备打包日志发给技术支持前，先删除旧的日志文件，然后重新复现问题并采集新的日志，这样日志更干净、定位更准确。</p>
+</div></blockquote>
+<ol class="simple">
+<li><p><strong>ROS2 日志（~/.ros/log）</strong>
+在 launch 文件中，将节点（或可组合节点容器）的 <code class="docutils literal notranslate"><span class="pre">output</span></code> 参数设为 <code class="docutils literal notranslate"><span class="pre">&quot;log&quot;</span></code>，即可将 ROS2 日志保存到本地：</p></li>
+</ol>
+<blockquote>
+<div><p>设置为 <code class="docutils literal notranslate"><span class="pre">output=&quot;log&quot;</span></code> 后，ROS2 日志将保存在 <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> 目录下。
+如需提交问题，请同时打包 <code class="docutils literal notranslate"><span class="pre">Log/</span></code> 目录下的 SDK 日志和 <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> 下对应时间的 ROS2 日志，一并提供。</p>
+</div></blockquote>
 </section>
 <section id="id5">
 <h2><span class="section-number">8.4. </span>为什么有这么多启动文件？<a class="headerlink" href="#id5" title="链接到此标题。"></a></h2>
@@ -541,7 +552,7 @@
 
   <div role="contentinfo">
     <p>&#169; 版权所有 2025, 奥比中光科技集团股份有限公司 www.orbbec.com.。
-      <span class="lastupdated">最后更新于 2026年01月26日 05:56:01.
+      <span class="lastupdated">最后更新于 2026年02月05日 06:28:50.
       </span></p>
   </div>
 
