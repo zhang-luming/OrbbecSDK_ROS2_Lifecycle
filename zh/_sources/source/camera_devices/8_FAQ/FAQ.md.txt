@@ -29,7 +29,7 @@
 
 **1. SDK debug 日志**
 
-将 launch 参数 `log_level` 设为 `debug` 运行后，会在当前工程目录下的 `Log/` 文件夹中生成 SDK 日志文件。如果需要为本次测试指定一个更易识别的日志文件名，可以修改参数 `log_file_name`。
+将 launch 参数 `log_level` 设为 `debug` 运行后，会在当前工作目录下的 `Log/` 文件夹中生成 SDK 日志文件。如果需要为本次测试指定一个更易识别的日志文件名，可以修改参数 `log_file_name`。
 
 - SDK 日志是追加写入的：多次启动会在同一个文件里不断累积日志。
 - 建议：在准备打包日志发给技术支持前，先删除旧的日志文件，然后重新复现问题并采集新的日志，这样日志更干净、定位更准确。
@@ -40,6 +40,20 @@
 
 - 设置为 `output="log"` 后，ROS2 日志将保存在 `~/.ros/log/` 目录下。
 - 如需提交问题，请同时打包 `Log/` 目录下的 SDK 日志和 `~/.ros/log/` 下对应时间的 ROS2 日志，一并提供。
+
+**3. 示例**
+
+在终端运行
+```
+ros2 launch orbbec_camera gemini_330_series.launch.py log_level:=debug
+```
+![alt text](../image/image-2.png)
+
+即可在当前工作目录下的 Log 文件夹下查看 SDK 日志
+![alt text](../image/image-1.png)
+
+ros2 log 默认开启，可在 `~/.ros/log/` 下查看
+![alt text](../image/image.png)
 
 ### 为什么有这么多启动文件？
 

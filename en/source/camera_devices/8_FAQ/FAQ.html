@@ -443,7 +443,7 @@
 <section id="how-to-collect-and-save-logs">
 <h2><span class="section-number">8.3. </span>How to Collect and Save Logs<a class="headerlink" href="#how-to-collect-and-save-logs" title="Link to this heading"></a></h2>
 <p><strong>1. SDK debug logs</strong></p>
-<p>Set the launch parameter <code class="docutils literal notranslate"><span class="pre">log_level</span></code> to <code class="docutils literal notranslate"><span class="pre">debug</span></code>. After running, the SDK will generate log files in the <code class="docutils literal notranslate"><span class="pre">Log/</span></code> folder under the current project directory. If you want a more recognizable file name for this test, you can set the parameter <code class="docutils literal notranslate"><span class="pre">log_file_name</span></code>.</p>
+<p>Set the launch parameter <code class="docutils literal notranslate"><span class="pre">log_level</span></code> to <code class="docutils literal notranslate"><span class="pre">debug</span></code>. After running, the SDK will generate log files in the <code class="docutils literal notranslate"><span class="pre">Log/</span></code> folder under the current working directory. If you want a more recognizable file name for this test, you can set the parameter <code class="docutils literal notranslate"><span class="pre">log_file_name</span></code>.</p>
 <ul class="simple">
 <li><p>SDK logs are appended to the same file: multiple launches will continue writing into the same log file.</p></li>
 <li><p>Recommendation: before packaging logs to send to technical support, delete old log files, then reproduce the issue and collect new logs. This keeps the logs cleaner and makes troubleshooting more accurate.</p></li>
@@ -454,6 +454,16 @@
 <li><p>After setting <code class="docutils literal notranslate"><span class="pre">output=&quot;log&quot;</span></code>, ROS 2 logs will be stored in the <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> directory.</p></li>
 <li><p>When submitting an issue, please package both the SDK logs under the <code class="docutils literal notranslate"><span class="pre">Log/</span></code> directory and the corresponding ROS 2 logs under <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> for the same time period.</p></li>
 </ul>
+<p><strong>3. Example Tutorial</strong></p>
+<p>Run in the terminal</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">orbbec_camera</span> <span class="n">gemini_330_series</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">log_level</span><span class="o">:=</span><span class="n">debug</span>
+</pre></div>
+</div>
+<p><img alt="alt text" src="../../../_images/image-2.png" /></p>
+<p>You can find the SDK logs in the Log folder within the current working directory.
+<img alt="alt text" src="../../../_images/image-1.png" /></p>
+<p>ros2 log is enabled by default and can be viewed under <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code>
+<img alt="alt text" src="../../../_images/image.png" /></p>
 </section>
 <section id="why-are-there-so-many-launch-files">
 <h2><span class="section-number">8.4. </span>Why Are There So Many Launch Files?<a class="headerlink" href="#why-are-there-so-many-launch-files" title="Link to this heading"></a></h2>
@@ -549,7 +559,7 @@ When setting <code class="docutils literal notranslate"><span class="pre">softwa
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-02-05 06:50:08.
+      <span class="lastupdated">Last updated on 2026-02-05 09:12:31.
       </span></p>
   </div>
 

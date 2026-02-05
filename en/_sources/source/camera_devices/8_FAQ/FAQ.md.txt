@@ -29,7 +29,7 @@ If the camera node crashes unexpectedly, it will generate a crash log in the cur
 
 **1. SDK debug logs**
 
-Set the launch parameter `log_level` to `debug`. After running, the SDK will generate log files in the `Log/` folder under the current project directory. If you want a more recognizable file name for this test, you can set the parameter `log_file_name`.
+Set the launch parameter `log_level` to `debug`. After running, the SDK will generate log files in the `Log/` folder under the current working directory. If you want a more recognizable file name for this test, you can set the parameter `log_file_name`.
 
 - SDK logs are appended to the same file: multiple launches will continue writing into the same log file.
 - Recommendation: before packaging logs to send to technical support, delete old log files, then reproduce the issue and collect new logs. This keeps the logs cleaner and makes troubleshooting more accurate.
@@ -40,6 +40,20 @@ In the launch file, set the node (or composable node container) parameter `outpu
 
 - After setting `output="log"`, ROS 2 logs will be stored in the `~/.ros/log/` directory.
 - When submitting an issue, please package both the SDK logs under the `Log/` directory and the corresponding ROS 2 logs under `~/.ros/log/` for the same time period.
+
+**3. Example Tutorial**
+
+Run in the terminal
+```
+ros2 launch orbbec_camera gemini_330_series.launch.py log_level:=debug
+```
+![alt text](../../../../zh/source/camera_devices/image/image-2.png)
+
+You can find the SDK logs in the Log folder within the current working directory.
+![alt text](../../../../zh/source/camera_devices/image/image-1.png)
+
+ros2 log is enabled by default and can be viewed under `~/.ros/log/`
+![alt text](../../../../zh/source/camera_devices/image/image.png)
 
 ### Why Are There So Many Launch Files?
 

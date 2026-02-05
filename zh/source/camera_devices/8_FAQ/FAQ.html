@@ -442,7 +442,7 @@
 <section id="id4">
 <h2><span class="section-number">8.3. </span>如何采集和保存日志<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>
 <p><strong>1. SDK debug 日志</strong></p>
-<p>将 launch 参数 <code class="docutils literal notranslate"><span class="pre">log_level</span></code> 设为 <code class="docutils literal notranslate"><span class="pre">debug</span></code> 运行后，会在当前工程目录下的 <code class="docutils literal notranslate"><span class="pre">Log/</span></code> 文件夹中生成 SDK 日志文件。如果需要为本次测试指定一个更易识别的日志文件名，可以修改参数 <code class="docutils literal notranslate"><span class="pre">log_file_name</span></code>。</p>
+<p>将 launch 参数 <code class="docutils literal notranslate"><span class="pre">log_level</span></code> 设为 <code class="docutils literal notranslate"><span class="pre">debug</span></code> 运行后，会在当前工作目录下的 <code class="docutils literal notranslate"><span class="pre">Log/</span></code> 文件夹中生成 SDK 日志文件。如果需要为本次测试指定一个更易识别的日志文件名，可以修改参数 <code class="docutils literal notranslate"><span class="pre">log_file_name</span></code>。</p>
 <ul class="simple">
 <li><p>SDK 日志是追加写入的：多次启动会在同一个文件里不断累积日志。</p></li>
 <li><p>建议：在准备打包日志发给技术支持前，先删除旧的日志文件，然后重新复现问题并采集新的日志，这样日志更干净、定位更准确。</p></li>
@@ -453,6 +453,16 @@
 <li><p>设置为 <code class="docutils literal notranslate"><span class="pre">output=&quot;log&quot;</span></code> 后，ROS2 日志将保存在 <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> 目录下。</p></li>
 <li><p>如需提交问题，请同时打包 <code class="docutils literal notranslate"><span class="pre">Log/</span></code> 目录下的 SDK 日志和 <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> 下对应时间的 ROS2 日志，一并提供。</p></li>
 </ul>
+<p><strong>3. 示例</strong></p>
+<p>在终端运行</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">orbbec_camera</span> <span class="n">gemini_330_series</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">log_level</span><span class="o">:=</span><span class="n">debug</span>
+</pre></div>
+</div>
+<p><img alt="alt text" src="../../../_images/image-2.png" /></p>
+<p>即可在当前工作目录下的 Log 文件夹下查看 SDK 日志
+<img alt="alt text" src="../../../_images/image-1.png" /></p>
+<p>ros2 log 默认开启，可在 <code class="docutils literal notranslate"><span class="pre">~/.ros/log/</span></code> 下查看
+<img alt="alt text" src="../../../_images/image.png" /></p>
 </section>
 <section id="id5">
 <h2><span class="section-number">8.4. </span>为什么有这么多启动文件？<a class="headerlink" href="#id5" title="链接到此标题。"></a></h2>
@@ -548,7 +558,7 @@
 
   <div role="contentinfo">
     <p>&#169; 版权所有 2025, 奥比中光科技集团股份有限公司 www.orbbec.com.。
-      <span class="lastupdated">最后更新于 2026年02月05日 06:50:11.
+      <span class="lastupdated">最后更新于 2026年02月05日 09:12:35.
       </span></p>
   </div>
 
