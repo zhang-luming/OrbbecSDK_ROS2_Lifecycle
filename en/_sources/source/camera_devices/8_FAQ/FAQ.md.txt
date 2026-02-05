@@ -27,13 +27,13 @@ If the camera node crashes unexpectedly, it will generate a crash log in the cur
 
 ### How to Collect and Save Logs
 
-1. **SDK debug logs**
+- **SDK debug logs**
 Set the launch parameter `log_level` to `debug`. After running, the SDK will generate log files in the `Log/` folder under the current project directory. If you want a more recognizable file name for this test, you can set the parameter `log_file_name`.
 
 > SDK logs are appended to the same file: multiple launches will continue writing into the same log file.
 > Recommendation: before packaging logs to send to technical support, delete old log files, then reproduce the issue and collect new logs. This keeps the logs cleaner and makes troubleshooting more accurate.
 
-2. **ROS 2 logs (`~/.ros/log`)**
+- **ROS 2 logs (`~/.ros/log`)**
 In the launch file, set the node (or composable node container) parameter `output` to `"log"` to save ROS 2 logs locally.
 
 > After setting `output="log"`, ROS 2 logs will be stored in the `~/.ros/log/` directory.
