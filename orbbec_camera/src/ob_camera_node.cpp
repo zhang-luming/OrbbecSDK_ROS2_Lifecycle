@@ -2566,12 +2566,23 @@ void OBCameraNode::setupPublishers() {
     if (use_intra_process_) {
       image_qos_profile = rmw_qos_profile_default;
     }
-    if (use_intra_process_) {
+    const bool is_mjpg_color_stream =
+        (stream_index == COLOR || stream_index == COLOR_LEFT || stream_index == COLOR_RIGHT) &&
+        format_[stream_index] == OB_FORMAT_MJPG;
+    if (use_intra_process_ || is_mjpg_color_stream) {
       image_publishers_[stream_index] =
           std::make_shared<image_rcl_publisher>(*node_, topic, image_qos_profile);
     } else {
       image_publishers_[stream_index] =
           std::make_shared<image_transport_publisher>(*node_, topic, image_qos_profile);
+    }
+    if ((stream_index == COLOR || stream_index == COLOR_LEFT || stream_index == COLOR_RIGHT) &&
+        format_[stream_index] == OB_FORMAT_MJPG) {
+      compressed_image_publishers_[stream_index] =
+          node_->create_publisher<sensor_msgs::msg::CompressedImage>(
+              topic + "/compressed",
+              rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(image_qos_profile),
+                          image_qos_profile));
     }
 
     topic = name + "/camera_info";
@@ -3506,8 +3517,8 @@ bool OBCameraNode::decodeColorFrameToBuffer(const std::shared_ptr<ob::Frame> &fr
   }
 
   bool has_subscriber = false;
-  if (image_publishers_.count(stream_index) && image_publishers_[stream_index]) {
-    has_subscriber = image_publishers_[stream_index]->get_subscription_count() > 0;
+  if (image_publishers_.count(stream_index) && image_publishers_.at(stream_index)) {
+    has_subscriber = image_publishers_.at(stream_index)->get_subscription_count() > 0;
   }
   if (stream_index == COLOR && enable_color_undistortion_ && color_undistortion_publisher_) {
     has_subscriber = true;
@@ -3623,9 +3634,11 @@ void OBCameraNode::onNewFrameCallback(const std::shared_ptr<ob::Frame> &frame,
   CHECK_NOTNULL(image_publishers_[stream_index]);
   const bool has_raw_image_subscriber =
       image_publishers_[stream_index]->get_subscription_count() > 0;
+  const bool has_compressed_image_subscriber = hasCompressedImageSubscriber(stream_index);
   const bool enable_undistortion_publish =
       (stream_index == COLOR && enable_color_undistortion_ && color_undistortion_publisher_);
-  bool has_subscriber = has_raw_image_subscriber || enable_undistortion_publish;
+  bool has_subscriber =
+      has_raw_image_subscriber || has_compressed_image_subscriber || enable_undistortion_publish;
   has_subscriber =
       has_subscriber || camera_info_publishers_[stream_index]->get_subscription_count() > 0;
   has_subscriber =
@@ -3728,6 +3741,10 @@ void OBCameraNode::onNewFrameCallback(const std::shared_ptr<ob::Frame> &frame,
     camera_info.p.at(3) = -fx * ex.trans[0] / 1000.0 + 0.0;
     camera_info.p.at(7) = -fy * ex.trans[1] / 1000.0 + 0.0;
   }
+  if ((stream_index == COLOR || stream_index == COLOR_LEFT || stream_index == COLOR_RIGHT) &&
+      frame->getFormat() == OB_FORMAT_MJPG && has_compressed_image_subscriber) {
+    publishCompressedColorImage(frame, stream_index, timestamp, frame_id);
+  }
   CHECK_NOTNULL(image_publishers_[stream_index]);
   if (!has_raw_image_subscriber && !enable_undistortion_publish) {
     return;
@@ -3808,6 +3825,29 @@ void OBCameraNode::onNewFrameCallback(const std::shared_ptr<ob::Frame> &frame,
   if (has_raw_image_subscriber) {
     image_publishers_[stream_index]->publish(std::move(image_msg));
   }
+}
+
+bool OBCameraNode::hasCompressedImageSubscriber(const stream_index_pair &stream_index) const {
+  auto it = compressed_image_publishers_.find(stream_index);
+  return it != compressed_image_publishers_.end() && it->second &&
+         it->second->get_subscription_count() > 0;
+}
+
+void OBCameraNode::publishCompressedColorImage(const std::shared_ptr<ob::Frame> &frame,
+                                               const stream_index_pair &stream_index,
+                                               const rclcpp::Time &timestamp,
+                                               const std::string &frame_id) {
+  auto it = compressed_image_publishers_.find(stream_index);
+  if (it == compressed_image_publishers_.end() || !it->second) {
+    return;
+  }
+  sensor_msgs::msg::CompressedImage msg;
+  msg.header.stamp = timestamp;
+  msg.header.frame_id = frame_id;
+  msg.format = "jpeg";
+  const auto *data = static_cast<const uint8_t *>(frame->getData());
+  msg.data.assign(data, data + frame->getDataSize());
+  it->second->publish(std::move(msg));
 }
 
 void OBCameraNode::publishMetadata(const std::shared_ptr<ob::Frame> &frame,
