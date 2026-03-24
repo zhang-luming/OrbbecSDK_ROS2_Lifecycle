@@ -49,6 +49,7 @@ ros2 launch orbbec_camera multi_net_camera.launch.py
 **`set_device_ip`** 可执行文件允许您直接从 ROS 2 配置网络相机的 IP 设置，包括在 DHCP 和静态 IP 之间切换，以及设置子网掩码和网关。这对于快速分配或更新 IP 地址而无需修改启动文件非常有用。
 
 > **注意：**使用 `set_device_ip` 应用的 IP 设置是**永久性的**，如果设备断电或重启，**不会重置**。
+> **支持版本**： wrapper version 2.6.3 及以上。
 
 **示例用法**
 
@@ -74,6 +75,7 @@ ros2 run orbbec_camera set_device_ip --ros-args \
 **强制 IP** 功能允许您为网络相机分配**静态 IP 地址**，覆盖 DHCP 设置。当连接多个网络相机时，这非常有用，您需要每个设备具有固定的 IP 以实现可靠的通信。
 
 > **注意：**如果设备断电或重启，强制 IP 配置**将被重置**。您需要在重启后重新应用设置。
+> **支持版本**： wrapper version 2.6.3 及以上。
 
 **参数**
 

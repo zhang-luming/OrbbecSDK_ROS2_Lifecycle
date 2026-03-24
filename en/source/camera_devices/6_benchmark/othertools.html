@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>6.4. Other Tools &mdash; OrbbecSDK V2 ROS2 Wrapper  documentation</title>
+  <title>6.3. Other Tools &mdash; OrbbecSDK V2 ROS2 Wrapper  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=63de077d" />
@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="7. Developer Guide" href="../7_developer_guide/developer_guide.html" />
-    <link rel="prev" title="6.3. Benchmark Data" href="benchmark_data.html" /> 
+    <link rel="prev" title="6.2. Benchmark Usage" href="benchmark_usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -295,17 +295,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="benchmark_data.html">6.3. Benchmark Data</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="benchmark_data.html#common-benckmark-data">6.3.1. Common Benckmark Data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="benchmark_data.html#service-benchmark-data">6.3.2. Service Benchmark Data</a></li>
-</ul>
-</li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">6.4. Other Tools</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ob-benchmark-tool">6.4.1. Ob_benchmark tool</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#tool-configuration-start-benchmark-params-json">6.4.1.1. Tool Configuration (start_benchmark_params.json)</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#camera-configuration-launch-files">6.4.1.2. Camera configuration (launch files)</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#running-the-ob-benchmark-tool">6.4.1.3. Running the ob_benchmark tool</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#output-data-files">6.4.1.4. Output Data Files</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">6.3. Other Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ob-benchmark-tool">6.3.1. Ob_benchmark tool</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#tool-configuration-start-benchmark-params-json">6.3.1.1. Tool Configuration (start_benchmark_params.json)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#camera-configuration-launch-files">6.3.1.2. Camera configuration (launch files)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#running-the-ob-benchmark-tool">6.3.1.3. Running the ob_benchmark tool</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#output-data-files">6.3.1.4. Output Data Files</a></li>
 </ul>
 </li>
 </ul>
@@ -403,7 +398,7 @@
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Camera Devices</a></li>
           <li class="breadcrumb-item"><a href="benchmark.html"><span class="section-number">6. </span>Benchmark</a></li>
-      <li class="breadcrumb-item active"><span class="section-number">6.4. </span>Other Tools</li>
+      <li class="breadcrumb-item active"><span class="section-number">6.3. </span>Other Tools</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/source/camera_devices/6_benchmark/othertools.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -414,15 +409,15 @@
            <div itemprop="articleBody">
              
   <div class="lang-switch" style="margin:0 0 1em 0; font-size:0.9em;"><a class="lang-other" href="#">中文</a> | <a class="lang-current" href="#">English</a></div><script>(function(){var p=window.location.pathname;var isEn=p.indexOf('/en/')!==-1 && p.indexOf('/zh/')===-1;if(p.indexOf('/zh/')!==-1) isEn=false;var other = isEn ? p.replace(/\/en\//, '/zh/') : p.replace(/\/zh\//, '/en/');var current=p;var sw=document.querySelector('.lang-switch'); if(!sw) return;var o=sw.querySelector('.lang-other'); var c=sw.querySelector('.lang-current');if(isEn){ o.textContent='中文'; c.textContent='English'; } else { o.textContent='English'; c.textContent='中文'; }o.setAttribute('href', other); c.setAttribute('href', current);})();</script><section id="other-tools">
-<h1><span class="section-number">6.4. </span>Other Tools<a class="headerlink" href="#other-tools" title="Link to this heading"></a></h1>
+<h1><span class="section-number">6.3. </span>Other Tools<a class="headerlink" href="#other-tools" title="Link to this heading"></a></h1>
 <section id="ob-benchmark-tool">
-<h2><span class="section-number">6.4.1. </span>Ob_benchmark tool<a class="headerlink" href="#ob-benchmark-tool" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.3.1. </span>Ob_benchmark tool<a class="headerlink" href="#ob-benchmark-tool" title="Link to this heading"></a></h2>
 <blockquote>
 <div><p>The goal of this tool is to benchmark the performance of various OrbbecSDK_ROS2 camera configurations. The benchmark results depend on the camera and settings used.(Currently only works with ROS2 Humble)</p>
 </div></blockquote>
 <p>You can find example usage code in the <a class="reference external" href="https://github.com/orbbec/OrbbecSDK_ROS2/tree/v2-main/orbbec_camera/examples">example</a>.</p>
 <section id="tool-configuration-start-benchmark-params-json">
-<h3><span class="section-number">6.4.1.1. </span>Tool Configuration (<a class="reference external" href="https://github.com/orbbec/OrbbecSDK_ROS2/blob/v2-main/orbbec_camera/config/tools/startbenchmark/start_benchmark_params.json">start_benchmark_params.json</a>)<a class="headerlink" href="#tool-configuration-start-benchmark-params-json" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.1.1. </span>Tool Configuration (<a class="reference external" href="https://github.com/orbbec/OrbbecSDK_ROS2/blob/v2-main/orbbec_camera/config/tools/startbenchmark/start_benchmark_params.json">start_benchmark_params.json</a>)<a class="headerlink" href="#tool-configuration-start-benchmark-params-json" title="Link to this heading"></a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;start_benchmark_params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;camera_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -448,11 +443,11 @@
 </ul>
 </section>
 <section id="camera-configuration-launch-files">
-<h3><span class="section-number">6.4.1.2. </span>Camera configuration (launch files)<a class="headerlink" href="#camera-configuration-launch-files" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.1.2. </span>Camera configuration (launch files)<a class="headerlink" href="#camera-configuration-launch-files" title="Link to this heading"></a></h3>
 <p>In the launch folder, there are multiple.launch.py files (<code class="docutils literal notranslate"><span class="pre">ob_benchmark_0.launch.py</span></code>, <code class="docutils literal notranslate"><span class="pre">ob_benchmark_1.launch.py</span></code>, …, <code class="docutils literal notranslate"><span class="pre">ob_benchmark_19.launch.py</span></code>). Each file corresponds to a different camera configuration.</p>
 </section>
 <section id="running-the-ob-benchmark-tool">
-<h3><span class="section-number">6.4.1.3. </span>Running the ob_benchmark tool<a class="headerlink" href="#running-the-ob-benchmark-tool" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.1.3. </span>Running the ob_benchmark tool<a class="headerlink" href="#running-the-ob-benchmark-tool" title="Link to this heading"></a></h3>
 <p>To run the tool, use the following commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>install/setup.bash
 ros2<span class="w"> </span>run<span class="w"> </span>orbbec_camera<span class="w"> </span>ob_benchmark_node
@@ -460,7 +455,7 @@ ros2<span class="w"> </span>run<span class="w"> </span>orbbec_camera<span class=
 </div>
 </section>
 <section id="output-data-files">
-<h3><span class="section-number">6.4.1.4. </span>Output Data Files<a class="headerlink" href="#output-data-files" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.1.4. </span>Output Data Files<a class="headerlink" href="#output-data-files" title="Link to this heading"></a></h3>
 <p>The output data files will be stored in the ob_benchmark folder with filenames like <code class="docutils literal notranslate"><span class="pre">0.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">1.csv</span></code>, …, 19.csv. For example:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">0.csv</span></code> contains data from the <code class="docutils literal notranslate"><span class="pre">ob_benchmark_0.launch.py</span></code> configuration.</p></li>
@@ -474,7 +469,7 @@ ros2<span class="w"> </span>run<span class="w"> </span>orbbec_camera<span class=
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="benchmark_data.html" class="btn btn-neutral float-left" title="6.3. Benchmark Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="benchmark_usage.html" class="btn btn-neutral float-left" title="6.2. Benchmark Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../7_developer_guide/developer_guide.html" class="btn btn-neutral float-right" title="7. Developer Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -482,7 +477,7 @@ ros2<span class="w"> </span>run<span class="w"> </span>orbbec_camera<span class=
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-02-05 09:12:31.
+      <span class="lastupdated">Last updated on 2026-03-24 07:49:09.
       </span></p>
   </div>
 

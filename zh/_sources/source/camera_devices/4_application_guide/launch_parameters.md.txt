@@ -38,16 +38,21 @@
     *   启用无效点云过滤。
 *   **`point_cloud_qos`、`[stream]_qos`、`[stream]_camera_info_qos`**
     *   ROS 2消息服务质量（QoS）设置。可能的值为 `SYSTEM_DEFAULT`、`DEFAULT`、`PARAMETER_EVENTS`、`SERVICES_DEFAULT`、`PARAMETERS`、`SENSOR_DATA`，不区分大小写。这些分别对应 `rmw_qos_profile_system_default`、`rmw_qos_profile_default`、`rmw_qos_profile_parameter_events`、`rmw_qos_profile_services_default`、`rmw_qos_profile_parameters` 和 `SENSOR_DATA`。
-*   **`color.image_raw.enable_pub_plugins`**
-    *   启用彩色图像传输插件。默认值：`["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`。
-*   **`depth.image_raw.enable_pub_plugins`**
-    *   启用深度图像传输插件。默认值：`["image_transport/compressedDepth", "image_transport/raw"]`。
-*   **`left_ir.image_raw.enable_pub_plugins`**
-    *   启用左红外图像传输插件。默认值：`["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`。
-*   **`right_ir.image_raw.enable_pub_plugins`**
-    *   启用右红外图像传输插件。默认值：`["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`。
-*   **`point_cloud_decimation_filter_factor`**
-    *   点云下采样因子。范围：`1–8`，`1`表示不下采样，数值越大下采样倍数越大。
+* **`color.image_raw.enable_pub_plugins`**
+  * 启用彩色图像传输插件。默认值：`["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`。
+    > **支持版本**： wrapper version 2.6.3 及以上。
+* **`depth.image_raw.enable_pub_plugins`**
+  * 启用深度图像传输插件。默认值：`["image_transport/compressedDepth", "image_transport/raw"]`。
+    > **支持版本**： wrapper version 2.6.3 及以上。
+* **`left_ir.image_raw.enable_pub_plugins`**
+  * 启用左红外图像传输插件。默认值：`["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`。
+    > **支持版本**： wrapper version 2.6.3 及以上。
+* **`right_ir.image_raw.enable_pub_plugins`**
+  * 启用右红外图像传输插件。默认值：`["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`。
+    > **支持版本**： wrapper version 2.6.3 及以上。
+* **`point_cloud_decimation_filter_factor`**
+  * 点云下采样因子。范围：`1–8`，`1`表示不下采样，数值越大下采样倍数越大。
+    > **支持版本**： wrapper version 2.6.3 及以上。
 
 ### 传感器控制
 
@@ -83,9 +88,9 @@
 #### 深度流
 *   **`enable_depth_auto_exposure_priority`**
     *   启用深度自动曝光优先级。
-*   **`mean_intensity_set_point`**
-    *   设置开启自动曝光时深度图像的目标平均强度。例如：`mean_intensity_set_point:=100`。
-    > **注意：** 这取代了已弃用的 `depth_brightness`，后者仍支持以保持向后兼容性。
+* **`mean_intensity_set_point`**
+  * 设置开启自动曝光时深度图像的目标平均强度。例如：`mean_intensity_set_point:=100`。
+    > **注意：** 在 2.4.7 版本之后，该参数取代已弃用的 `depth_brightness`，但为了向后兼容，仍会支持 `depth_brightness`。
 *   **`enable_depth_scale`**
     *   设置D2C后是否启用深度缩放。`true`表示启用，默认为`true`。
 *   **`depth_precision`**
@@ -132,42 +137,55 @@
 > 用于 [多相机同步](../5_advanced_guide/multi_camera/multi_camera_synced.md)。
 
 #### 网络相机
-*   **`enumerate_net_device`**
-    *   启用自动枚举网络设备。
-*   **`net_device_ip`** / **`net_device_port`**
-    *   设置网络设备的IP地址和端口（通常为 `8090`）。
-*   **`force_ip_enable`**
-    *   启用强制IP功能。**默认值：** `false`
-*   **`force_ip_mac`**
-    *   连接多个相机时的目标设备MAC地址（例如，`"54:14:FD:06:07:DA"`）。您可以使用 `list_devices_node` 查找每个设备的MAC。**默认值：** `""`
-*   **`force_ip_address`**
-    *   要分配的静态IP地址。**默认值：** `192.168.1.10`
-*   **`force_ip_subnet_mask`**
-    *   静态IP的子网掩码。**默认值：** `255.255.255.0`
-*   **`force_ip_gateway`**
-    *   静态IP的网关地址。**默认值：** `192.168.1.1`
+* **`enumerate_net_device`**
+  * 启用自动枚举网络设备。
+* **`net_device_ip`** / **`net_device_port`**
+  * 设置网络设备的IP地址和端口（通常为 `8090`）。
+* **`force_ip_enable`**
+  * 启用强制IP功能。**默认值：** `false`
+    > **支持版本**： wrapper version 2.5.4 及以上。
+* **`force_ip_mac`**
+  * 连接多个相机时的目标设备MAC地址（例如，`"54:14:FD:06:07:DA"`）。您可以使用 `list_devices_node` 查找每个设备的MAC。**默认值：** `""`
+    > **支持版本**： wrapper version 2.5.4 及以上。
+* **`force_ip_address`**
+  * 要分配的静态IP地址。**默认值：** `192.168.1.10`
+    > **支持版本**： wrapper version 2.5.4 及以上。
+* **`force_ip_subnet_mask`**
+  * 静态IP的子网掩码。**默认值：** `255.255.255.0`
+    > **支持版本**： wrapper version 2.5.4 及以上。
+* **`force_ip_gateway`**
+  * 静态IP的网关地址。**默认值：** `192.168.1.1`
+    > **支持版本**： wrapper version 2.5.4 及以上。
 
 > 用于 [网络相机](../5_advanced_guide/configuration/net_camera.md)。
 
 #### 设备特定
 *   **`enable_gmsl_trigger`** / **`gmsl_trigger_fps`**
     *   启用gmsl触发输出信号 / 设置gmsl触发fps。用于 [gmsl相机](../5_advanced_guide/multi_camera/gmsl_camera.md)。
-*   **`preset_resolution_config`**
-    * 摄像头设备的预设分辨率配置。格式: "width,height,ir_decimation_factor,depth_decimation_factor". Example: "1280,720,4,4". 仅在 Gemini435Le 设备上受支持。留空禁用。
+* **`enable_ptp_config`**
+  * 启用PTP时间同步。仅适用于Gemini 335Le。需要 `enable_sync_host_time` 设置为 `false`。
+    > **支持模组**：Gemini 335Le。
+    > **支持版本**： wrapper version 2.3.4 及以上。
+* **`preset_resolution_config`**
+  * 摄像头设备的预设分辨率配置。格式: "width,height,ir_decimation_factor,depth_decimation_factor". Example: "1280,720,4,4". 留空禁用。
+    > **支持模组**：Gemini 435Le。
+    > **支持版本**： wrapper version 2.6.3 及以上。
 * **`ae_mode`**
   * `colorbased`：自动曝光基于彩色流。`depthbased`：自动曝光基于深度流。**默认值：** `depthbased`
-    > 仅支持Gemini 305。
-    >
+    > **支持模组**：Gemini 305。
+    > **支持版本**： wrapper version 2.7.2 及以上。
 * **`enalbe_sports_mode`**
   * 是否开启运动模式。**默认值：** `false`
-    > 仅支持Gemini 305。
-    >
+    > **支持模组**：Gemini 305。
+    > **支持版本**： wrapper version 2.7.2 及以上。
 * **`depth_downscale`** / **`left_ir_downscale`** /**`right_ir_downscale`**
   * 设置下采样倍数。可用`ros2 run orbbec_camera list_camera_profile_mode_node`查看可设置分辨率。**默认值：** `1`
-    > 仅支持Gemini 305。
-    >
-*   **`enable_ptp_config`**
-    *   启用PTP时间同步。仅适用于Gemini 335Le。需要 `enable_sync_host_time` 设置为 `false`。
+    > **支持模组**：Gemini 305。
+    > **支持版本**： wrapper version 2.7.2 及以上。
+* **`enable_false_positive_filter`**
+  * 启用鬼影滤波。可减少重影噪声。
+    > **支持模组**： DaBaiA/DaBaiAL/Gemini345/Gemini345Lg.
+    > **支持版本**： wrapper version 2.7.6 及以上；firmware version 1.9.03 及以上。
 
 #### 视差
 *   **`disparity_to_depth_mode`**
@@ -197,6 +215,7 @@
   *   `DEPTH`：将彩色对齐到深度。
 - **`intra_camera_sync_reference`**
   - 设置相机内同步的参考点。适用于Gemini 330系列设备，当 `sync_mode` 设置为**软件**或**硬件触发**模式时。**选项：** `Start`、`Middle`、`End`。设置为空时，长基线设备默认End，短基线设备默认Middle。
+    > **支持版本**： wrapper version 2.6.3 及以上。
 
 ### 基础与通用参数
 
@@ -227,18 +246,19 @@
     *   启用主机时间与相机时间的同步。默认值为 `true`。如果使用全局时间，设置为 `false`。
 *   **`time_domain`**
     *   选择时间戳类型：`device`、`global` 和 `system`。
-*   **`time_sync_period`**
-
-    *   相机时间与主机系统同步的间隔（秒）。
+* **`time_sync_period`**
+  * 相机时间与主机系统同步的间隔（秒）。
     > **注意**：仅当 **`enable_sync_host_time = true`** 且 **`time_domain = device`** 时需要设置此参数。
+    > **支持版本**： wrapper version 2.6.3 及以上。
 *   **`enable_frame_sync`**
     *   启用帧同步。
 
 #### 日志与诊断
 *   **`log_level`**
     *   SDK日志级别。默认为 `info`。可选值：`debug`、`info`、`warn`、`error`、`fatal`。
-*   **`log_file_name`**
-    *   保存的SDK日志文件名。当`log_level`为`debug`时生效。
+* **`log_file_name`**
+  * 保存的SDK日志文件名。当`log_level`为`debug`时生效。
+    > **支持版本**： wrapper version 2.6.3 及以上。
 *   **`diagnostic_period`**
     *   诊断周期（秒）。
 *   **`enable_heartbeat`**

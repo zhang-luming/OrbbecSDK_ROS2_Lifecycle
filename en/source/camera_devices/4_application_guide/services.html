@@ -295,17 +295,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../6_benchmark/benchmark_data.html">6.3. Benchmark Data</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../6_benchmark/benchmark_data.html#common-benckmark-data">6.3.1. Common Benckmark Data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../6_benchmark/benchmark_data.html#service-benchmark-data">6.3.2. Service Benchmark Data</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../6_benchmark/othertools.html">6.4. Other Tools</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../6_benchmark/othertools.html#ob-benchmark-tool">6.4.1. Ob_benchmark tool</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../6_benchmark/othertools.html#tool-configuration-start-benchmark-params-json">6.4.1.1. Tool Configuration (start_benchmark_params.json)</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../6_benchmark/othertools.html#camera-configuration-launch-files">6.4.1.2. Camera configuration (launch files)</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../6_benchmark/othertools.html#running-the-ob-benchmark-tool">6.4.1.3. Running the ob_benchmark tool</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../6_benchmark/othertools.html#output-data-files">6.4.1.4. Output Data Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../6_benchmark/othertools.html">6.3. Other Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../6_benchmark/othertools.html#ob-benchmark-tool">6.3.1. Ob_benchmark tool</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../6_benchmark/othertools.html#tool-configuration-start-benchmark-params-json">6.3.1.1. Tool Configuration (start_benchmark_params.json)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../6_benchmark/othertools.html#camera-configuration-launch-files">6.3.1.2. Camera configuration (launch files)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../6_benchmark/othertools.html#running-the-ob-benchmark-tool">6.3.1.3. Running the ob_benchmark tool</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../6_benchmark/othertools.html#output-data-files">6.3.1.4. Output Data Files</a></li>
 </ul>
 </li>
 </ul>
@@ -575,10 +570,14 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_laser_enable<span class="w"> </span>std_srvs/srv/SetBool<span class="w"> </span><span class="s1">&#39;{data: true}&#39;</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">/camera/get_laser_status</span></code></p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/camera/get_laser_status</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/get_laser_status<span class="w"> </span>orbbec_camera_msgs/srv/GetBool<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
+</div></blockquote>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/camera/set_ldp_enable</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">/camera/get_ldp_status</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_ldp_enable<span class="w"> </span>std_srvs/srv/SetBool<span class="w"> </span><span class="s1">&#39;{data: true}&#39;</span>
@@ -706,13 +705,16 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 </ul>
 <section id="device-specific">
 <h3><span class="section-number">4.2.6.1. </span>Device-Specific<a class="headerlink" href="#device-specific" title="Link to this heading"></a></h3>
-<p><strong>Gemini 435Le</strong></p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">/camera/write_customer_data</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">/camera/read_customer_data</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/write_customer_data<span class="w"> </span>orbbec_camera_msgs/srv/SetString<span class="w"> </span><span class="s1">&#39;{data: &quot;string&quot;}&#39;</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/read_customer_data<span class="w"> </span>orbbec_camera_msgs/srv/GetString<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Supported Modules</strong>: Gemini 435Le
+<strong>Supported Versions</strong>: Wrapper version 2.5.4 and above.</p>
+</div></blockquote>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/camera/set_user_calib_params</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">/camera/get_user_calib_params</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_user_calib_params<span class="w"> </span>orbbec_camera_msgs/srv/SetUserCalibParams<span class="w"> </span><span class="se">\</span>
@@ -734,20 +736,29 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/get_user_calib_params<span class="w"> </span>orbbec_camera_msgs/srv/GetUserCalibParams<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Supported Modules</strong>: Gemini 435Le
+<strong>Supported Versions</strong>: Wrapper version 2.5.4 and above.</p>
+</div></blockquote>
 </li>
-</ul>
-<p><strong>Gemini 305</strong></p>
-<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">/camera/set_ae_mode</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="c1"># depthbased or colorbased</span>
 <span class="w">  </span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_ae_mode<span class="w"> </span>orbbec_camera_msgs/srv/SetString<span class="w"> </span><span class="s2">&quot;data: depthbased&quot;</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Supported Modules</strong>: Gemini 305
+<strong>Supported Versions</strong>: Wrapper version 2.7.2 and above.</p>
+</div></blockquote>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/camera/set_sports_mode</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_sports_mode<span class="w"> </span>std_srvs/srv/SetBool<span class="w"> </span><span class="s2">&quot;data: true&quot;</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Supported Modules</strong>: Gemini 305
+<strong>Supported Versions</strong>: Wrapper version 2.7.2 and above.</p>
+</div></blockquote>
 </li>
 </ul>
 </section>
@@ -759,11 +770,17 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_point_cloud_decimation<span class="w"> </span>orbbec_camera_msgs/srv/SetInt32<span class="w"> </span><span class="s1">&#39;{data: 8}&#39;</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
+</div></blockquote>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">/camera/get_point_cloud_decimation</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/get_point_cloud_decimation<span class="w"> </span>orbbec_camera_msgs/srv/GetInt32<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
+</div></blockquote>
 </li>
 </ul>
 </section>
@@ -781,7 +798,7 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-02-05 09:12:31.
+      <span class="lastupdated">Last updated on 2026-03-24 07:49:09.
       </span></p>
   </div>
 

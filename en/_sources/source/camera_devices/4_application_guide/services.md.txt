@@ -124,10 +124,11 @@
     ```bash
     ros2 service call /camera/set_laser_enable std_srvs/srv/SetBool '{data: true}'
     ```
-    `/camera/get_laser_status`
+*   `/camera/get_laser_status`
     ```bash
     ros2 service call /camera/get_laser_status orbbec_camera_msgs/srv/GetBool '{}'
     ```
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
 *   `/camera/set_ldp_enable` & `/camera/get_ldp_status`
     ```bash
     ros2 service call /camera/set_ldp_enable std_srvs/srv/SetBool '{data: true}'
@@ -231,13 +232,13 @@
 
 #### Device-Specific
 
-**Gemini 435Le**
-
 *   `/camera/write_customer_data` & `/camera/read_customer_data`
     ```bash
     ros2 service call /camera/write_customer_data orbbec_camera_msgs/srv/SetString '{data: "string"}'
     ros2 service call /camera/read_customer_data orbbec_camera_msgs/srv/GetString '{}'
     ```
+    > **Supported Modules**: Gemini 435Le
+    > **Supported Versions**: Wrapper version 2.5.4 and above.
 *   `/camera/set_user_calib_params` & `/camera/get_user_calib_params`
     ```bash
     ros2 service call /camera/set_user_calib_params orbbec_camera_msgs/srv/SetUserCalibParams \
@@ -258,25 +259,30 @@
                     -6.804073229432106e-06]}'
     ros2 service call /camera/get_user_calib_params orbbec_camera_msgs/srv/GetUserCalibParams '{}'
     ```
+    > **Supported Modules**: Gemini 435Le
+    > **Supported Versions**: Wrapper version 2.5.4 and above.
 
-**Gemini 305**
 *   `/camera/set_ae_mode`
     ```bash
       # depthbased or colorbased
       ros2 service call /camera/set_ae_mode orbbec_camera_msgs/srv/SetString "data: depthbased"
     ```
-
+    > **Supported Modules**: Gemini 305
+    > **Supported Versions**: Wrapper version 2.7.2 and above.
 *   `/camera/set_sports_mode`
     ```bash
       ros2 service call /camera/set_sports_mode std_srvs/srv/SetBool "data: true"
     ```
-
+    > **Supported Modules**: Gemini 305
+    > **Supported Versions**: Wrapper version 2.7.2 and above.
 ### Point cloud decimation
 *   `/camera/set_point_cloud_decimation`
     ```bash
     ros2 service call /camera/set_point_cloud_decimation orbbec_camera_msgs/srv/SetInt32 '{data: 8}'
     ```
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
 *   `/camera/get_point_cloud_decimation`
     ```bash
     ros2 service call /camera/get_point_cloud_decimation orbbec_camera_msgs/srv/GetInt32 '{}'
     ```
+    > **Supported Versions**: Wrapper version 2.6.3 and above.

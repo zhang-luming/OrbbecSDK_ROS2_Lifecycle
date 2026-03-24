@@ -124,10 +124,11 @@
     ```bash
     ros2 service call /camera/set_laser_enable std_srvs/srv/SetBool '{data: true}'
     ```
-    `/camera/get_laser_status`
+*   `/camera/get_laser_status`
     ```bash
     ros2 service call /camera/get_laser_status orbbec_camera_msgs/srv/GetBool '{}'
     ```
+    > **支持版本**： wrapper version 2.6.3 及以上。
 *   `/camera/set_ldp_enable` & `/camera/get_ldp_status`
     ```bash
     ros2 service call /camera/set_ldp_enable std_srvs/srv/SetBool '{data: true}'
@@ -231,12 +232,13 @@
 
 ### 特定设备
 
-**Gemini 435L**
 *   `/camera/write_customer_data` & `/camera/read_customer_data`
     ```bash
     ros2 service call /camera/write_customer_data orbbec_camera_msgs/srv/SetString '{data: "string"}'
     ros2 service call /camera/read_customer_data orbbec_camera_msgs/srv/GetString '{}'
     ```
+    > **支持模组**：Gemini 435Le。
+    > **支持版本**： wrapper version 2.5.4 及以上。
 *   `/camera/set_user_calib_params` & `/camera/get_user_calib_params`
     ```bash
     ros2 service call /camera/set_user_calib_params orbbec_camera_msgs/srv/SetUserCalibParams \
@@ -257,25 +259,29 @@
                     -6.804073229432106e-06]}'
     ros2 service call /camera/get_user_calib_params orbbec_camera_msgs/srv/GetUserCalibParams '{}'
     ```
-
-**Gemini 305**
+    > **支持模组**：Gemini 435Le。
+    > **支持版本**： wrapper version 2.5.4 及以上。
 *   `/camera/set_ae_mode`
     ```bash
       # depthbased or colorbased
       ros2 service call /camera/set_ae_mode orbbec_camera_msgs/srv/SetString "data: depthbased"
     ```
-
+    > **支持模组**：Gemini 305。
+    > **支持版本**： wrapper version 2.7.2 及以上。
 *   `/camera/set_sports_mode`
     ```bash
       ros2 service call /camera/set_sports_mode std_srvs/srv/SetBool "data: true"
     ```
-
+    > **支持模组**：Gemini 305。
+    > **支持版本**： wrapper version 2.7.2 及以上。
 ### 点云下采样
 *   `/camera/set_point_cloud_decimation`
     ```bash
     ros2 service call /camera/set_point_cloud_decimation orbbec_camera_msgs/srv/SetInt32 '{data: 8}'
     ```
+    > **支持版本**： wrapper version 2.6.3 及以上。
 *   `/camera/get_point_cloud_decimation`
     ```bash
     ros2 service call /camera/get_point_cloud_decimation orbbec_camera_msgs/srv/GetInt32 '{}'
     ```
+    > **支持版本**： wrapper version 2.6.3 及以上。

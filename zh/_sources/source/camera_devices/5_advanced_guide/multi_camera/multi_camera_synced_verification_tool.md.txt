@@ -4,7 +4,7 @@
 
 此示例节点用于 **4 台 Orbbec 相机** 的同步采集与时间戳验证。
 它可用于验证多相机主从同步（Primary / Secondary Synced）模式下的帧对齐精度。
-
+> **支持版本**： wrapper version 2.6.3 及以上。
 ---
 
 ## 使用教程

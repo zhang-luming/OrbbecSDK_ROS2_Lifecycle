@@ -38,16 +38,21 @@ The following are the launch parameters available:
     *   Enable filtering of invalid point clouds.
 *   **`point_cloud_qos`, `[stream]_qos`, `[stream]_camera_info_qos`**
     *   ROS 2 Message Quality of Service (QoS) settings. The possible values are `SYSTEM_DEFAULT`, `DEFAULT`, `PARAMETER_EVENTS`, `SERVICES_DEFAULT`, `PARAMETERS`, `SENSOR_DATA` and are case-insensitive. These correspond to `rmw_qos_profile_system_default`, `rmw_qos_profile_default`, `rmw_qos_profile_parameter_events`, `rmw_qos_profile_services_default`, `rmw_qos_profile_parameters`, and `SENSOR_DATA`, respectively.
-*   **`color.image_raw.enable_pub_plugins`**
-    *   Enable Color image transport plugins. Default: `["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`.
-*   **`depth.image_raw.enable_pub_plugins`**
-    *   Enable Depth image transport plugins. Default: `["image_transport/compressedDepth", "image_transport/raw"]`.
-*   **`left_ir.image_raw.enable_pub_plugins`**
-    *   Enable Left IR image transport plugins. Default: `["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`.
-*   **`right_ir.image_raw.enable_pub_plugins`**
-    *   Enable Right IR image transport plugins. Default: `["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`.
-*   **`point_cloud_decimation_filter_factor`**
-    *   Point cloud downsampling factor. Range: `1–8`. `1` means no downsampling.
+* **`color.image_raw.enable_pub_plugins`**
+  * Enable Color image transport plugins. Default: `["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`.
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
+* **`depth.image_raw.enable_pub_plugins`**
+  * Enable Depth image transport plugins. Default: `["image_transport/compressedDepth", "image_transport/raw"]`.
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
+* **`left_ir.image_raw.enable_pub_plugins`**
+  * Enable Left IR image transport plugins. Default: `["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`.
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
+* **`right_ir.image_raw.enable_pub_plugins`**
+  * Enable Right IR image transport plugins. Default: `["image_transport/compressed", "image_transport/raw", "image_transport/theora"]`.
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
+* **`point_cloud_decimation_filter_factor`**
+  * Point cloud downsampling factor. Range: `1–8`. `1` means no downsampling.
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
 
 ### Sensor Controls
 
@@ -81,12 +86,11 @@ The following are the launch parameters available:
 
 
 #### Depth Stream
-*   **`enable_depth_auto_exposure_priority`**
-
-    *   Enable the Depth auto exposure priority.
-*   **`mean_intensity_set_point`**
-    *   Set the target average intensity of the depth image when auto-exposure is turned on. For example: `mean_intensity_set_point:=100`.
-    > **Note:** This replaces the deprecated `depth_brightness`, which is still supported for backward compatibility.
+* **`enable_depth_auto_exposure_priority`**
+  * Enable the Depth auto exposure priority.
+* **`mean_intensity_set_point`**
+  * Set the target average intensity of the depth image when auto-exposure is turned on. For example: `mean_intensity_set_point:=100`.
+    > **Note:** In wrapper version 2.4.7 and later, this parameter replaces the deprecated `depth_brightness`, but `depth_brightness` will still be supported for backward compatibility.
 *   **`enable_depth_scale`**
     *   Whether to enable depth scaling after setting D2C. `true` means enabled, the default is `true`.
 *   **`depth_precision`**
@@ -132,51 +136,56 @@ The following are the launch parameters available:
 > Used for [multi camera synced](../5_advanced_guide/multi_camera/multi_camera_synced.md).
 
 #### Network Cameras
-*   **`enumerate_net_device`**
-    *   Enable automatically enumerate network devices.
-*   **`net_device_ip`** / **`net_device_port`**
-    *   Set net device's IP address and port (Usually `8090`).
-*   **`force_ip_enable`**
-    *   Enable the Force IP function. **Default:** `false`
-
-*   **`force_ip_mac`**
-    *   Target device MAC address when multiple cameras are connected (e.g., `"54:14:FD:06:07:DA"`). You can use the `list_devices_node` to find the MAC of each device. **Default:** `""`
-
-*   **`force_ip_address`**
-    *   Static IP address to assign. **Default:** `192.168.1.10`
-
-*   **`force_ip_subnet_mask`**
-    *   Subnet mask for the static IP. **Default:** `255.255.255.0`
-
-*   **`force_ip_gateway`**
-    *   Gateway address for the static IP. **Default:** `192.168.1.1`
-
+* **`enumerate_net_device`**
+  * Enable automatically enumerate network devices.
+* **`net_device_ip`** / **`net_device_port`**
+  * Set net device's IP address and port (Usually `8090`).
+* **`force_ip_enable`**
+  * Enable the Force IP function. **Default:** `false`
+    > **Supported Versions**: Wrapper version 2.5.4 and above.
+* **`force_ip_mac`**
+  * Target device MAC address when multiple cameras are connected (e.g., `"54:14:FD:06:07:DA"`). You can use the `list_devices_node` to find the MAC of each device. **Default:** `""`
+    > **Supported Versions**: Wrapper version 2.5.4 and above.
+* **`force_ip_address`**
+  * Static IP address to assign. **Default:** `192.168.1.10`
+    > **Supported Versions**: Wrapper version 2.5.4 and above.
+* **`force_ip_subnet_mask`**
+  * Subnet mask for the static IP. **Default:** `255.255.255.0`
+    > **Supported Versions**: Wrapper version 2.5.4 and above.
+* **`force_ip_gateway`**
+  * Gateway address for the static IP. **Default:** `192.168.1.1`
+    > **Supported Versions**: Wrapper version 2.5.4 and above.
 > Used for [net camera](../5_advanced_guide/configuration/net_camera.md).
 
 #### Device-Specific
-*   **`preset_resolution_config`**
-    * Preset resolution configuration for the camera device. Format: "width,height,ir_decimation_factor,depth_decimation_factor". Example: "1280,720,4,4". Leave empty to disable.
-    > Only supported 435Le.
-    >
-*   **`enable_gmsl_trigger`** / **`gmsl_trigger_fps`**
-    *   Enable the gmsl trigger out signal / set gmsl trigger fps.
+* **`enable_gmsl_trigger`** / **`gmsl_trigger_fps`**
+  * Enable the gmsl trigger out signal / set gmsl trigger fps.
     > Only supports [gmsl camera](../5_advanced_guide/multi_camera/gmsl_camera.md).
     >
+* **`enable_ptp_config`**
+  * Enable PTP time synchronization. Requires `enable_sync_host_time` to be `false`.
+    > **Supported Modules**: Gemini 335Le
+    > **Supported Versions**: Wrapper version 2.3.4 and above.
+* **`preset_resolution_config`**
+  * Preset resolution configuration for the camera device. Format: "width,height,ir_decimation_factor,depth_decimation_factor". Example: "1280,720,4,4". Leave empty to disable.
+    > **Supported Modules**: Gemini 435Le
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
 * **`ae_mode`**
-  * `colorbased`: Automatic exposure based on color flow. `depthbased`: Automatic exposure based on depth flow. **默认值：** `depthbased`
-    > Only supports Gemini 305.
-    >
+  * `colorbased`: Automatic exposure based on color flow. `depthbased`: Automatic exposure based on depth flow. **Default:** `depthbased`
+    > **Supported Modules**: Gemini 305
+    > **Supported Versions**: Wrapper version 2.7.2 and above.
 * **`enalbe_sports_mode`**
   * Whether to enable sports mode. **Default:** `false`
-    > Only supports Gemini 305.
-    >
+    > **Supported Modules**: Gemini 305
+    > **Supported Versions**: Wrapper version 2.7.2 and above.
 * **`depth_downscale`** / **`left_ir_downscale`** /**`right_ir_downscale`**
   * Set the downsampling multiple. You can use `ros2 run orbbec_camera list_camera_profile_mode_node` to view the settable resolution. **Default value:** `1`
-    > Only supports Gemini 305.
-    >
-*   **`enable_ptp_config`**
-    *   Enable PTP time synchronization. Only for Gemini 335Le. Requires `enable_sync_host_time` to be `false`.
-
+    > **Supported Modules**: Gemini 305
+    > **Supported Versions**: Wrapper version 2.7.2 and above.
+* **`enable_false_positive_filter`**
+  * Enable this option to reduce ghosting noise.
+    > **Supported Modules**: DaBaiA / DaBaiAL / Gemini345 / Gemini345Lg
+    > **Supported Versions**: Wrapper version 2.7.6 and above; Firmware version 1.9.03 and above.
 #### Disparity
 *   **`disparity_to_depth_mode`**
     *   `HW`: use hardware disparity to depth conversion. `SW`: use software disparity to depth conversion.
@@ -205,20 +214,21 @@ The following are the launch parameters available:
   *   `DEPTH`: Align color to depth.
 - **`intra_camera_sync_reference`**
   - Sets the reference point for intra-camera synchronization. Applicable for Gemini 330 series devices when `sync_mode` is set to **software** or **hardware trigger** mode. **Options:** `Start`, `Middle`, `End`. When set to empty, the long baseline device defaults to End, and the short baseline device defaults to Middle.
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
 
 ### Basic & General Parameters
 
 #### Firmware & Backend
-*   **`upgrade_firmware`**
-    *   The input parameter is the firmware path.
-*   **`preset_firmware_path`**
-    *   The input parameter is the preset firmware path. If multiple paths are input, each path needs to be separated by `,` and a maximum of 3 firmware paths can be input.
-*   **`uvc_backend`**
-    *   Optional values: `v4l2`, `libuvc`.
-*   **`connection_delay`**
-    *   The delay time in milliseconds for reopening the device. Some devices, such as Astra mini, require a longer time to initialize and reopening the device immediately can cause firmware crashes when hot plugging.
-*   **`retry_on_usb3_detection_failure`**
-    *   If the camera is connected to a USB 2.0 port and is not detected, the system will attempt to reset the camera up to three times. It is recommended to set this parameter to `false` when using a USB 2.0 connection to avoid unnecessary resets.
+* **`upgrade_firmware`**
+  * The input parameter is the firmware path.
+* **`preset_firmware_path`**
+  * The input parameter is the preset firmware path. If multiple paths are input, each path needs to be separated by `,` and a maximum of 3 firmware paths can be input.
+* **`uvc_backend`**
+  * Optional values: `v4l2`, `libuvc`.
+* **`connection_delay`**
+  * The delay time in milliseconds for reopening the device. Some devices, such as Astra mini, require a longer time to initialize and reopening the device immediately can cause firmware crashes when hot plugging.
+* **`retry_on_usb3_detection_failure`**
+  * If the camera is connected to a USB 2.0 port and is not detected, the system will attempt to reset the camera up to three times. It is recommended to set this parameter to `false` when using a USB 2.0 connection to avoid unnecessary resets.
 
 #### TF, Extrinsics & Calibration
 *   **`publish_tf`** / **`tf_publish_rate`**
@@ -231,26 +241,28 @@ The following are the launch parameters available:
     *   Enable the Color undistortion.
 
 #### Time Synchronization
-*   **`enable_sync_host_time`**
-    *   Enable synchronization of the host time with the camera time. The default value is `true`. If using global time, set to `false`.
-*   **`time_domain`**
-    *   Select timestamp type: `device`, `global`, and `system`.
-*   **`time_sync_period`**
+* **`enable_sync_host_time`**
+  * Enable synchronization of the host time with the camera time. The default value is `true`. If using global time, set to `false`.
+* **`time_domain`**
+  * Select timestamp type: `device`, `global`, and `system`.
+* **`time_sync_period`**
+  * Interval (in seconds) for synchronizing the camera time with the host system.
+    > **Note**: This parameter only needs to be set when `enable_sync_host_time = true` and `time_domain = device`.
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
 
-    *   Interval (in seconds) for synchronizing the camera time with the host system.
-    > **Note**: This parameter only needs to be set when **`enable_sync_host_time = true`** and **`time_domain = device`**.
-*   **`enable_frame_sync`**
-    *   Enable the frame synchronization.
+* **`enable_frame_sync`**
+  * Enable the frame synchronization.
 
 #### Logging & Diagnostics
-*   **`log_level`**
-    *   SDK log level. Default is `info`. Optional values: `debug`, `info`, `warn`, `error`, `fatal`.
+* **`log_level`**
+  * SDK log level. Default is `info`. Optional values: `debug`, `info`, `warn`, `error`, `fatal`.
 * **`log_file_name`**
-    * Saved SDK log file name. Effective when `log_level` is `debug`.
-*   **`diagnostic_period`**
-    *   Diagnostic period in seconds.
-*   **`enable_heartbeat`**
-    *   Enable the heartbeat function. Default is `false`. If `true`, the camera node will send heartbeat signals to the firmware.
+  * Saved SDK log file name. Effective when `log_level` is `debug`.
+    > **Supported Versions**: Wrapper version 2.6.3 and above.
+* **`diagnostic_period`**
+  * Diagnostic period in seconds.
+* **`enable_heartbeat`**
+  * Enable the heartbeat function. Default is `false`. If `true`, the camera node will send heartbeat signals to the firmware.
 
 #### Miscellaneous
 *   **`config_file_path`**

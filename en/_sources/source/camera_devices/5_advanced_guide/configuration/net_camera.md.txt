@@ -49,6 +49,7 @@ ros2 launch orbbec_camera multi_net_camera.launch.py
 The **`set_device_ip`** executable allows you to configure the IP settings of a network camera directly from ROS 2, including switching between DHCP and static IP, and setting subnet mask and gateway. This is useful for quickly assigning or updating IP addresses without modifying launch files.
 
 > **Note:** The IP settings applied with `set_device_ip` are **permanent** and **will not be reset** if the device is powered off or restarted.
+> **Supported Versions**: Wrapper version 2.6.3 and above.
 
 **Example Usage**
 
@@ -74,6 +75,7 @@ ros2 run orbbec_camera set_device_ip --ros-args \
 The **Force IP** feature allows you to assign a **static IP address** to a network camera, overriding DHCP settings. This is useful when multiple network cameras are connected, and you need each device to have a fixed IP for reliable communication.
 
 > **Note:** The Force IP configuration **will be reset if the device is powered off or restarted**. You need to reapply the settings after reboot.
+> **Supported Versions**: Wrapper version 2.6.3 and above.
 
 **Parameters**
 
