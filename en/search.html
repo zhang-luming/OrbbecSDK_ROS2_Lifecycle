@@ -8,21 +8,26 @@
   <title>Search &mdash; OrbbecSDK V2 ROS2 Wrapper  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=63de077d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c853d342" />
 
   
     <link rel="shortcut icon" href="_static/orbbec_footerlogo_3d_world.svg"/>
-    
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=ca8a8b2d"></script>
+      <script src="_static/section_search.js?v=036e4266"></script>
     <script src="_static/js/theme.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="#" />
+  <script src="_static/section-search-index.js"></script>
+  <meta name="robots" content="noindex" />
+   
+
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,12 +41,23 @@
           <a href="index.html" class="icon icon-home">
             OrbbecSDK V2 ROS2 Wrapper
           </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+<div class="sidebar-search-entry">
+  <a class="sidebar-search-entry__shortcut" href="#" aria-label="Open search page">
+    <span class="sidebar-search-entry__shortcut-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.5"></circle>
+        <path d="M16 16 L21 21"></path>
+      </svg>
+    </span>
+    <span class="sidebar-search-entry__shortcut-copy">
+      <span class="sidebar-search-entry__shortcut-title">
+        Global Search
+      </span>
+      <span class="sidebar-search-entry__shortcut-text">
+        Search docs, sections, and parameters
+      </span>
+    </span>
+  </a>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
@@ -405,17 +421,56 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
+  <h1 id="search-documentation">Search</h1>
+
   <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search functionality.
-    </p>
-  </div>
+    <div class="admonition warning">
+      <p>
+        Please enable JavaScript to use search.
+      </p>
+    </div>
   </noscript>
 
-  
-  <div id="search-results">
-  
+  <div
+    id="section-search-app"
+    data-empty-query="Enter a keyword to search."
+    data-loading="Searching..."
+    data-load-error="Search index failed to load."
+    data-no-results="No matching results found."
+    data-result-one="Found 1 matching result."
+    data-result-many="Found {count} matching results."
+    data-history-title="Recent searches"
+    data-history-empty="No recent searches yet."
+    data-clear-history="Clear history"
+  >
+    <p>
+      Supports both Chinese and English search and jumps to the closest matching section.
+    </p>
+
+    <div class="section-search-panel">
+      <form action="" method="get" role="search" class="section-search-form">
+        <div class="section-search-form__field">
+          <span class="section-search-form__icon" aria-hidden="true">⌕</span>
+          <input
+            type="text"
+            name="q"
+            aria-labelledby="search-documentation"
+            value=""
+            placeholder="Search keywords like camera, sync_mode, network camera"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          />
+        </div>
+        <button type="submit" class="section-search-form__submit">search</button>
+      </form>
+
+      <div id="section-search-history" class="section-search-history" hidden></div>
+    </div>
+
+    <p id="section-search-status" class="search-summary"></p>
+    <div id="section-search-results"></div>
   </div>
 
            </div>
@@ -426,7 +481,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-03-24 07:49:09.
+      <span class="lastupdated">Last updated on 2026-04-08 08:24:29.
       </span></p>
   </div>
 
@@ -441,14 +496,7 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-  <script>
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script id="searchindexloader"></script>
-   
-
+  </script> 
 
 </body>
 </html>

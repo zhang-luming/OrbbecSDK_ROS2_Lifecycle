@@ -8,22 +8,27 @@
   <title>搜索 &mdash; OrbbecSDK V2 ROS2 封装  文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=63de077d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c853d342" />
 
   
     <link rel="shortcut icon" href="_static/orbbec_footerlogo_3d_world.svg"/>
-    
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=7d86a446"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=ca8a8b2d"></script>
+      <script src="_static/section_search.js?v=036e4266"></script>
       <script src="_static/translations.js?v=540d3cec"></script>
     <script src="_static/js/theme.js"></script>
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
-    <link rel="search" title="搜索" href="#" /> 
+    <link rel="search" title="搜索" href="#" />
+  <script src="_static/section-search-index.js"></script>
+  <meta name="robots" content="noindex" />
+   
+
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -37,12 +42,23 @@
           <a href="index.html" class="icon icon-home">
             OrbbecSDK V2 ROS2 封装
           </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
-    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+<div class="sidebar-search-entry">
+  <a class="sidebar-search-entry__shortcut" href="#" aria-label="打开搜索页面">
+    <span class="sidebar-search-entry__shortcut-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.5"></circle>
+        <path d="M16 16 L21 21"></path>
+      </svg>
+    </span>
+    <span class="sidebar-search-entry__shortcut-copy">
+      <span class="sidebar-search-entry__shortcut-title">
+        全站搜索
+      </span>
+      <span class="sidebar-search-entry__shortcut-text">
+        搜索中文、英文、参数名和章节
+      </span>
+    </span>
+  </a>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul>
@@ -404,17 +420,56 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
+  <h1 id="search-documentation">搜索</h1>
+
   <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      请启用 JavaScript 以便使用搜索功能
-    </p>
-  </div>
+    <div class="admonition warning">
+      <p>
+        请启用 JavaScript 以使用搜索功能。
+      </p>
+    </div>
   </noscript>
 
-  
-  <div id="search-results">
-  
+  <div
+    id="section-search-app"
+    data-empty-query="请输入搜索关键词。"
+    data-loading="正在搜索..."
+    data-load-error="搜索索引加载失败。"
+    data-no-results="没有找到匹配结果。"
+    data-result-one="找到 1 个匹配结果。"
+    data-result-many="找到 {count} 个匹配结果。"
+    data-history-title="最近搜索"
+    data-history-empty="还没有搜索记录。"
+    data-clear-history="清空历史"
+  >
+    <p>
+      支持中文和英文搜索，结果会优先跳转到最接近的章节位置。
+    </p>
+
+    <div class="section-search-panel">
+      <form action="" method="get" role="search" class="section-search-form">
+        <div class="section-search-form__field">
+          <span class="section-search-form__icon" aria-hidden="true">⌕</span>
+          <input
+            type="text"
+            name="q"
+            aria-labelledby="search-documentation"
+            value=""
+            placeholder="输入关键词，例如：相机、sync_mode、网络相机"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+          />
+        </div>
+        <button type="submit" class="section-search-form__submit">搜索</button>
+      </form>
+
+      <div id="section-search-history" class="section-search-history" hidden></div>
+    </div>
+
+    <p id="section-search-status" class="search-summary"></p>
+    <div id="section-search-results"></div>
   </div>
 
            </div>
@@ -425,7 +480,7 @@
 
   <div role="contentinfo">
     <p>&#169; 版权所有 2025, 奥比中光科技集团股份有限公司 www.orbbec.com.。
-      <span class="lastupdated">最后更新于 2026年03月24日 07:49:12.
+      <span class="lastupdated">最后更新于 2026年04月08日 08:24:35.
       </span></p>
   </div>
 
@@ -440,14 +495,7 @@
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-  <script>
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script id="searchindexloader"></script>
-   
-
+  </script> 
 
 </body>
 </html>

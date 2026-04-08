@@ -9,7 +9,8 @@
   <title>4.1. Launch parameters &mdash; OrbbecSDK V2 ROS2 Wrapper  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=63de077d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=c853d342" />
 
   
     <link rel="shortcut icon" href="../../../_static/orbbec_footerlogo_3d_world.svg"/>
@@ -18,6 +19,9 @@
       <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=ca8a8b2d"></script>
+      <script src="../../../_static/section_search.js?v=036e4266"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -36,12 +40,23 @@
           <a href="../../../index.html" class="icon icon-home">
             OrbbecSDK V2 ROS2 Wrapper
           </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+<div class="sidebar-search-entry">
+  <a class="sidebar-search-entry__shortcut" href="../../../search.html" aria-label="Open search page">
+    <span class="sidebar-search-entry__shortcut-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.5"></circle>
+        <path d="M16 16 L21 21"></path>
+      </svg>
+    </span>
+    <span class="sidebar-search-entry__shortcut-copy">
+      <span class="sidebar-search-entry__shortcut-title">
+        Global Search
+      </span>
+      <span class="sidebar-search-entry__shortcut-text">
+        Search docs, sections, and parameters
+      </span>
+    </span>
+  </a>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
@@ -492,49 +507,44 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">color.image_raw.enable_pub_plugins</span></code></strong></p>
-<ul>
-<li><p>Enable Color image transport plugins. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>.</p>
+<ul class="simple">
+<li><p>Enable Color image transport plugins. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">depth.image_raw.enable_pub_plugins</span></code></strong></p>
-<ul>
-<li><p>Enable Depth image transport plugins. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressedDepth&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;]</span></code>.</p>
+<ul class="simple">
+<li><p>Enable Depth image transport plugins. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressedDepth&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;]</span></code>.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">left_ir.image_raw.enable_pub_plugins</span></code></strong></p>
-<ul>
-<li><p>Enable Left IR image transport plugins. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>.</p>
+<ul class="simple">
+<li><p>Enable Left IR image transport plugins. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">right_ir.image_raw.enable_pub_plugins</span></code></strong></p>
-<ul>
-<li><p>Enable Right IR image transport plugins. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>.</p>
+<ul class="simple">
+<li><p>Enable Right IR image transport plugins. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">point_cloud_decimation_filter_factor</span></code></strong></p>
-<ul>
-<li><p>Point cloud downsampling factor. Range: <code class="docutils literal notranslate"><span class="pre">1–8</span></code>. <code class="docutils literal notranslate"><span class="pre">1</span></code> means no downsampling.</p>
+<ul class="simple">
+<li><p>Point cloud downsampling factor. Range: <code class="docutils literal notranslate"><span class="pre">1–8</span></code>. <code class="docutils literal notranslate"><span class="pre">1</span></code> means no downsampling.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 </ul>
 </section>
@@ -619,13 +629,12 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">mean_intensity_set_point</span></code></strong></p>
-<ul>
-<li><p>Set the target average intensity of the depth image when auto-exposure is turned on. For example: <code class="docutils literal notranslate"><span class="pre">mean_intensity_set_point:=100</span></code>.</p>
+<ul class="simple">
+<li><p>Set the target average intensity of the depth image when auto-exposure is turned on. For example: <code class="docutils literal notranslate"><span class="pre">mean_intensity_set_point:=100</span></code>.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Note:</strong> In wrapper version 2.4.7 and later, this parameter replaces the deprecated <code class="docutils literal notranslate"><span class="pre">depth_brightness</span></code>, but <code class="docutils literal notranslate"><span class="pre">depth_brightness</span></code> will still be supported for backward compatibility.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_depth_scale</span></code></strong></p>
 <ul class="simple">
@@ -749,49 +758,44 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_enable</span></code></strong></p>
-<ul>
-<li><p>Enable the Force IP function. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<ul class="simple">
+<li><p>Enable the Force IP function. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.5.4 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_mac</span></code></strong></p>
-<ul>
-<li><p>Target device MAC address when multiple cameras are connected (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;54:14:FD:06:07:DA&quot;</span></code>). You can use the <code class="docutils literal notranslate"><span class="pre">list_devices_node</span></code> to find the MAC of each device. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+<ul class="simple">
+<li><p>Target device MAC address when multiple cameras are connected (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;54:14:FD:06:07:DA&quot;</span></code>). You can use the <code class="docutils literal notranslate"><span class="pre">list_devices_node</span></code> to find the MAC of each device. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.5.4 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_address</span></code></strong></p>
-<ul>
-<li><p>Static IP address to assign. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">192.168.1.10</span></code></p>
+<ul class="simple">
+<li><p>Static IP address to assign. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">192.168.1.10</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.5.4 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_subnet_mask</span></code></strong></p>
-<ul>
-<li><p>Subnet mask for the static IP. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">255.255.255.0</span></code></p>
+<ul class="simple">
+<li><p>Subnet mask for the static IP. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">255.255.255.0</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.5.4 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_gateway</span></code></strong></p>
-<ul>
-<li><p>Gateway address for the static IP. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">192.168.1.1</span></code></p>
+<ul class="simple">
+<li><p>Gateway address for the static IP. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">192.168.1.1</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.5.4 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 </ul>
 <blockquote>
@@ -802,73 +806,66 @@
 <h3><span class="section-number">4.1.3.3. </span>Device-Specific<a class="headerlink" href="#device-specific" title="Link to this heading"></a></h3>
 <ul>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_gmsl_trigger</span></code></strong> / <strong><code class="docutils literal notranslate"><span class="pre">gmsl_trigger_fps</span></code></strong></p>
-<ul>
-<li><p>Enable the gmsl trigger out signal / set gmsl trigger fps.</p>
+<ul class="simple">
+<li><p>Enable the gmsl trigger out signal / set gmsl trigger fps.</p></li>
+</ul>
 <blockquote>
 <div><p>Only supports <a class="reference internal" href="../5_advanced_guide/multi_camera/gmsl_camera.html"><span class="doc">gmsl camera</span></a>.</p>
 </div></blockquote>
 </li>
-</ul>
-</li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_ptp_config</span></code></strong></p>
-<ul>
-<li><p>Enable PTP time synchronization. Requires <code class="docutils literal notranslate"><span class="pre">enable_sync_host_time</span></code> to be <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<ul class="simple">
+<li><p>Enable PTP time synchronization. Requires <code class="docutils literal notranslate"><span class="pre">enable_sync_host_time</span></code> to be <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Modules</strong>: Gemini 335Le
 <strong>Supported Versions</strong>: Wrapper version 2.3.4 and above.</p>
 </div></blockquote>
 </li>
-</ul>
-</li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">preset_resolution_config</span></code></strong></p>
-<ul>
-<li><p>Preset resolution configuration for the camera device. Format: “width,height,ir_decimation_factor,depth_decimation_factor”. Example: “1280,720,4,4”. Leave empty to disable.</p>
+<ul class="simple">
+<li><p>Preset resolution configuration for the camera device. Format: “width,height,ir_decimation_factor,depth_decimation_factor”. Example: “1280,720,4,4”. Leave empty to disable.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Modules</strong>: Gemini 435Le
 <strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
 </li>
-</ul>
-</li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">ae_mode</span></code></strong></p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">colorbased</span></code>: Automatic exposure based on color flow. <code class="docutils literal notranslate"><span class="pre">depthbased</span></code>: Automatic exposure based on depth flow. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">depthbased</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">colorbased</span></code>: Automatic exposure based on color flow. <code class="docutils literal notranslate"><span class="pre">depthbased</span></code>: Automatic exposure based on depth flow. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">depthbased</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Modules</strong>: Gemini 305
 <strong>Supported Versions</strong>: Wrapper version 2.7.2 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enalbe_sports_mode</span></code></strong></p>
-<ul>
-<li><p>Whether to enable sports mode. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<ul class="simple">
+<li><p>Whether to enable sports mode. <strong>Default:</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Modules</strong>: Gemini 305
 <strong>Supported Versions</strong>: Wrapper version 2.7.2 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">depth_downscale</span></code></strong> / <strong><code class="docutils literal notranslate"><span class="pre">left_ir_downscale</span></code></strong> /<strong><code class="docutils literal notranslate"><span class="pre">right_ir_downscale</span></code></strong></p>
-<ul>
-<li><p>Set the downsampling multiple. You can use <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">orbbec_camera</span> <span class="pre">list_camera_profile_mode_node</span></code> to view the settable resolution. <strong>Default value:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<ul class="simple">
+<li><p>Set the downsampling multiple. You can use <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">orbbec_camera</span> <span class="pre">list_camera_profile_mode_node</span></code> to view the settable resolution. <strong>Default value:</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Modules</strong>: Gemini 305
 <strong>Supported Versions</strong>: Wrapper version 2.7.2 and above.</p>
 </div></blockquote>
 </li>
-</ul>
-</li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_false_positive_filter</span></code></strong></p>
-<ul>
-<li><p>Enable this option to reduce ghosting noise.</p>
+<ul class="simple">
+<li><p>Enable this option to reduce ghosting noise.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Modules</strong>: DaBaiA / DaBaiAL / Gemini345 / Gemini345Lg
 <strong>Supported Versions</strong>: Wrapper version 2.7.6 and above; Firmware version 1.9.03 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 </ul>
 </section>
@@ -930,13 +927,12 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">intra_camera_sync_reference</span></code></strong></p>
-<ul>
-<li><p>Sets the reference point for intra-camera synchronization. Applicable for Gemini 330 series devices when <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code> is set to <strong>software</strong> or <strong>hardware trigger</strong> mode. <strong>Options:</strong> <code class="docutils literal notranslate"><span class="pre">Start</span></code>, <code class="docutils literal notranslate"><span class="pre">Middle</span></code>, <code class="docutils literal notranslate"><span class="pre">End</span></code>. When set to empty, the long baseline device defaults to End, and the short baseline device defaults to Middle.</p>
+<ul class="simple">
+<li><p>Sets the reference point for intra-camera synchronization. Applicable for Gemini 330 series devices when <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code> is set to <strong>software</strong> or <strong>hardware trigger</strong> mode. <strong>Options:</strong> <code class="docutils literal notranslate"><span class="pre">Start</span></code>, <code class="docutils literal notranslate"><span class="pre">Middle</span></code>, <code class="docutils literal notranslate"><span class="pre">End</span></code>. When set to empty, the long baseline device defaults to End, and the short baseline device defaults to Middle.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 </ul>
 </section>
@@ -1012,14 +1008,13 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">time_sync_period</span></code></strong></p>
-<ul>
-<li><p>Interval (in seconds) for synchronizing the camera time with the host system.</p>
+<ul class="simple">
+<li><p>Interval (in seconds) for synchronizing the camera time with the host system.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Note</strong>: This parameter only needs to be set when <code class="docutils literal notranslate"><span class="pre">enable_sync_host_time</span> <span class="pre">=</span> <span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">time_domain</span> <span class="pre">=</span> <span class="pre">device</span></code>.
 <strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_frame_sync</span></code></strong></p>
 <ul class="simple">
@@ -1037,13 +1032,12 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">log_file_name</span></code></strong></p>
-<ul>
-<li><p>Saved SDK log file name. Effective when <code class="docutils literal notranslate"><span class="pre">log_level</span></code> is <code class="docutils literal notranslate"><span class="pre">debug</span></code>.</p>
+<ul class="simple">
+<li><p>Saved SDK log file name. Effective when <code class="docutils literal notranslate"><span class="pre">log_level</span></code> is <code class="docutils literal notranslate"><span class="pre">debug</span></code>.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Supported Versions</strong>: Wrapper version 2.6.3 and above.</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">diagnostic_period</span></code></strong></p>
 <ul class="simple">
@@ -1191,7 +1185,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-03-24 07:49:09.
+      <span class="lastupdated">Last updated on 2026-04-08 08:24:29.
       </span></p>
   </div>
 

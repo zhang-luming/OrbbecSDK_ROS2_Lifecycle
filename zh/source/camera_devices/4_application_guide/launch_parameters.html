@@ -9,7 +9,8 @@
   <title>4.1. 启动参数 &mdash; OrbbecSDK V2 ROS2 封装  文档</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=63de077d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=c853d342" />
 
   
     <link rel="shortcut icon" href="../../../_static/orbbec_footerlogo_3d_world.svg"/>
@@ -18,6 +19,9 @@
       <script src="../../../_static/documentation_options.js?v=7d86a446"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=ca8a8b2d"></script>
+      <script src="../../../_static/section_search.js?v=036e4266"></script>
       <script src="../../../_static/translations.js?v=540d3cec"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../../genindex.html" />
@@ -37,12 +41,23 @@
           <a href="../../../index.html" class="icon icon-home">
             OrbbecSDK V2 ROS2 封装
           </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+<div class="sidebar-search-entry">
+  <a class="sidebar-search-entry__shortcut" href="../../../search.html" aria-label="打开搜索页面">
+    <span class="sidebar-search-entry__shortcut-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+        <circle cx="11" cy="11" r="6.5"></circle>
+        <path d="M16 16 L21 21"></path>
+      </svg>
+    </span>
+    <span class="sidebar-search-entry__shortcut-copy">
+      <span class="sidebar-search-entry__shortcut-title">
+        全站搜索
+      </span>
+      <span class="sidebar-search-entry__shortcut-text">
+        搜索中文、英文、参数名和章节
+      </span>
+    </span>
+  </a>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
@@ -491,49 +506,44 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">color.image_raw.enable_pub_plugins</span></code></strong></p>
-<ul>
-<li><p>启用彩色图像传输插件。默认值：<code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>。</p>
+<ul class="simple">
+<li><p>启用彩色图像传输插件。默认值：<code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">depth.image_raw.enable_pub_plugins</span></code></strong></p>
-<ul>
-<li><p>启用深度图像传输插件。默认值：<code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressedDepth&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;]</span></code>。</p>
+<ul class="simple">
+<li><p>启用深度图像传输插件。默认值：<code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressedDepth&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;]</span></code>。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">left_ir.image_raw.enable_pub_plugins</span></code></strong></p>
-<ul>
-<li><p>启用左红外图像传输插件。默认值：<code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>。</p>
+<ul class="simple">
+<li><p>启用左红外图像传输插件。默认值：<code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">right_ir.image_raw.enable_pub_plugins</span></code></strong></p>
-<ul>
-<li><p>启用右红外图像传输插件。默认值：<code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>。</p>
+<ul class="simple">
+<li><p>启用右红外图像传输插件。默认值：<code class="docutils literal notranslate"><span class="pre">[&quot;image_transport/compressed&quot;,</span> <span class="pre">&quot;image_transport/raw&quot;,</span> <span class="pre">&quot;image_transport/theora&quot;]</span></code>。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">point_cloud_decimation_filter_factor</span></code></strong></p>
-<ul>
-<li><p>点云下采样因子。范围：<code class="docutils literal notranslate"><span class="pre">1–8</span></code>，<code class="docutils literal notranslate"><span class="pre">1</span></code>表示不下采样，数值越大下采样倍数越大。</p>
+<ul class="simple">
+<li><p>点云下采样因子。范围：<code class="docutils literal notranslate"><span class="pre">1–8</span></code>，<code class="docutils literal notranslate"><span class="pre">1</span></code>表示不下采样，数值越大下采样倍数越大。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 </ul>
 </section>
@@ -618,13 +628,12 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">mean_intensity_set_point</span></code></strong></p>
-<ul>
-<li><p>设置开启自动曝光时深度图像的目标平均强度。例如：<code class="docutils literal notranslate"><span class="pre">mean_intensity_set_point:=100</span></code>。</p>
+<ul class="simple">
+<li><p>设置开启自动曝光时深度图像的目标平均强度。例如：<code class="docutils literal notranslate"><span class="pre">mean_intensity_set_point:=100</span></code>。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>注意：</strong> 在 2.4.7 版本之后，该参数取代已弃用的 <code class="docutils literal notranslate"><span class="pre">depth_brightness</span></code>，但为了向后兼容，仍会支持 <code class="docutils literal notranslate"><span class="pre">depth_brightness</span></code>。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_depth_scale</span></code></strong></p>
 <ul class="simple">
@@ -748,49 +757,44 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_enable</span></code></strong></p>
-<ul>
-<li><p>启用强制IP功能。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<ul class="simple">
+<li><p>启用强制IP功能。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.5.4 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_mac</span></code></strong></p>
-<ul>
-<li><p>连接多个相机时的目标设备MAC地址（例如，<code class="docutils literal notranslate"><span class="pre">&quot;54:14:FD:06:07:DA&quot;</span></code>）。您可以使用 <code class="docutils literal notranslate"><span class="pre">list_devices_node</span></code> 查找每个设备的MAC。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p>
+<ul class="simple">
+<li><p>连接多个相机时的目标设备MAC地址（例如，<code class="docutils literal notranslate"><span class="pre">&quot;54:14:FD:06:07:DA&quot;</span></code>）。您可以使用 <code class="docutils literal notranslate"><span class="pre">list_devices_node</span></code> 查找每个设备的MAC。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.5.4 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_address</span></code></strong></p>
-<ul>
-<li><p>要分配的静态IP地址。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">192.168.1.10</span></code></p>
+<ul class="simple">
+<li><p>要分配的静态IP地址。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">192.168.1.10</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.5.4 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_subnet_mask</span></code></strong></p>
-<ul>
-<li><p>静态IP的子网掩码。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">255.255.255.0</span></code></p>
+<ul class="simple">
+<li><p>静态IP的子网掩码。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">255.255.255.0</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.5.4 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">force_ip_gateway</span></code></strong></p>
-<ul>
-<li><p>静态IP的网关地址。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">192.168.1.1</span></code></p>
+<ul class="simple">
+<li><p>静态IP的网关地址。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">192.168.1.1</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.5.4 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 </ul>
 <blockquote>
@@ -806,64 +810,58 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_ptp_config</span></code></strong></p>
-<ul>
-<li><p>启用PTP时间同步。仅适用于Gemini 335Le。需要 <code class="docutils literal notranslate"><span class="pre">enable_sync_host_time</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">false</span></code>。</p>
+<ul class="simple">
+<li><p>启用PTP时间同步。仅适用于Gemini 335Le。需要 <code class="docutils literal notranslate"><span class="pre">enable_sync_host_time</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">false</span></code>。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持模组</strong>：Gemini 335Le。
 <strong>支持版本</strong>： wrapper version 2.3.4 及以上。</p>
 </div></blockquote>
 </li>
-</ul>
-</li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">preset_resolution_config</span></code></strong></p>
-<ul>
-<li><p>摄像头设备的预设分辨率配置。格式: &quot;width,height,ir_decimation_factor,depth_decimation_factor&quot;. Example: &quot;1280,720,4,4&quot;. 留空禁用。</p>
+<ul class="simple">
+<li><p>摄像头设备的预设分辨率配置。格式: &quot;width,height,ir_decimation_factor,depth_decimation_factor&quot;. Example: &quot;1280,720,4,4&quot;. 留空禁用。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持模组</strong>：Gemini 435Le。
 <strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
 </li>
-</ul>
-</li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">ae_mode</span></code></strong></p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">colorbased</span></code>：自动曝光基于彩色流。<code class="docutils literal notranslate"><span class="pre">depthbased</span></code>：自动曝光基于深度流。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">depthbased</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">colorbased</span></code>：自动曝光基于彩色流。<code class="docutils literal notranslate"><span class="pre">depthbased</span></code>：自动曝光基于深度流。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">depthbased</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持模组</strong>：Gemini 305。
 <strong>支持版本</strong>： wrapper version 2.7.2 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enalbe_sports_mode</span></code></strong></p>
-<ul>
-<li><p>是否开启运动模式。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<ul class="simple">
+<li><p>是否开启运动模式。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持模组</strong>：Gemini 305。
 <strong>支持版本</strong>： wrapper version 2.7.2 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">depth_downscale</span></code></strong> / <strong><code class="docutils literal notranslate"><span class="pre">left_ir_downscale</span></code></strong> /<strong><code class="docutils literal notranslate"><span class="pre">right_ir_downscale</span></code></strong></p>
-<ul>
-<li><p>设置下采样倍数。可用<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">orbbec_camera</span> <span class="pre">list_camera_profile_mode_node</span></code>查看可设置分辨率。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<ul class="simple">
+<li><p>设置下采样倍数。可用<code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span> <span class="pre">orbbec_camera</span> <span class="pre">list_camera_profile_mode_node</span></code>查看可设置分辨率。<strong>默认值：</strong> <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持模组</strong>：Gemini 305。
 <strong>支持版本</strong>： wrapper version 2.7.2 及以上。</p>
 </div></blockquote>
 </li>
-</ul>
-</li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_false_positive_filter</span></code></strong></p>
-<ul>
-<li><p>启用鬼影滤波。可减少重影噪声。</p>
+<ul class="simple">
+<li><p>启用鬼影滤波。可减少重影噪声。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持模组</strong>： DaBaiA/DaBaiAL/Gemini345/Gemini345Lg.
 <strong>支持版本</strong>： wrapper version 2.7.6 及以上；firmware version 1.9.03 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 </ul>
 </section>
@@ -925,13 +923,12 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">intra_camera_sync_reference</span></code></strong></p>
-<ul>
-<li><p>设置相机内同步的参考点。适用于Gemini 330系列设备，当 <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code> 设置为<strong>软件</strong>或<strong>硬件触发</strong>模式时。<strong>选项：</strong> <code class="docutils literal notranslate"><span class="pre">Start</span></code>、<code class="docutils literal notranslate"><span class="pre">Middle</span></code>、<code class="docutils literal notranslate"><span class="pre">End</span></code>。设置为空时，长基线设备默认End，短基线设备默认Middle。</p>
+<ul class="simple">
+<li><p>设置相机内同步的参考点。适用于Gemini 330系列设备，当 <code class="docutils literal notranslate"><span class="pre">sync_mode</span></code> 设置为<strong>软件</strong>或<strong>硬件触发</strong>模式时。<strong>选项：</strong> <code class="docutils literal notranslate"><span class="pre">Start</span></code>、<code class="docutils literal notranslate"><span class="pre">Middle</span></code>、<code class="docutils literal notranslate"><span class="pre">End</span></code>。设置为空时，长基线设备默认End，短基线设备默认Middle。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 </ul>
 </section>
@@ -1007,14 +1004,13 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">time_sync_period</span></code></strong></p>
-<ul>
-<li><p>相机时间与主机系统同步的间隔（秒）。</p>
+<ul class="simple">
+<li><p>相机时间与主机系统同步的间隔（秒）。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>注意</strong>：仅当 <strong><code class="docutils literal notranslate"><span class="pre">enable_sync_host_time</span> <span class="pre">=</span> <span class="pre">true</span></code></strong> 且 <strong><code class="docutils literal notranslate"><span class="pre">time_domain</span> <span class="pre">=</span> <span class="pre">device</span></code></strong> 时需要设置此参数。
 <strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">enable_frame_sync</span></code></strong></p>
 <ul class="simple">
@@ -1032,13 +1028,12 @@
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">log_file_name</span></code></strong></p>
-<ul>
-<li><p>保存的SDK日志文件名。当<code class="docutils literal notranslate"><span class="pre">log_level</span></code>为<code class="docutils literal notranslate"><span class="pre">debug</span></code>时生效。</p>
+<ul class="simple">
+<li><p>保存的SDK日志文件名。当<code class="docutils literal notranslate"><span class="pre">log_level</span></code>为<code class="docutils literal notranslate"><span class="pre">debug</span></code>时生效。</p></li>
+</ul>
 <blockquote>
 <div><p><strong>支持版本</strong>： wrapper version 2.6.3 及以上。</p>
 </div></blockquote>
-</li>
-</ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">diagnostic_period</span></code></strong></p>
 <ul class="simple">
@@ -1186,7 +1181,7 @@
 
   <div role="contentinfo">
     <p>&#169; 版权所有 2025, 奥比中光科技集团股份有限公司 www.orbbec.com.。
-      <span class="lastupdated">最后更新于 2026年03月24日 07:49:12.
+      <span class="lastupdated">最后更新于 2026年04月08日 08:24:35.
       </span></p>
   </div>
 
