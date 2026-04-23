@@ -674,30 +674,29 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 <h2><span class="section-number">4.2.5. </span>Depth Filter Configuration<a class="headerlink" href="#depth-filter-configuration" title="Link to this heading"></a></h2>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">/camera/set_filter</span></code></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set DecimationFilter</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># filter_name is the filter name, filter_enable indicates whether the filter is enabled or disabled, and filter_param represents the filter parameters.</span>
+
+<span class="c1"># Set DecimationFilter: [scale]</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: DecimationFilter, filter_enable: false, filter_param: [5]}&#39;</span>
 
-<span class="c1"># Set SpatialAdvancedFilter</span>
+<span class="c1"># Set SpatialAdvancedFilter: [alpha, disp_diff, magnitude, radius]</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: SpatialAdvancedFilter, filter_enable: true, filter_param: [0.5,160,1,8]}&#39;</span>
 
-<span class="c1"># Set SequenceIdFilter</span>
+<span class="c1"># Set SequenceIdFilter: [sequence_id]</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: SequenceIdFilter, filter_enable: true, filter_param: [1]}&#39;</span>
 
-<span class="c1"># Set ThresholdFilter</span>
+<span class="c1"># Set ThresholdFilter: [min, max]</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: ThresholdFilter, filter_enable: true, filter_param: [0,15999]}&#39;</span>
 
-<span class="c1"># Set NoiseRemovalFilter</span>
+<span class="c1"># Set NoiseRemovalFilter: [min_diff, max_size]</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: NoiseRemovalFilter, filter_enable: true, filter_param: [256,80]}&#39;</span>
 
-<span class="c1"># Set HardwareNoiseRemoval</span>
-ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: HardwareNoiseRemoval, filter_enable: true, filter_param: []}&#39;</span>
+<span class="c1"># Set HardwareNoiseRemoval: [threshold]</span>
+ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: HardwareNoiseRemoval, filter_enable: true, filter_param: [0.2]}&#39;</span>
 
-<span class="c1"># Set SpatialFastFilter</span>
-<span class="c1"># filter_param: [radius]</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: SpatialFastFilter, filter_enable: true, filter_param: [4]}&#39;</span>
 
-<span class="c1"># Set SpatialModerateFilter</span>
-<span class="c1"># filter_param: [disp_diff, magnitude, radius]</span>
+<span class="c1"># Set SpatialModerateFilter: [disp_diff, magnitude, radius]</span>
 ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/camera/set_filter<span class="w"> </span>orbbec_camera_msgs/srv/SetFilter<span class="w"> </span><span class="s1">&#39;{filter_name: SpatialModerateFilter, filter_enable: true, filter_param: [160,1,3]}&#39;</span>
 </pre></div>
 </div>
@@ -813,7 +812,7 @@ ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> 
 
   <div role="contentinfo">
     <p>&#169; Copyright 2025, ORBBEC INC. www.orbbec.com..
-      <span class="lastupdated">Last updated on 2026-04-08 08:24:29.
+      <span class="lastupdated">Last updated on 2026-04-23 08:40:01.
       </span></p>
   </div>
 

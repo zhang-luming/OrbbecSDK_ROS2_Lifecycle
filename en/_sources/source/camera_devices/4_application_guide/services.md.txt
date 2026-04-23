@@ -192,30 +192,29 @@
 
 *   `/camera/set_filter`
     ```bash
-    # Set DecimationFilter
+    # filter_name is the filter name, filter_enable indicates whether the filter is enabled or disabled, and filter_param represents the filter parameters.
+
+    # Set DecimationFilter: [scale]
     ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: DecimationFilter, filter_enable: false, filter_param: [5]}'
 
-    # Set SpatialAdvancedFilter
+    # Set SpatialAdvancedFilter: [alpha, disp_diff, magnitude, radius]
     ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: SpatialAdvancedFilter, filter_enable: true, filter_param: [0.5,160,1,8]}'
 
-    # Set SequenceIdFilter
+    # Set SequenceIdFilter: [sequence_id]
     ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: SequenceIdFilter, filter_enable: true, filter_param: [1]}'
 
-    # Set ThresholdFilter
+    # Set ThresholdFilter: [min, max]
     ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: ThresholdFilter, filter_enable: true, filter_param: [0,15999]}'
 
-    # Set NoiseRemovalFilter
+    # Set NoiseRemovalFilter: [min_diff, max_size]
     ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: NoiseRemovalFilter, filter_enable: true, filter_param: [256,80]}'
 
-    # Set HardwareNoiseRemoval
-    ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: HardwareNoiseRemoval, filter_enable: true, filter_param: []}'
+    # Set HardwareNoiseRemoval: [threshold]
+    ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: HardwareNoiseRemoval, filter_enable: true, filter_param: [0.2]}'
 
-    # Set SpatialFastFilter
-    # filter_param: [radius]
     ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: SpatialFastFilter, filter_enable: true, filter_param: [4]}'
 
-    # Set SpatialModerateFilter
-    # filter_param: [disp_diff, magnitude, radius]
+    # Set SpatialModerateFilter: [disp_diff, magnitude, radius]
     ros2 service call /camera/set_filter orbbec_camera_msgs/srv/SetFilter '{filter_name: SpatialModerateFilter, filter_enable: true, filter_param: [160,1,3]}'
     ```
 
