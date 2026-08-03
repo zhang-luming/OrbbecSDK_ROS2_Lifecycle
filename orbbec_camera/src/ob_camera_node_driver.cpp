@@ -376,23 +376,31 @@ void OBCameraNodeDriver::init() {
   net_device_port_ = static_cast<int>(declare_parameter<int>("net_device_port", 0));
   enumerate_net_device_ = declare_parameter<bool>("enumerate_net_device", false);
   uvc_backend_ = declare_parameter<std::string>("uvc_backend", "libuvc");
-  const bool use_explicit_net_device =
-      !enumerate_net_device_ && !net_device_ip_.empty() && net_device_port_ != 0;
+  const bool use_explicit_net_device = !net_device_ip_.empty() && net_device_port_ != 0;
   device_access_mode_str_ = declare_parameter<std::string>("device_access_mode", "Default");
   device_access_mode_ = stringToAccessMode(device_access_mode_str_);
   RCLCPP_INFO_STREAM(logger_, "Device access mode: " << device_access_mode_str_ << " ("
                                                      << device_access_mode_ << ")");
   if (!use_explicit_net_device) {
-    if (uvc_backend_ == "libuvc") {
-      ctx_->setUvcBackendType(OB_UVC_BACKEND_TYPE_LIBUVC);
-      RCLCPP_INFO_STREAM(logger_, "Set UVC backend to " << uvc_backend_);
-    } else if (uvc_backend_ == "v4l2") {
-      ctx_->setUvcBackendType(OB_UVC_BACKEND_TYPE_V4L2);
-      RCLCPP_INFO_STREAM(logger_, "Set UVC backend to " << uvc_backend_);
-    } else {
-      ctx_->setUvcBackendType(OB_UVC_BACKEND_TYPE_LIBUVC);
+    try {
+      if (uvc_backend_ == "libuvc") {
+        ctx_->setUvcBackendType(OB_UVC_BACKEND_TYPE_LIBUVC);
+        RCLCPP_INFO_STREAM(logger_, "Set UVC backend to " << uvc_backend_);
+      } else if (uvc_backend_ == "v4l2") {
+        ctx_->setUvcBackendType(OB_UVC_BACKEND_TYPE_V4L2);
+        RCLCPP_INFO_STREAM(logger_, "Set UVC backend to " << uvc_backend_);
+      } else {
+        ctx_->setUvcBackendType(OB_UVC_BACKEND_TYPE_LIBUVC);
+        RCLCPP_WARN_STREAM(
+            logger_, "Unsupported uvc_backend '" << uvc_backend_ << "', using default libuvc");
+      }
+    } catch (const ob::Error &e) {
+      if (!enumerate_net_device_ || e.getStatus() != OB_ERROR_ITEM_NOT_FOUND) {
+        throw;
+      }
       RCLCPP_WARN_STREAM(logger_,
-                         "Unsupported uvc_backend '" << uvc_backend_ << "', using default libuvc");
+                         "USB backend is unavailable; continuing with network device enumeration: "
+                             << orbbec_camera::formatObErrorWithStatus(e));
     }
   }
   ctx_->enableNetDeviceEnumeration(enumerate_net_device_);
