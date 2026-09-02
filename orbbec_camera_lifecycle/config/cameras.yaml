@@ -1,0 +1,34 @@
+cameras:
+  - name: camera_01
+    parameters:
+      serial_number: ""
+      usb_port: "2-2"
+      depth_registration: true
+      align_mode: "HW"
+      enable_color: true
+      color_width: 640
+      color_height: 480
+      color_fps: 30
+      enable_depth: true
+      depth_width: 640
+      depth_height: 480
+      depth_fps: 30
+      enable_frame_sync: true
+      publish_tf: true
+
+  - name: camera_02
+    parameters:
+      serial_number: ""
+      usb_port: "2-1"
+      depth_registration: true
+      align_mode: "HW"
+      enable_color: true
+      color_width: 640
+      color_height: 480
+      color_fps: 30
+      enable_depth: true
+      depth_width: 640
+      depth_height: 480
+      depth_fps: 30
+      enable_frame_sync: true
+      publish_tf: true
