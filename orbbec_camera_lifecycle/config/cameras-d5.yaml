@@ -8,8 +8,9 @@ self_check:
   first_frame_timeout_sec: 2.0
   status_rate_hz: 1.0
 
+
 cameras:
-  - name: camera_01
+  - name: torso_rgbd
     parameters:
       serial_number: ""
       usb_port: "2-1"
@@ -27,21 +28,25 @@ cameras:
       publish_tf: true
       show_fps_enable: true
       enable_pub_plugins: true
+      sync_mode: standalone
 
-  # - name: camera_02
-  #   parameters:
-  #     serial_number: ""
-  #     usb_port: "2-1"
-  #     depth_registration: true
-  #     align_mode: "HW"
-  #     enable_color: true
-  #     color_width: 640
-  #     color_height: 480
-  #     color_fps: 30
-  #     enable_depth: true
-  #     depth_width: 640
-  #     depth_height: 480
-  #     depth_fps: 30
-  #     enable_frame_sync: true
-  #     publish_tf: true
-  #     show_fps_enable: true
+# cameras:
+#   - name: xxxx
+#     parameters:
+#       serial_number: ""
+#       usb_port: "x-xx"
+#       depth_registration: true
+#       align_mode: "HW"
+#       enable_color: true
+#       color_width: 640
+#       color_height: 480
+#       color_fps: 30
+#       enable_depth: true
+#       depth_width: 640
+#       depth_height: 480
+#       depth_fps: 30
+#       enable_frame_sync: true
+#       publish_tf: true
+#       show_fps_enable: true
+#       enable_pub_plugins: true
+#       sync_mode: standalone
