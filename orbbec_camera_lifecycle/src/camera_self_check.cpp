@@ -44,25 +44,57 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
                        "orbbec_camera_lifecycle") +
                    "/config/cameras.yaml";
   }
-  service_name_ = get_parameter("service_name").as_string();
-  status_topic_ = get_parameter("status_topic").as_string();
-  target_fps_ = get_parameter("target_fps").as_double();
-  fps_tolerance_ = get_parameter("fps_tolerance").as_double();
-  test_duration_sec_ = get_parameter("test_duration_sec").as_double();
-  first_frame_timeout_sec_ =
-      get_parameter("first_frame_timeout_sec").as_double();
-  status_rate_hz_ = get_parameter("status_rate_hz").as_double();
-
-  if (target_fps_ <= 0.0 || fps_tolerance_ < 0.0 ||
-      test_duration_sec_ <= 0.0 || first_frame_timeout_sec_ <= 0.0 ||
-      status_rate_hz_ <= 0.0) {
-    RCLCPP_ERROR(get_logger(), "self-test timing and FPS parameters are invalid");
-    return CallbackReturn::FAILURE;
-  }
-
   streams_.clear();
   try {
     const auto root = YAML::LoadFile(config_file_);
+    const auto self_check = root["self_check"];
+    if (self_check && !self_check.IsMap()) {
+      RCLCPP_ERROR(get_logger(), "self_check config must be a map");
+      return CallbackReturn::FAILURE;
+    }
+
+    if (self_check) {
+      const auto& overrides =
+          get_node_parameters_interface()->get_parameter_overrides();
+      const auto load_string = [this, &self_check, &overrides](
+                                   const char* name) {
+        if (self_check[name] && overrides.count(name) == 0) {
+          set_parameter(
+              rclcpp::Parameter(name, self_check[name].as<std::string>()));
+        }
+      };
+      const auto load_double = [this, &self_check, &overrides](
+                                   const char* name) {
+        if (self_check[name] && overrides.count(name) == 0) {
+          set_parameter(rclcpp::Parameter(name, self_check[name].as<double>()));
+        }
+      };
+      load_string("service_name");
+      load_string("status_topic");
+      load_double("target_fps");
+      load_double("fps_tolerance");
+      load_double("test_duration_sec");
+      load_double("first_frame_timeout_sec");
+      load_double("status_rate_hz");
+    }
+
+    service_name_ = get_parameter("service_name").as_string();
+    status_topic_ = get_parameter("status_topic").as_string();
+    target_fps_ = get_parameter("target_fps").as_double();
+    fps_tolerance_ = get_parameter("fps_tolerance").as_double();
+    test_duration_sec_ = get_parameter("test_duration_sec").as_double();
+    first_frame_timeout_sec_ =
+        get_parameter("first_frame_timeout_sec").as_double();
+    status_rate_hz_ = get_parameter("status_rate_hz").as_double();
+
+    if (target_fps_ <= 0.0 || fps_tolerance_ < 0.0 ||
+        test_duration_sec_ <= 0.0 || first_frame_timeout_sec_ <= 0.0 ||
+        status_rate_hz_ <= 0.0) {
+      RCLCPP_ERROR(get_logger(),
+                   "self-test timing and FPS parameters are invalid");
+      return CallbackReturn::FAILURE;
+    }
+
     const auto cameras = root["cameras"];
     if (!cameras || !cameras.IsSequence()) {
       RCLCPP_ERROR(get_logger(), "config must contain a cameras sequence");
