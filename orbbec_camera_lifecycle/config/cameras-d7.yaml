@@ -1,0 +1,52 @@
+self_check:
+  service_name: orbbec_self_test
+  status_topic: orbbec_self_test_status
+  target_fps: 30.0
+  # 相对波动范围，0.1 表示目标帧率上下各 10%。
+  fps_tolerance: 0.1
+  test_duration_sec: 2.0
+  first_frame_timeout_sec: 2.0
+  status_rate_hz: 1.0
+
+
+cameras:
+  - name: torso_rgbd
+    parameters:
+      serial_number: ""
+      usb_port: "2-1"
+      depth_registration: true
+      align_mode: "HW"
+      enable_color: true
+      color_width: 640
+      color_height: 480
+      color_fps: 30
+      enable_depth: true
+      depth_width: 640
+      depth_height: 480
+      depth_fps: 30
+      enable_frame_sync: true
+      publish_tf: true
+      show_fps_enable: true
+      enable_pub_plugins: true
+      sync_mode: standalone
+
+# cameras:
+#   - name: xxxx
+#     parameters:
+#       serial_number: ""
+#       usb_port: "x-xx"
+#       depth_registration: true
+#       align_mode: "HW"
+#       enable_color: true
+#       color_width: 640
+#       color_height: 480
+#       color_fps: 30
+#       enable_depth: true
+#       depth_width: 640
+#       depth_height: 480
+#       depth_fps: 30
+#       enable_frame_sync: true
+#       publish_tf: true
+#       show_fps_enable: true
+#       enable_pub_plugins: true
+#       sync_mode: standalone
