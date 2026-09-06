@@ -10,10 +10,10 @@ self_check:
 
 
 cameras:
-  - name: torso_rgbd
+  - name: head_rgbd
     parameters:
       serial_number: ""
-      usb_port: "2-1"
+      usb_port: "4-1"
       depth_registration: true
       align_mode: "HW"
       enable_color: true
@@ -29,6 +29,26 @@ cameras:
       show_fps_enable: true
       enable_pub_plugins: true
       sync_mode: standalone
+
+  # - name: chassis_rgbd
+  #   parameters:
+  #     serial_number: ""
+  #     usb_port: ""
+  #     depth_registration: true
+  #     align_mode: "HW"
+  #     enable_color: true
+  #     color_width: 640
+  #     color_height: 480
+  #     color_fps: 30
+  #     enable_depth: true
+  #     depth_width: 640
+  #     depth_height: 480
+  #     depth_fps: 30
+  #     enable_frame_sync: true
+  #     publish_tf: true
+  #     show_fps_enable: true
+  #     enable_pub_plugins: true
+  #     sync_mode: standalone
 
 # cameras:
 #   - name: xxxx
