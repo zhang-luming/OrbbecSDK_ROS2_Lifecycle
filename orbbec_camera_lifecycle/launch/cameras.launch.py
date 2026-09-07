@@ -39,7 +39,7 @@ def generate_launch_description():
     camera_node = LifecycleNode(
         package="orbbec_camera_lifecycle",
         executable="orbbec_camera_lifecycle_node",
-        name="orbbec_camera",
+        name="orbbec_camera_manager",
         namespace="",
         output="screen",
         parameters=[{"config_file": config_file}],

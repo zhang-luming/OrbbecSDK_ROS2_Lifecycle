@@ -12,7 +12,7 @@ namespace orbbec_camera_lifecycle {
 LifecycleCameraNode::LifecycleCameraNode(
     const rclcpp::NodeOptions& options,
     const std::shared_ptr<rclcpp::Executor>& executor)
-    : LifecycleNode("orbbec_camera", options), executor_(executor) {
+    : LifecycleNode("orbbec_camera_manager", options), executor_(executor) {
   config_file_ = declare_parameter<std::string>("config_file", "");
 }
 
