@@ -1,4 +1,6 @@
 #include "orbbec_camera_lifecycle/lifecycle_camera_node.hpp"
+#include "pudu-base/pdLog/log.h"
+#include "nvq_tools/tools/common.h"
 
 #include <yaml-cpp/yaml.h>
 
@@ -196,6 +198,9 @@ void LifecycleCameraNode::stop_drivers() {
 }  // namespace orbbec_camera_lifecycle
 
 int main(int argc, char* argv[]) {
+  auto log = base::initLog("", pudu::tools::Tools::getLogPathFromEnv(),
+                           "orbbec_camera_manager", true,
+                           ORBBEC_LIFECYCLE_VERSION, "");
   rclcpp::init(argc, argv);
   auto executor = std::make_shared<rclcpp::executors::MultiThreadedExecutor>();
   auto node = std::make_shared<orbbec_camera_lifecycle::LifecycleCameraNode>(
