@@ -1,4 +1,6 @@
 #include "orbbec_camera_lifecycle/camera_self_check.hpp"
+#include "pudu-base/pdLog/log.h"
+#include "nvq_tools/tools/common.h"
 
 #include <ament_index_cpp/get_package_share_directory.hpp>
 #include <rclcpp/executors/multi_threaded_executor.hpp>
@@ -292,6 +294,9 @@ void CameraSelfCheck::handle_self_test(
 }  // namespace orbbec_camera_lifecycle
 
 int main(int argc, char** argv) {
+  auto log = base::initLog("", pudu::tools::Tools::getLogPathFromEnv(),
+                           "orbbec_self_test_node", true,
+                           ORBBEC_LIFECYCLE_VERSION, "");
   rclcpp::init(argc, argv);
   auto node =
       std::make_shared<orbbec_camera_lifecycle::CameraSelfCheck>();
