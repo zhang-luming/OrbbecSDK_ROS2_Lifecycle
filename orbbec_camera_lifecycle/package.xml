@@ -19,6 +19,8 @@
   <depend>std_msgs</depend>
   <depend>std_srvs</depend>
   <depend>yaml-cpp</depend>
+  <depend>pudu-base</depend>
+  <depend>nvq_tools</depend>
 
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
