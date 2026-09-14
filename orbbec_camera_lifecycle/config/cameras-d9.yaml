@@ -13,7 +13,7 @@ cameras:
   - name: torso_rgbd
     parameters:
       serial_number: ""
-      usb_port: "2-1"
+      usb_port: "1-1"
       depth_registration: true
       align_mode: "HW"
       enable_color: true
