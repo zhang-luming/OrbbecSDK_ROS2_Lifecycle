@@ -1,6 +1,42 @@
-# OrbbecSDK ROS2 Wrapper v2
+<div align="center">
+<!-- Title: -->
+  <a href="https://www.orbbec.com/products/">
+    <img src="./docs/images/orbbec-logo-horizontal.png" width="500" alt="Orbbec">
+  </a>
+  <h1><a href="https://github.com/orbbec/OrbbecSDK_ROS2">OrbbecSDK ROS2 Wrapper v2</a></h1>
 
-[English](./README.MD) | [中文](./README_CN.MD)
+<!-- Language: -->
+  <p align="center">
+    <a href="./README.MD">English</a> | <a href="./README_CN.MD">中文</a>
+  </p>
+
+<!-- Labels: -->
+  <!-- First row: -->
+  <a href="https://docs.ros.org/en/foxy/">
+    <img src="https://img.shields.io/badge/ROS-Foxy-f5792a?style=flat-square&amp;logo=ros&amp;logoColor=white" height="20" alt="ROS Foxy">
+  </a>
+  <a href="https://docs.ros.org/en/humble/">
+    <img src="https://img.shields.io/badge/ROS-Humble-f5792a?style=flat-square&amp;logo=ros&amp;logoColor=white" height="20" alt="ROS Humble">
+  </a>
+  <a href="https://docs.ros.org/en/jazzy/">
+    <img src="https://img.shields.io/badge/ROS-Jazzy-f5792a?style=flat-square&amp;logo=ros&amp;logoColor=white" height="20" alt="ROS Jazzy">
+  </a>
+  <img src="https://img.shields.io/badge/Ubuntu-20.04-0078d4?style=flat-square&amp;logo=ubuntu&amp;logoColor=white" height="20" alt="Ubuntu 20.04">
+  <img src="https://img.shields.io/badge/Ubuntu-22.04-0078d4?style=flat-square&amp;logo=ubuntu&amp;logoColor=white" height="20" alt="Ubuntu 22.04">
+  <img src="https://img.shields.io/badge/Ubuntu-24.04-0078d4?style=flat-square&amp;logo=ubuntu&amp;logoColor=white" height="20" alt="Ubuntu 24.04">
+
+  <!-- Second row: -->
+  <br>
+  <a href="https://github.com/orbbec/OrbbecSDK_ROS2/tree/v2-main">
+    <img src="https://img.shields.io/badge/branch-v2--main-555555?style=flat-square" height="20" alt="branch v2-main">
+  </a>
+  <a href="http://www.apache.org/licenses/LICENSE-2.0">
+    <img src="https://img.shields.io/badge/license-Apache--2.0-6bcf00?style=flat-square" height="20" alt="license Apache-2.0">
+  </a>
+  <a href="https://gitee.com/orbbecdeveloper/OrbbecSDK_ROS2">
+    <img src="https://img.shields.io/badge/Gitee-mirror-c71d23?style=flat-square" height="20" alt="Gitee mirror">
+  </a>
+</div>
 
 ## 简介
 
@@ -16,7 +52,7 @@ OrbbecSDK ROS2 Wrapper 提供 Orbbec 相机与 ROS 2 环境的无缝集成，支
 
 <table border="1" style="border-collapse: collapse; text-align: left; width: 100%;">
   <thead>
-    <tr style="background-color: #1f4e78; color: white; text-align: center;">
+    <tr style="background-color: #1f4e78; color: black; text-align: center;">
       <th>产品系列</th>
       <th>产品</th>
       <th><a href="https://github.com/orbbec/OrbbecSDK_ROS2/tree/main" style="color: black; text-decoration: none;">main分支</a></th>
@@ -24,41 +60,25 @@ OrbbecSDK ROS2 Wrapper 提供 Orbbec 相机与 ROS 2 环境的无缝集成，支
     </tr>
   </thead>
   <tbody>
-      <tr>
-      <td rowspan="2" style="text-align: center; font-weight: bold;">Gemini 305</td>
-      <td>Gemini 305</td>
-      <td>not supported</td>
-      <td>recommended for new designs</td>
-    </tr>
     <tr>
-      <td>Gemini 305G</td>
-      <td>not supported</td>
-      <td>recommended for new designs</td>
-    </tr>
-    <tr>
-      <td rowspan="2" style="text-align: center; font-weight: bold;">Gemini 340</td>
-      <td>Gemini 345</td>
-      <td>not supported</td>
-      <td>recommended for new designs</td>
-    </tr>
-    <tr>
-      <td>Gemini 345Lg</td>
-      <td>not supported</td>
-      <td>recommended for new designs</td>
-    </tr>
-      <tr>
-      <td style="text-align: center; font-weight: bold;">Gemini 435Le</td>
+      <td style="text-align: center; font-weight: bold;">Gemini 430</td>
       <td>Gemini 435Le</td>
       <td>not supported</td>
       <td>recommended for new designs</td>
     </tr>
     <tr>
-      <td rowspan="8" style="text-align: center; font-weight: bold;">Gemini 330</td>
-      <td>Gemini 335Le</td>
+      <td rowspan="2" style="text-align: center; font-weight: bold;">Gemini 301</td>
+      <td>Gemini 305</td>
       <td>not supported</td>
       <td>recommended for new designs</td>
     </tr>
     <tr>
+      <td>Gemini 305g</td>
+      <td>not supported</td>
+      <td>recommended for new designs</td>
+    </tr>
+    <tr>
+      <td rowspan="8" style="text-align: center; font-weight: bold;">Gemini 330</td>
       <td>Gemini 335</td>
       <td>full maintenance</td>
       <td>recommended for new designs</td>
@@ -94,6 +114,17 @@ OrbbecSDK ROS2 Wrapper 提供 Orbbec 相机与 ROS 2 环境的无缝集成，支
       <td>recommended for new designs</td>
     </tr>
     <tr>
+      <td>Gemini 335Le</td>
+      <td>not supported</td>
+      <td>recommended for new designs</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; font-weight: bold;">Gemini 340</td>
+      <td>Gemini 345Lg</td>
+      <td>not supported</td>
+      <td>recommended for new designs</td>
+    </tr>
+    <tr>
       <td rowspan="5" style="text-align: center; font-weight: bold;">Gemini 2</td>
       <td>Gemini 2</td>
       <td>full maintenance</td>
@@ -107,7 +138,7 @@ OrbbecSDK ROS2 Wrapper 提供 Orbbec 相机与 ROS 2 环境的无缝集成，支
     <tr>
       <td>Gemini 2 XL</td>
       <td>recommended for new designs</td>
-      <td>to be supported</td>
+      <td>not supported</td>
     </tr>
     <tr>
       <td>Gemini 215</td>
@@ -152,19 +183,18 @@ OrbbecSDK ROS2 Wrapper 提供 Orbbec 相机与 ROS 2 环境的无缝集成，支
       <td>not supported</td>
     </tr>
     <tr>
-      <td style="text-align: center; font-weight: bold;">Astra Mini</td>
-      <td>Astra Mini (S) Pro</td>
+      <td rowspan="2" style="text-align: center; font-weight: bold;">Astra Mini</td>
+      <td>Astra Mini Pro</td>
       <td>full maintenance</td>
       <td>recommended for new designs</td>
     </tr>
     <tr>
-      <td style="text-align: center; font-weight: bold;">Astra Mini</td>
-      <td>Astra Mini (S) Pro</td>
+      <td>Astra Mini S Pro</td>
       <td>full maintenance</td>
       <td>recommended for new designs</td>
     </tr>
     <tr>
-      <td rowspan="3" style="text-align: center; font-weight: bold;">LiDAR</td>
+      <td rowspan="2" style="text-align: center; font-weight: bold;">LiDAR</td>
       <td>Pulsar ME450</td>
       <td>not supported</td>
       <td>recommended for new designs</td>
@@ -328,27 +358,119 @@ ros2 service call /camera/get_sdk_version orbbec_camera_msgs/srv/GetString '{}'
 
 为获得最佳性能，强烈建议更新至最新固件版本，以确保您能获得最新的改进和 bug 修复。
 
-| **产品列表** | **推荐固件版本**                                                             |  **启动文件**                                          |
-| ----------------------- | -------------------------------------------------------------------------------------------- | --------------------------- |
-| Gemini 305              | [1.0.30](https://doc.orbbec.com/documentation/Gemini%20305%20Series%20Documentation/Firmware%20Release%20of%20Gemini%20305)                  | gemini305.launch.py             |
-| Gemini 305G             | [1.0.30](https://doc.orbbec.com/documentation/Gemini%20305%20Documentation/Firmware%20Release%20of%20Gemini%20305)                  | gemini305_g.launch.py           |
-| Astra Mini Pro          | [2.0.03](https://github.com/orbbec/OrbbecFirmware/releases/tag/Astra-Mini-Pro)                  | astra.launch.py             |
-| Astra Mini S Pro        | [2.0.03](https://github.com/orbbec/OrbbecFirmware/releases/tag/Astra-Mini-S-Pro)                | astra.launch.py             |
-| Gemini 435Le            | [1.3.6](https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemin435Le-Firmware)              | gemini435_le.launch.py      |
-| Gemini 330 series       | [1.6.00](https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip) | gemini_330_series.launch.py |
-| Gemini 338/338L/338Le/338Lg/331L | 以发布包内推荐固件为准 | gemini_330_series.launch.py |
-| Gemini 215              | [1.0.9](https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini215-Firmware)               | gemini210.launch.py         |
-| Gemini 210              | [1.0.9](https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini210-Firmware)               | gemini210.launch.py         |
-| Gemini 2                | [1.4.98](https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini2-Firmware)                | gemini2.launch.py           |
-| Gemini 2 L              | [1.5.2](https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini2L-Firmware)                | gemini2L.launch.py          |
-| Femto Bolt              | [1.1.3](https://github.com/orbbec/OrbbecFirmware/releases/tag/Femto-Bolt-Firmware)              | femto_bolt.launch.py        |
-| Femto Mega              | [1.3.1](https://github.com/orbbec/OrbbecFirmware/releases/tag/Femto-Mega-Firmware)              | femto_mega.launch.py        |
-| Femto Mega I            | [2.0.4](https://github.com/orbbec/OrbbecFirmware/releases/tag/Femto-Mega-I-Firmware)            | femto_mega.launch.py        |
-| Astra 2                 | [2.8.20](https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Astra2_Release_2.8.20.zip)    | astra2.launch.py            |
-| Gemini 345            | 1.9.03 | gemini345.launch.py |
-| Gemini 345Lg            | 1.9.03 | gemini345_lg.launch.py |
-| Pulsar SL450            | 2.2.4.5 | lidar.launch.py |
-| Pulsar ME450            | 1.0.0.6 | lidar.launch.py |
+<table border="1" style="border-collapse: collapse; text-align: left; width: 100%;">
+  <thead>
+    <tr>
+      <th>产品系列</th>
+      <th>产品列表</th>
+      <th>推荐固件版本</th>
+      <th>启动文件</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center; font-weight: bold;">Gemini 430</td>
+      <td>Gemini 435Le</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemin435Le-Firmware">1.3.19</a></td>
+      <td>gemini435_le.launch.py</td>
+    </tr>
+    <tr>
+      <td rowspan="3" style="text-align: center; font-weight: bold;">Gemini 301</td>
+      <td>Gemini 305</td>
+      <td><a href="https://doc.orbbec.com/documentation/Gemini%20305%20Documentation/Firmware%20Release%20of%20Gemini%20305">1.0.70</a></td>
+      <td>gemini_301_series.launch.py</td>
+    </tr>
+    <tr>
+      <td>Gemini 305g</td>
+      <td><a href="https://doc.orbbec.com/documentation/Gemini%20305%20Documentation/Firmware%20Release%20of%20Gemini%20305">1.0.70</a></td>
+      <td>gemini_301_series.launch.py</td>
+    </tr>
+    <tr>
+      <td rowspan="8" style="text-align: center; font-weight: bold;">Gemini 330</td>
+      <td>Gemini 335</td>
+      <td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip">1.6.00</a></td>
+      <td>gemini_330_series.launch.py</td>
+    </tr>
+    <tr><td>Gemini 336</td><td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip">1.6.00</a></td><td>gemini_330_series.launch.py</td></tr>
+    <tr><td>Gemini 330</td><td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip">1.6.00</a></td><td>gemini_330_series.launch.py</td></tr>
+    <tr><td>Gemini 335L</td><td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip">1.6.00</a></td><td>gemini_330_series.launch.py</td></tr>
+    <tr><td>Gemini 336L</td><td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip">1.6.00</a></td><td>gemini_330_series.launch.py</td></tr>
+    <tr><td>Gemini 330L</td><td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip">1.6.00</a></td><td>gemini_330_series.launch.py</td></tr>
+    <tr><td>Gemini 335Lg</td><td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip">1.6.00</a></td><td>gemini_330_series.launch.py</td></tr>
+    <tr><td>Gemini 335Le</td><td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Gemini330_Release_1.6.00.zip">1.6.00</a></td><td>gemini_330_series.launch.py</td></tr>
+    <tr>
+      <td style="text-align: center; font-weight: bold;">Gemini 340</td>
+      <td>Gemini 345Lg</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini340-Firmware">1.9.03</a></td>
+      <td>gemini345_lg.launch.py</td>
+    </tr>
+    <tr>
+      <td rowspan="4" style="text-align: center; font-weight: bold;">Gemini 2</td>
+      <td>Gemini 2</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini2-Firmware">1.4.98</a></td>
+      <td>gemini2.launch.py</td>
+    </tr>
+    <tr>
+      <td>Gemini 2 L</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini2L-Firmware">1.5.2</a></td>
+      <td>gemini2L.launch.py</td>
+    </tr>
+    <tr>
+      <td>Gemini 215</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini215-Firmware">1.0.9</a></td>
+      <td>gemini210.launch.py</td>
+    </tr>
+    <tr>
+      <td>Gemini 210</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Gemini210-Firmware">1.0.9</a></td>
+      <td>gemini210.launch.py</td>
+    </tr>
+    <tr>
+      <td rowspan="3" style="text-align: center; font-weight: bold;">Femto</td>
+      <td>Femto Bolt</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Femto-Bolt-Firmware">1.1.3</a></td>
+      <td>femto_bolt.launch.py</td>
+    </tr>
+    <tr>
+      <td>Femto Mega</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Femto-Mega-Firmware">1.3.1</a></td>
+      <td>femto_mega.launch.py</td>
+    </tr>
+    <tr>
+      <td>Femto Mega I</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Femto-Mega-I-Firmware">2.0.4</a></td>
+      <td>femto_mega.launch.py</td>
+    </tr>
+    <tr>
+      <td style="text-align: center; font-weight: bold;">Astra</td>
+      <td>Astra 2</td>
+      <td><a href="https://orbbec-debian-repos-aws.s3.amazonaws.com/product/Astra2_Release_2.8.20.zip">2.8.20</a></td>
+      <td>astra2.launch.py</td>
+    </tr>
+    <tr>
+      <td rowspan="2" style="text-align: center; font-weight: bold;">Astra Mini</td>
+      <td>Astra Mini Pro</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Astra-Mini-Pro">2.0.03</a></td>
+      <td>astra.launch.py</td>
+    </tr>
+    <tr>
+      <td>Astra Mini S Pro</td>
+      <td><a href="https://github.com/orbbec/OrbbecFirmware/releases/tag/Astra-Mini-S-Pro">2.0.03</a></td>
+      <td>astra.launch.py</td>
+    </tr>
+    <tr>
+      <td rowspan="2" style="text-align: center; font-weight: bold;">LiDAR</td>
+      <td>Pulsar ME450</td>
+      <td>1.0.0.6</td>
+      <td>lidar.launch.py</td>
+    </tr>
+    <tr>
+      <td>Pulsar SL450</td>
+      <td>2.2.4.5</td>
+      <td>lidar.launch.py</td>
+    </tr>
+  </tbody>
+</table>
 
 所有启动文件基本相似，主要区别在于针对不同型号的默认参数设置。不同的 USB 标准（如 USB 2.0 和 USB 3.0）可能需要调整这些参数。如果遇到启动失败，请仔细查看规格说明书，特别是启动文件中的分辨率设置以及其他参数，以确保兼容性和最佳性能。
 

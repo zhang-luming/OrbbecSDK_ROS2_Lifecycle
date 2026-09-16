@@ -1,32 +1,42 @@
 #include <rclcpp/rclcpp.hpp>
 #include <orbbec_camera/ob_camera_node_driver.h>
 #include <orbbec_camera/ob_camera_node.h>
+#include <orbbec_camera/utils.h>
 #include <magic_enum/magic_enum.hpp>
+#include <chrono>
 #include <cstring>
 #include <iostream>
 #include <memory>
 #include <string>
+#include <thread>
 
 using namespace orbbec_camera;
 
 namespace {
 
+constexpr int kFirmwareLogDrainDelaySec = 5;
+
 struct CliArgs {
   bool help = false;
   std::string serial_number;
+  std::string sdk_log_level = "off";
 };
 
 void printUsage() {
-  std::cout
-      << "Usage:\n"
-      << "ros2 run orbbec_camera list_camera_profile_mode_node --\\\n"
-      << "      [--serial_number SN]\n\n"
-      << "Parameters:\n"
-      << "  --serial_number SN  Select a specific camera by serial number.\n"
-      << "  -h, --help          Show this help message.\n";
+  std::cout << "Usage:\n"
+            << "ros2 run orbbec_camera list_camera_profile_mode_node --\\\n"
+            << "      [--serial_number SN]\n\n"
+            << "Parameters:\n"
+            << "  --serial_number SN  Select a specific camera by serial number.\n"
+            << "  --sdk_log_level LEVEL\n"
+            << "                      SDK file log level: debug/info/warn/error/fatal/off "
+               "(default: off).\n"
+            << "  -h, --help          Show this help message.\n"
+            << "Examples:\n"
+            << "  ros2 run orbbec_camera list_camera_profile_mode_node -- --sdk_log_level debug\n";
 }
 
-bool parseArgs(int argc, char **argv, CliArgs &args, std::string &error) {
+bool parseArgs(int argc, char** argv, CliArgs& args, std::string& error) {
   for (int i = 1; i < argc; ++i) {
     const std::string current = argv[i];
     if (current == "-h" || current == "--help") {
@@ -52,11 +62,54 @@ bool parseArgs(int argc, char **argv, CliArgs &args, std::string &error) {
       continue;
     }
 
+    if (current.rfind("--sdk_log_level=", 0) == 0) {
+      args.sdk_log_level = current.substr(std::strlen("--sdk_log_level="));
+      continue;
+    }
+    if (current == "--sdk_log_level") {
+      if (++i >= argc) {
+        error = "--sdk_log_level requires a value";
+        return false;
+      }
+      args.sdk_log_level = argv[i];
+      continue;
+    }
+
     error = "Unknown argument: " + current;
     return false;
   }
 
+  const auto log_severity = obLogSeverityFromString(args.sdk_log_level);
+  if (log_severity == OBLogSeverity::OB_LOG_SEVERITY_OFF && args.sdk_log_level != "off" &&
+      args.sdk_log_level != "none") {
+    error = "--sdk_log_level expects one of: debug, info, warn, error, fatal, off";
+    return false;
+  }
+
   return true;
+}
+
+void waitForFirmwareLogDrain() {
+  std::cout << "Waiting " << kFirmwareLogDrainDelaySec << " seconds to keep firmware log alive..."
+            << std::endl;
+  std::this_thread::sleep_for(std::chrono::seconds(kFirmwareLogDrainDelaySec));
+}
+
+bool enableFirmwareLog(const std::shared_ptr<ob::Device>& device) {
+  try {
+    device->enableFirmwareLog(true);
+    std::cout << "Firmware log enabled." << std::endl;
+    return true;
+  } catch (const ob::Error& e) {
+    std::cerr << "Failed to enable firmware log: " << formatObErrorWithStatus(e) << std::endl;
+  } catch (const std::exception& e) {
+    std::cerr << "Failed to enable firmware log: " << e.what() << std::endl;
+  }
+  return false;
+}
+
+bool isSdkLogEnabled(const std::string& log_level) {
+  return obLogSeverityFromString(log_level) != OBLogSeverity::OB_LOG_SEVERITY_OFF;
 }
 
 std::shared_ptr<ob::Device> initializeDevice(const std::string& serial_number) {
@@ -150,7 +203,7 @@ void printPreset(const std::shared_ptr<ob::Device>& device) {
   }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   CliArgs args;
   std::string parse_error;
   if (!parseArgs(argc, argv, args, parse_error)) {
@@ -163,12 +216,25 @@ int main(int argc, char **argv) {
     return 0;
   }
 
+  const auto sdk_log_path =
+      configureObSdkLoggerForTool("list_camera_profile_mode_node", args.sdk_log_level);
+  if (!sdk_log_path.empty()) {
+    std::cout << "SDK file log enabled: " << sdk_log_path << std::endl;
+  }
+
   auto device = initializeDevice(args.serial_number);
   if (!device) {
     return -1;
   }
+  bool firmware_log_enabled = false;
+  if (isSdkLogEnabled(args.sdk_log_level)) {
+    firmware_log_enabled = enableFirmwareLog(device);
+  }
   listSensorProfiles(device);
   printDeviceProperties(device);
   printPreset(device);
+  if (firmware_log_enabled) {
+    waitForFirmwareLogDrain();
+  }
   return 0;
 }

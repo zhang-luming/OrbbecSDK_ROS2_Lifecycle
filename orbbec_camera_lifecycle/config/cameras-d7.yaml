@@ -53,7 +53,7 @@ cameras:
   # - name: left_hand_rgbd
   #   parameters:
   #     serial_number: ""
-  #     usb_port: "2-4.1"
+  #     usb_port: "2-4.4"
   #     depth_registration: true
   #     align_mode: "HW"
   #     enable_color: true
@@ -73,7 +73,7 @@ cameras:
   # - name: right_hand_rgbd
   #   parameters:
   #     serial_number: ""
-  #     usb_port: "2-4.4"
+  #     usb_port: "2-4.1"
   #     depth_registration: true
   #     align_mode: "HW"
   #     enable_color: true

@@ -31,6 +31,7 @@
 #include <sstream>
 #include <iomanip>
 #include <arpa/inet.h>
+#include <string_view>
 
 namespace orbbec_camera {
 inline void LogFatal(const char* file, int line, const std::string& message) {
@@ -70,20 +71,21 @@ inline std::string formatObErrorWithStatus(const ob::Error& e) {
     RCLCPP_ERROR(logger_, "Unknown exception in %s at line %d", __FUNCTION__, __LINE__);          \
   }
 
-#define TRY_TO_SET_PROPERTY(func, property, value)                                             \
-  try {                                                                                        \
-    device_->func(property, value);                                                            \
-  } catch (const ob::Error& e) {                                                               \
-    RCLCPP_ERROR_STREAM(logger_, "Failed to set " << property << " to " << value << " in "     \
-                                                  << __FUNCTION__ << " at line " << __LINE__   \
-                                                  << ": " << orbbec_camera::formatObErrorWithStatus(e)); \
-  } catch (const std::exception& e) {                                                          \
-    RCLCPP_ERROR_STREAM(logger_, "Failed to set " << property << " to " << value << " in "     \
-                                                  << __FUNCTION__ << " at line " << __LINE__   \
-                                                  << ": " << e.what());                        \
-  } catch (...) {                                                                              \
-    RCLCPP_ERROR_STREAM(logger_, "Failed to set " << property << " to " << value << " in "     \
-                                                  << __FUNCTION__ << " at line " << __LINE__); \
+#define TRY_TO_SET_PROPERTY(func, property, value)                                               \
+  try {                                                                                          \
+    device_->func(property, value);                                                              \
+  } catch (const ob::Error& e) {                                                                 \
+    RCLCPP_ERROR_STREAM(logger_, "Failed to set " << property << " to " << value << " in "       \
+                                                  << __FUNCTION__ << " at line " << __LINE__     \
+                                                  << ": "                                        \
+                                                  << orbbec_camera::formatObErrorWithStatus(e)); \
+  } catch (const std::exception& e) {                                                            \
+    RCLCPP_ERROR_STREAM(logger_, "Failed to set " << property << " to " << value << " in "       \
+                                                  << __FUNCTION__ << " at line " << __LINE__     \
+                                                  << ": " << e.what());                          \
+  } catch (...) {                                                                                \
+    RCLCPP_ERROR_STREAM(logger_, "Failed to set " << property << " to " << value << " in "       \
+                                                  << __FUNCTION__ << " at line " << __LINE__);   \
   }
 
 // Macros for checking conditions and comparing values
@@ -162,6 +164,12 @@ rclcpp::Time fromMsToROSTime(uint64_t ms);
 rclcpp::Time fromUsToROSTime(uint64_t us);
 
 std::string getObSDKVersion();
+
+OBLogSeverity obLogSeverityFromString(const std::string_view& log_level);
+
+std::string getObSdkLogDirectory();
+
+std::string configureObSdkLoggerForTool(const std::string& tool_name, const std::string& log_level);
 
 OBFormat OBFormatFromString(const std::string& format);
 
