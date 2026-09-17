@@ -2,7 +2,7 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>orbbec_camera_lifecycle</name>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <description>Lifecycle wrapper for the unmodified Orbbec ROS 2 camera driver.</description>
   <maintainer email="support@orbbec.com">Orbbec</maintainer>
   <license>Apache-2.0</license>
