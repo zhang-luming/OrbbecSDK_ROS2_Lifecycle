@@ -1,6 +1,7 @@
 #pragma once
 
 #include <rclcpp_lifecycle/lifecycle_node.hpp>
+#include <sensor_msgs/msg/compressed_image.hpp>
 #include <sensor_msgs/msg/image.hpp>
 #include <std_msgs/msg/int8.hpp>
 #include <std_srvs/srv/trigger.hpp>
@@ -29,14 +30,14 @@ class CameraSelfCheck : public rclcpp_lifecycle::LifecycleNode {
  private:
   struct Stream {
     std::string topic;
+    bool compressed{false};
     uint64_t frames{0};
     uint64_t first_timestamp_ns{0};
     uint64_t last_timestamp_ns{0};
-    rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr subscription;
+    rclcpp::SubscriptionBase::SharedPtr subscription;
   };
 
-  void image_callback(size_t index,
-                      sensor_msgs::msg::Image::ConstSharedPtr message);
+  void frame_callback(size_t index);
   void handle_self_test(
       std::shared_ptr<std_srvs::srv::Trigger::Request> request,
       std::shared_ptr<std_srvs::srv::Trigger::Response> response);

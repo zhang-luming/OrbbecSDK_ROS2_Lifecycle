@@ -109,14 +109,17 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
                           ? camera["namespace"].as<std::string>()
                           : camera["name"].as<std::string>();
       const auto parameters = camera["parameters"];
-      const auto add_stream = [this, &ns](const char* name, bool enabled) {
+      const auto add_stream = [this, &ns](const char* name, bool enabled,
+                                         bool compressed = false) {
         if (!enabled) return;
         Stream stream;
         stream.topic = "/" + ns + "/" + name + "/image_raw";
+        stream.compressed = compressed;
+        if (compressed) stream.topic += "/compressed";
         streams_.push_back(std::move(stream));
       };
       add_stream("color", !parameters || !parameters["enable_color"] ||
-                              parameters["enable_color"].as<bool>());
+                              parameters["enable_color"].as<bool>(), true);
       add_stream("depth", !parameters || !parameters["enable_depth"] ||
                               parameters["enable_depth"].as<bool>());
       add_stream("left_ir", parameters && parameters["enable_left_ir"] &&
@@ -142,12 +145,23 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
   rclcpp::SubscriptionOptions options;
   options.callback_group = subscription_group_;
   for (size_t i = 0; i < streams_.size(); ++i) {
-    streams_[i].subscription = create_subscription<sensor_msgs::msg::Image>(
-        streams_[i].topic, rclcpp::SensorDataQoS(),
-        [this, i](sensor_msgs::msg::Image::ConstSharedPtr message) {
-          image_callback(i, message);
-        },
-        options);
+    // Count arrivals without decoding JPEG or requesting the color raw stream.
+    if (streams_[i].compressed) {
+      streams_[i].subscription =
+          create_subscription<sensor_msgs::msg::CompressedImage>(
+              streams_[i].topic, rclcpp::SensorDataQoS(),
+              [this, i](sensor_msgs::msg::CompressedImage::ConstSharedPtr) {
+                frame_callback(i);
+              },
+              options);
+    } else {
+      streams_[i].subscription = create_subscription<sensor_msgs::msg::Image>(
+          streams_[i].topic, rclcpp::SensorDataQoS(),
+          [this, i](sensor_msgs::msg::Image::ConstSharedPtr) {
+            frame_callback(i);
+          },
+          options);
+    }
   }
   service_ = create_service<std_srvs::srv::Trigger>(
       service_name_,
@@ -203,8 +217,7 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_shutdown(
   return on_cleanup(state);
 }
 
-void CameraSelfCheck::image_callback(
-    size_t index, sensor_msgs::msg::Image::ConstSharedPtr) {
+void CameraSelfCheck::frame_callback(size_t index) {
   std::lock_guard<std::mutex> lock(sample_mutex_);
   if (!collecting_) return;
   const auto now = monotonic_raw_nanoseconds();
