@@ -14,6 +14,7 @@ cameras:
     parameters:
       serial_number: ""
       usb_port: "2-1"
+      uvc_backend: "v4l2"
       depth_registration: true
       align_mode: "HW"
       enable_color: true
@@ -35,6 +36,7 @@ cameras:
 #     parameters:
 #       serial_number: ""
 #       usb_port: "x-xx"
+#       uvc_backend: "v4l2"
 #       depth_registration: true
 #       align_mode: "HW"
 #       enable_color: true
