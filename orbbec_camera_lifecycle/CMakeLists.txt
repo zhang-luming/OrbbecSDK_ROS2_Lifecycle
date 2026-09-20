@@ -61,6 +61,8 @@ install(TARGETS orbbec_camera_lifecycle_node camera_self_check
 install(DIRECTORY include/ DESTINATION include)
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/enable_d7_hand_cameras.py
+  DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
