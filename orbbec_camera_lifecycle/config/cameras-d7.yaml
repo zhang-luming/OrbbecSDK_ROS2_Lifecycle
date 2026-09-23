@@ -21,14 +21,15 @@ cameras:
       color_width: 640
       color_height: 480
       color_fps: 30
+      color.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressed"]
       enable_depth: true
       depth_width: 640
       depth_height: 480
       depth_fps: 30
+      depth.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressedDepth"]
       enable_frame_sync: true
       publish_tf: true
       show_fps_enable: true
-      enable_pub_plugins: true
       sync_mode: standalone
 
   - name: head_rgbd
@@ -42,14 +43,15 @@ cameras:
       color_width: 640
       color_height: 480
       color_fps: 30
+      color.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressed"]
       enable_depth: true
       depth_width: 640
       depth_height: 480
       depth_fps: 30
+      depth.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressedDepth"]
       enable_frame_sync: true
       publish_tf: true
       show_fps_enable: true
-      enable_pub_plugins: true
       sync_mode: standalone
 
   # - name: left_hand_rgbd
@@ -63,14 +65,15 @@ cameras:
   #     color_width: 640
   #     color_height: 480
   #     color_fps: 30
+  #     color.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressed"]
   #     enable_depth: true
   #     depth_width: 640
   #     depth_height: 480
   #     depth_fps: 30
+  #     depth.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressedDepth"]
   #     enable_frame_sync: true
   #     publish_tf: true
   #     show_fps_enable: true
-  #     enable_pub_plugins: true
   #     sync_mode: standalone
 
   # - name: right_hand_rgbd
@@ -84,12 +87,13 @@ cameras:
   #     color_width: 640
   #     color_height: 480
   #     color_fps: 30
+  #     color.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressed"]
   #     enable_depth: true
   #     depth_width: 640
   #     depth_height: 480
   #     depth_fps: 30
+  #     depth.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressedDepth"]
   #     enable_frame_sync: true
   #     publish_tf: true
   #     show_fps_enable: true
-  #     enable_pub_plugins: true
   #     sync_mode: standalone
