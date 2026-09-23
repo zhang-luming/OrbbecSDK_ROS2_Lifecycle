@@ -116,18 +116,18 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
                           : camera["name"].as<std::string>();
       const auto parameters = camera["parameters"];
       const auto add_stream = [this, &ns](const char* name, bool enabled,
-                                         bool compressed = false) {
+                                         const char* transport = nullptr) {
         if (!enabled) return;
         Stream stream;
         stream.topic = "/" + ns + "/" + name + "/image_raw";
-        stream.compressed = compressed;
-        if (compressed) stream.topic += "/compressed";
+        stream.compressed = transport != nullptr;
+        if (transport) stream.topic += std::string("/") + transport;
         streams_.push_back(std::move(stream));
       };
       add_stream("color", !parameters || !parameters["enable_color"] ||
-                              parameters["enable_color"].as<bool>(), true);
+                              parameters["enable_color"].as<bool>(), "compressed");
       add_stream("depth", !parameters || !parameters["enable_depth"] ||
-                              parameters["enable_depth"].as<bool>());
+                              parameters["enable_depth"].as<bool>(), "compressedDepth");
       add_stream("left_ir", parameters && parameters["enable_left_ir"] &&
                                 parameters["enable_left_ir"].as<bool>());
       add_stream("right_ir", parameters && parameters["enable_right_ir"] &&
@@ -147,7 +147,7 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
   rclcpp::SubscriptionOptions options;
   options.callback_group = subscription_group_;
   for (size_t i = 0; i < streams_.size(); ++i) {
-    // Count arrivals without decoding JPEG or requesting the color raw stream.
+    // Count compressed arrivals without decoding color or depth images.
     if (streams_[i].compressed) {
       streams_[i].subscription =
           create_subscription<sensor_msgs::msg::CompressedImage>(
