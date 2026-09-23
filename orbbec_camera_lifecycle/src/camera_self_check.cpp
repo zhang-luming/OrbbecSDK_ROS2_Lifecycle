@@ -28,6 +28,12 @@ uint64_t monotonic_raw_nanoseconds() {
 
 CameraSelfCheck::CameraSelfCheck(const rclcpp::NodeOptions& options)
     : LifecycleNode("orbbec_self_test_node", options) {
+  // Keep callback groups alive until the executor has stopped and the node is
+  // destroyed: an active wait set may still reference their guard conditions.
+  subscription_group_ =
+      create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+  service_group_ =
+      create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
   declare_parameter("config_file", "");
   declare_parameter("service_name", service_name_);
   declare_parameter("status_topic", status_topic_);
@@ -138,10 +144,6 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
     return CallbackReturn::FAILURE;
   }
 
-  subscription_group_ =
-      create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
-  service_group_ =
-      create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
   rclcpp::SubscriptionOptions options;
   options.callback_group = subscription_group_;
   for (size_t i = 0; i < streams_.size(); ++i) {
@@ -207,8 +209,7 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_cleanup(
   service_.reset();
   for (auto& stream : streams_) stream.subscription.reset();
   streams_.clear();
-  subscription_group_.reset();
-  service_group_.reset();
+  // Reuse the node's callback groups on the next configure transition.
   return CallbackReturn::SUCCESS;
 }
 
