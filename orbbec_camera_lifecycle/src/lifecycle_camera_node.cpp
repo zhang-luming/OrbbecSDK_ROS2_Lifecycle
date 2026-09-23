@@ -90,8 +90,21 @@ bool LifecycleCameraNode::load_configuration() {
         for (const auto& item : parameters) {
           const auto key = item.first.as<std::string>();
           const auto value = item.second;
+          if (value.IsSequence()) {
+            std::vector<std::string> values;
+            values.reserve(value.size());
+            for (const auto& element : value) {
+              if (!element.IsScalar()) {
+                throw std::runtime_error("parameter '" + key +
+                                         "' must contain only scalar string values");
+              }
+              values.push_back(element.as<std::string>());
+            }
+            overrides.emplace_back(key, values);
+            continue;
+          }
           if (!value.IsScalar()) {
-            RCLCPP_WARN(get_logger(), "ignoring non-scalar parameter '%s'",
+            RCLCPP_WARN(get_logger(), "ignoring unsupported parameter '%s'",
                         key.c_str());
             continue;
           }
