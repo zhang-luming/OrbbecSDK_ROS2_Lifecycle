@@ -1,7 +1,7 @@
 self_check:
   service_name: orbbec_self_test
   status_topic: orbbec_self_test_status
-  target_fps: 30.0
+  target_fps: 60.0
   # 相对波动范围，0.1 表示目标帧率上下各 10%。
   fps_tolerance: 0.1
   test_duration_sec: 2.0
@@ -21,13 +21,13 @@ cameras:
       align_mode: "HW"
       enable_color: true
       color_width: 640
-      color_height: 480
-      color_fps: 30
+      color_height: 360
+      color_fps: 60
       color.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressed"]
       enable_depth: true
       depth_width: 640
-      depth_height: 480
-      depth_fps: 30
+      depth_height: 360
+      depth_fps: 60
       depth.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressedDepth"]
       enable_frame_sync: true
       publish_tf: true
@@ -46,13 +46,13 @@ cameras:
 #       align_mode: "HW"
 #       enable_color: true
 #       color_width: 640
-#       color_height: 480
-#       color_fps: 30
+#       color_height: 360
+#       color_fps: 60
 #       color.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressed"]
 #       enable_depth: true
 #       depth_width: 640
-#       depth_height: 480
-#       depth_fps: 30
+#       depth_height: 360
+#       depth_fps: 60
 #       depth.image_raw.enable_pub_plugins: ["image_transport/raw", "image_transport/compressedDepth"]
 #       enable_frame_sync: true
 #       publish_tf: true
