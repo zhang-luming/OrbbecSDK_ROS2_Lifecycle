@@ -27,6 +27,7 @@ def generate_launch_description():
     robot_type = LaunchConfiguration("robot_type")
     autostart = LaunchConfiguration("autostart")
     start_self_check = LaunchConfiguration("start_self_check")
+    log_level = LaunchConfiguration("log_level")
 
     default_config = PathJoinSubstitution(
         [
@@ -42,6 +43,7 @@ def generate_launch_description():
         name="orbbec_camera_manager",
         namespace="",
         output="screen",
+        arguments=["--ros-args", "--log-level", log_level],
         parameters=[{"config_file": config_file}],
     )
     self_check_node = LifecycleNode(
@@ -50,6 +52,7 @@ def generate_launch_description():
         name="orbbec_self_test_node",
         namespace="",
         output="screen",
+        arguments=["--ros-args", "--log-level", log_level],
         parameters=[{"config_file": config_file}],
     )
 
@@ -129,6 +132,11 @@ def generate_launch_description():
                 "start_self_check",
                 default_value="true",
                 description="Start the camera self-check lifecycle node",
+            ),
+            DeclareLaunchArgument(
+                "log_level",
+                default_value="debug",
+                description="ROS log level for lifecycle and self-check nodes",
             ),
             *camera_autostart_handlers,
             self_check_group,
