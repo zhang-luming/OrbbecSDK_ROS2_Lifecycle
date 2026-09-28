@@ -45,7 +45,9 @@ CameraSelfCheck::CameraSelfCheck(const rclcpp::NodeOptions& options)
 }
 
 CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
-    const rclcpp_lifecycle::State&) {
+    const rclcpp_lifecycle::State& state) {
+  RCLCPP_INFO(get_logger(), "Lifecycle configure started from %s",
+              state.label().c_str());
   config_file_ = get_parameter("config_file").as_string();
   if (config_file_.empty()) {
     config_file_ = ament_index_cpp::get_package_share_directory(
@@ -58,6 +60,7 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
     const auto self_check = root["self_check"];
     if (self_check && !self_check.IsMap()) {
       RCLCPP_ERROR(get_logger(), "self_check config must be a map");
+      RCLCPP_ERROR(get_logger(), "Lifecycle configure failed");
       return CallbackReturn::FAILURE;
     }
 
@@ -100,12 +103,14 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
         status_rate_hz_ <= 0.0) {
       RCLCPP_ERROR(get_logger(),
                    "self-test timing and FPS parameters are invalid");
+      RCLCPP_ERROR(get_logger(), "Lifecycle configure failed");
       return CallbackReturn::FAILURE;
     }
 
     const auto cameras = root["cameras"];
     if (!cameras || !cameras.IsSequence()) {
       RCLCPP_ERROR(get_logger(), "config must contain a cameras sequence");
+      RCLCPP_ERROR(get_logger(), "Lifecycle configure failed");
       return CallbackReturn::FAILURE;
     }
 
@@ -136,11 +141,13 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
   } catch (const std::exception& error) {
     RCLCPP_ERROR(get_logger(), "failed to load self-test config: %s",
                  error.what());
+    RCLCPP_ERROR(get_logger(), "Lifecycle configure failed");
     return CallbackReturn::FAILURE;
   }
 
   if (streams_.empty()) {
     RCLCPP_ERROR(get_logger(), "no enabled image streams found in config");
+    RCLCPP_ERROR(get_logger(), "Lifecycle configure failed");
     return CallbackReturn::FAILURE;
   }
 
@@ -178,18 +185,25 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_configure(
       std::chrono::duration<double>(1.0 / status_rate_hz_),
       [this] { publish_status(); });
   status_ = 3;
+  RCLCPP_INFO(get_logger(), "Lifecycle configure completed: %zu streams",
+              streams_.size());
   return CallbackReturn::SUCCESS;
 }
 
 CameraSelfCheck::CallbackReturn CameraSelfCheck::on_activate(
-    const rclcpp_lifecycle::State&) {
+    const rclcpp_lifecycle::State& state) {
+  RCLCPP_INFO(get_logger(), "Lifecycle activate started from %s",
+              state.label().c_str());
   status_publisher_->on_activate();
   active_ = true;
+  RCLCPP_INFO(get_logger(), "Lifecycle activate completed");
   return CallbackReturn::SUCCESS;
 }
 
 CameraSelfCheck::CallbackReturn CameraSelfCheck::on_deactivate(
-    const rclcpp_lifecycle::State&) {
+    const rclcpp_lifecycle::State& state) {
+  RCLCPP_INFO(get_logger(), "Lifecycle deactivate started from %s",
+              state.label().c_str());
   active_ = false;
   {
     std::lock_guard<std::mutex> lock(sample_mutex_);
@@ -198,11 +212,14 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_deactivate(
   sample_cv_.notify_all();
   if (status_publisher_) status_publisher_->on_deactivate();
   status_ = 3;
+  RCLCPP_INFO(get_logger(), "Lifecycle deactivate completed");
   return CallbackReturn::SUCCESS;
 }
 
 CameraSelfCheck::CallbackReturn CameraSelfCheck::on_cleanup(
     const rclcpp_lifecycle::State& state) {
+  RCLCPP_INFO(get_logger(), "Lifecycle cleanup started from %s",
+              state.label().c_str());
   on_deactivate(state);
   status_timer_.reset();
   status_publisher_.reset();
@@ -210,12 +227,17 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_cleanup(
   for (auto& stream : streams_) stream.subscription.reset();
   streams_.clear();
   // Reuse the node's callback groups on the next configure transition.
+  RCLCPP_INFO(get_logger(), "Lifecycle cleanup completed");
   return CallbackReturn::SUCCESS;
 }
 
 CameraSelfCheck::CallbackReturn CameraSelfCheck::on_shutdown(
     const rclcpp_lifecycle::State& state) {
-  return on_cleanup(state);
+  RCLCPP_INFO(get_logger(), "Lifecycle shutdown started from %s",
+              state.label().c_str());
+  const auto result = on_cleanup(state);
+  RCLCPP_INFO(get_logger(), "Lifecycle shutdown completed");
+  return result;
 }
 
 void CameraSelfCheck::frame_callback(size_t index) {
