@@ -19,6 +19,7 @@ find_package(ament_cmake REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 find_package(lifecycle_msgs REQUIRED)
 find_package(orbbec_camera REQUIRED)
+find_package(orbbec_camera_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
@@ -37,6 +38,7 @@ ament_target_dependencies(orbbec_camera_lifecycle_node
   lifecycle_msgs
   nvq_tools
   orbbec_camera
+  orbbec_camera_msgs
   rclcpp
   rclcpp_components
   rclcpp_lifecycle)
