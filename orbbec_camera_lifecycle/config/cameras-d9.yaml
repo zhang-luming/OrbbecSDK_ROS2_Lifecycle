@@ -14,7 +14,7 @@ cameras:
     parameters:
       serial_number: ""
       usb_port: "2-1"
-      enable_heartbeat: true
+      enable_heartbeat: false
       log_level: debug
       uvc_backend: "v4l2"
       depth_registration: true
@@ -39,7 +39,7 @@ cameras:
 #     parameters:
 #       serial_number: ""
 #       usb_port: "x-xx"
-#       enable_heartbeat: true
+#       enable_heartbeat: false
 #       log_level: debug
 #       uvc_backend: "v4l2"
 #       depth_registration: true
