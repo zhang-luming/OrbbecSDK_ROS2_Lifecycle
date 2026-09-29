@@ -34,6 +34,8 @@ class CameraSelfCheck : public rclcpp_lifecycle::LifecycleNode {
     uint64_t frames{0};
     uint64_t first_timestamp_ns{0};
     uint64_t last_timestamp_ns{0};
+    uint64_t total_frames{0};
+    uint64_t last_received_timestamp_ns{0};
     rclcpp::SubscriptionBase::SharedPtr subscription;
   };
 

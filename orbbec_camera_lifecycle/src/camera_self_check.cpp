@@ -225,7 +225,10 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_cleanup(
   status_publisher_.reset();
   service_.reset();
   for (auto& stream : streams_) stream.subscription.reset();
-  streams_.clear();
+  {
+    std::lock_guard<std::mutex> lock(sample_mutex_);
+    streams_.clear();
+  }
   // Reuse the node's callback groups on the next configure transition.
   RCLCPP_INFO(get_logger(), "Lifecycle cleanup completed");
   return CallbackReturn::SUCCESS;
@@ -242,13 +245,17 @@ CameraSelfCheck::CallbackReturn CameraSelfCheck::on_shutdown(
 
 void CameraSelfCheck::frame_callback(size_t index) {
   std::lock_guard<std::mutex> lock(sample_mutex_);
-  if (!collecting_) return;
+  if (index >= streams_.size()) return;
+  auto& stream = streams_[index];
   const auto now = monotonic_raw_nanoseconds();
-  if (streams_[index].frames == 0) {
-    streams_[index].first_timestamp_ns = now;
+  ++stream.total_frames;
+  stream.last_received_timestamp_ns = now;
+  if (!collecting_) return;
+  if (stream.frames == 0) {
+    stream.first_timestamp_ns = now;
   }
-  streams_[index].last_timestamp_ns = now;
-  ++streams_[index].frames;
+  stream.last_timestamp_ns = now;
+  ++stream.frames;
   sample_cv_.notify_all();
 }
 
@@ -265,17 +272,39 @@ void CameraSelfCheck::handle_self_test(
     std::shared_ptr<std_srvs::srv::Trigger::Response> response) {
   if (!active_) {
     response->message = "Node is not in ACTIVE state";
+    RCLCPP_WARN(get_logger(), "Self-test rejected: %s",
+                response->message.c_str());
     return;
   }
   bool expected = false;
   if (!test_running_.compare_exchange_strong(expected, true)) {
     response->message = "Orbbec self-test is already running";
+    RCLCPP_WARN(get_logger(), "Self-test rejected: %s",
+                response->message.c_str());
     return;
   }
 
   status_ = 0;
   std::unique_lock<std::mutex> lock(sample_mutex_);
-  for (auto& stream : streams_) stream.frames = 0;
+  RCLCPP_INFO(get_logger(),
+              "Self-test started: streams=%zu, first_frame_timeout=%.2fs, "
+              "sample_duration=%.2fs, target_fps=%.2f, tolerance=%.2f",
+              streams_.size(), first_frame_timeout_sec_, test_duration_sec_,
+              target_fps_, fps_tolerance_);
+  if (!active_) {
+    status_ = 3;
+    response->message = "Node left ACTIVE state during self-test";
+    test_running_ = false;
+    lock.unlock();
+    RCLCPP_WARN(get_logger(), "Self-test interrupted: %s",
+                response->message.c_str());
+    return;
+  }
+  for (auto& stream : streams_) {
+    stream.frames = 0;
+    stream.first_timestamp_ns = 0;
+    stream.last_timestamp_ns = 0;
+  }
   collecting_ = true;
   const auto all_started = [this] {
     for (const auto& stream : streams_) {
@@ -283,14 +312,59 @@ void CameraSelfCheck::handle_self_test(
     }
     return true;
   };
-  if (!sample_cv_.wait_for(
-          lock, std::chrono::duration<double>(first_frame_timeout_sec_),
-          all_started)) {
+  sample_cv_.wait_for(lock,
+                      std::chrono::duration<double>(first_frame_timeout_sec_),
+                      [this, &all_started] {
+                        return !active_.load() || all_started();
+                      });
+  if (!active_) {
+    collecting_ = false;
+    status_ = 3;
+    response->message = "Node left ACTIVE state during self-test";
+    test_running_ = false;
+    lock.unlock();
+    RCLCPP_WARN(get_logger(), "Self-test interrupted: %s",
+                response->message.c_str());
+    return;
+  }
+  if (!all_started()) {
     collecting_ = false;
     status_ = 2;
-    response->message =
-        "One or more configured streams did not receive frames";
+    const auto now_ns = monotonic_raw_nanoseconds();
+    std::ostringstream missing;
+    std::ostringstream received;
+    bool first_missing = true;
+    bool first_received = true;
+    for (const auto& stream : streams_) {
+      if (stream.frames == 0) {
+        if (!first_missing) missing << ", ";
+        first_missing = false;
+        missing << stream.topic;
+        if (stream.total_frames == 0) {
+          missing << "(never_seen_since_configure)";
+        } else {
+          const double age_sec =
+              static_cast<double>(now_ns - stream.last_received_timestamp_ns) /
+              1e9;
+          missing << "(last_seen=" << std::fixed << std::setprecision(2)
+                  << age_sec << "s_ago,total=" << stream.total_frames << ")";
+        }
+      } else {
+        if (!first_received) received << ", ";
+        first_received = false;
+        received << stream.topic << "(frames=" << stream.frames << ")";
+      }
+    }
+    std::ostringstream message;
+    message << "One or more configured streams did not receive frames "
+            << "within " << std::fixed << std::setprecision(2)
+            << first_frame_timeout_sec_ << "s: missing=[" << missing.str()
+            << "]; received=[" << received.str() << "]";
+    response->message = message.str();
     test_running_ = false;
+    lock.unlock();
+    RCLCPP_ERROR(get_logger(), "Self-test failed: %s",
+                 response->message.c_str());
     return;
   }
 
@@ -302,11 +376,16 @@ void CameraSelfCheck::handle_self_test(
     status_ = 3;
     response->message = "Node left ACTIVE state during self-test";
     test_running_ = false;
+    lock.unlock();
+    RCLCPP_WARN(get_logger(), "Self-test interrupted: %s",
+                response->message.c_str());
     return;
   }
 
   bool success = true;
-  std::ostringstream message;
+  std::ostringstream details;
+  const double min_fps = target_fps_ * (1.0 - fps_tolerance_);
+  const double max_fps = target_fps_ * (1.0 + fps_tolerance_);
   for (const auto& stream : streams_) {
     const double elapsed =
         static_cast<double>(stream.last_timestamp_ns -
@@ -315,16 +394,29 @@ void CameraSelfCheck::handle_self_test(
     const double fps = stream.frames > 1 && elapsed > 0.0
                            ? (stream.frames - 1) / elapsed
                            : 0.0;
-    const bool pass = fps >= target_fps_ * (1.0 - fps_tolerance_) &&
-                      fps <= target_fps_ * (1.0 + fps_tolerance_);
+    const bool pass = fps >= min_fps && fps <= max_fps;
     success = success && pass;
-    message << stream.topic << " fps=" << std::fixed << std::setprecision(2)
-            << fps << "; ";
+    if (details.tellp() > 0) details << "; ";
+    details << stream.topic << "(fps=" << std::fixed << std::setprecision(2)
+            << fps << ", frames=" << stream.frames
+            << ", result=" << (pass ? "PASS" : "FAIL") << ")";
   }
   status_ = success ? 1 : 2;
   response->success = success;
+  std::ostringstream message;
+  message << (success ? "PASS" : "FPS_OUT_OF_RANGE") << " expected="
+          << std::fixed << std::setprecision(2) << min_fps << ".." << max_fps
+          << "fps; streams=[" << details.str() << "]";
   response->message = message.str();
   test_running_ = false;
+  lock.unlock();
+  if (success) {
+    RCLCPP_INFO(get_logger(), "Self-test passed: %s",
+                response->message.c_str());
+  } else {
+    RCLCPP_ERROR(get_logger(), "Self-test failed: %s",
+                 response->message.c_str());
+  }
 }
 
 }  // namespace orbbec_camera_lifecycle
