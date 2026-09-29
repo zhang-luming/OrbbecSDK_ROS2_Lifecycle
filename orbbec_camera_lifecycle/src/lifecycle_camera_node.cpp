@@ -1,21 +1,87 @@
 #include "orbbec_camera_lifecycle/lifecycle_camera_node.hpp"
 #include "pudu-base/pdLog/log.h"
 #include "nvq_tools/tools/common.h"
+#include <orbbec_camera_msgs/msg/device_status.hpp>
 
 #include <yaml-cpp/yaml.h>
 
 #include <algorithm>
+#include <chrono>
 #include <exception>
 #include <rclcpp/executors/multi_threaded_executor.hpp>
+#include <rclcpp/wait_for_message.hpp>
 #include <utility>
 
 namespace orbbec_camera_lifecycle {
+
+namespace {
+
+// A separate node lets the lifecycle callback wait for status without relying
+// on the executor that is currently running that callback.
+class DeviceOnlineProbe {
+ public:
+  DeviceOnlineProbe(const rclcpp::Context::SharedPtr& context,
+                    const std::string& status_topic)
+      : context_(context) {
+    auto options = rclcpp::NodeOptions().use_global_arguments(false);
+    options.context(context);
+    node_ = std::make_shared<rclcpp::Node>(
+        "orbbec_camera_connection_probe", options);
+    status_subscription_ = node_->create_subscription<
+        orbbec_camera_msgs::msg::DeviceStatus>(
+        status_topic, rclcpp::QoS(1).transient_local(),
+        [](orbbec_camera_msgs::msg::DeviceStatus::ConstSharedPtr) {});
+  }
+
+  bool wait_for_online(double timeout_sec) {
+    const auto deadline = std::chrono::steady_clock::now() +
+                          std::chrono::duration_cast<std::chrono::steady_clock::duration>(
+                              std::chrono::duration<double>(timeout_sec));
+    while (receive_until(deadline)) {
+      if (last_status_.device_online &&
+          !last_status_.connection_type.empty() &&
+          last_status_.connection_type != "unknown") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool received() const { return received_; }
+  const orbbec_camera_msgs::msg::DeviceStatus& last_status() const {
+    return last_status_;
+  }
+
+ private:
+  bool receive_until(std::chrono::steady_clock::time_point deadline) {
+    while (std::chrono::steady_clock::now() < deadline && rclcpp::ok(context_)) {
+      const auto remaining = deadline - std::chrono::steady_clock::now();
+      if (rclcpp::wait_for_message(last_status_, status_subscription_, context_,
+                                   remaining)) {
+        received_ = true;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  rclcpp::Context::SharedPtr context_;
+  rclcpp::Node::SharedPtr node_;
+  rclcpp::Subscription<orbbec_camera_msgs::msg::DeviceStatus>::SharedPtr
+      status_subscription_;
+  orbbec_camera_msgs::msg::DeviceStatus last_status_;
+  bool received_ = false;
+};
+
+}  // namespace
 
 LifecycleCameraNode::LifecycleCameraNode(
     const rclcpp::NodeOptions& options,
     const std::shared_ptr<rclcpp::Executor>& executor)
     : LifecycleNode("orbbec_camera_manager", options), executor_(executor) {
   config_file_ = declare_parameter<std::string>("config_file", "");
+  device_online_timeout_sec_ =
+      declare_parameter<double>("device_online_timeout_sec", 5.0);
 }
 
 LifecycleCameraNode::~LifecycleCameraNode() { stop_drivers(); }
@@ -155,6 +221,12 @@ bool LifecycleCameraNode::start_drivers() {
     RCLCPP_ERROR(get_logger(), "executor is no longer available");
     return false;
   }
+  if (device_online_timeout_sec_ <= 0.0 ||
+      device_online_timeout_sec_ > 5.0) {
+    RCLCPP_ERROR(get_logger(),
+                 "device_online_timeout_sec must be greater than 0 and at most 5");
+    return false;
+  }
 
   try {
     if (!component_loader_) {
@@ -176,9 +248,31 @@ bool LifecycleCameraNode::start_drivers() {
       driver_factory_ = component_loader_->create_component_factory(*resource);
     }
     for (auto& camera : cameras_) {
+      const auto status_topic = camera.namespace_name + "/device_status";
+      DeviceOnlineProbe probe(get_node_base_interface()->get_context(),
+                              status_topic);
       camera.driver = std::make_unique<rclcpp_components::NodeInstanceWrapper>(
           driver_factory_->create_node_instance(camera.options));
       executor->add_node(camera.driver->get_node_base_interface());
+      RCLCPP_INFO(get_logger(), "created camera %s/%s; waiting for %s",
+                  camera.namespace_name.c_str(), camera.name.c_str(),
+                  status_topic.c_str());
+      if (!probe.wait_for_online(device_online_timeout_sec_)) {
+        const auto& status = probe.last_status();
+        RCLCPP_ERROR(get_logger(),
+                     "camera %s did not become online within %.2fs on %s "
+                     "(status_received=%s, last_connection_type=%s)",
+                     camera.name.c_str(), device_online_timeout_sec_,
+                     status_topic.c_str(), probe.received() ? "true" : "false",
+                     status.connection_type.empty()
+                         ? "<none>"
+                         : status.connection_type.c_str());
+        stop_drivers();
+        return false;
+      }
+      RCLCPP_INFO(get_logger(), "camera %s online via %s",
+                  camera.name.c_str(),
+                  probe.last_status().connection_type.c_str());
       RCLCPP_INFO(get_logger(), "activated camera %s/%s",
                   camera.namespace_name.c_str(), camera.name.c_str());
     }
@@ -190,6 +284,7 @@ bool LifecycleCameraNode::start_drivers() {
     RCLCPP_ERROR(get_logger(),
                  "failed to activate Orbbec driver: unknown exception");
   }
+  stop_drivers();
   return false;
 }
 

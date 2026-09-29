@@ -42,6 +42,7 @@ class LifecycleCameraNode : public rclcpp_lifecycle::LifecycleNode {
   std::shared_ptr<rclcpp_components::ComponentManager> component_loader_;
   std::shared_ptr<rclcpp_components::NodeFactory> driver_factory_;
   std::string config_file_;
+  double device_online_timeout_sec_ = 5.0;
   std::vector<CameraInstance> cameras_;
 };
 
